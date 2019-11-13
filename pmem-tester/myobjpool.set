@@ -1,0 +1,3 @@
+PMEMPOOLSET
+10G /mnt/pmem0/sveingf/myfile0.obj
+10G /mnt/pmem1/sveingf/myfile1.obj

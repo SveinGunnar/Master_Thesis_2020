@@ -1,0 +1,14 @@
+From DRAM to DRAM
+Time: 0.043451
+GB/S: 23.01
+From DRAM to NVM
+Time: 0.445774
+GB/S: 2.24
+From NVM to DRAM
+Time: 0.443387
+GB/S: 2.26
+From NVM to NVM
+Time: 0.449140
+GB/S: 2.23
+Ended successfully
+
