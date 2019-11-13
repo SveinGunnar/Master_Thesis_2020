@@ -54,7 +54,6 @@
 #include <errno.h>
 #include <stdint.h>
 #include <string.h>
-//#include <libpmempool.h>
 
 //pmem stuff
 //#define BILLION 1E9
@@ -260,15 +259,15 @@ void initiate()
 int main()
 {	
 	//double poolSize = (1 << 30)*10;
-	//const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
+	const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
 	//const char path[] = "/mnt/pmem1/sveingf/pmem_objects";
-	const char path[] = "myobjpool.set";
+	//const char path[] = "myobjpool.set";
         //PMEMobjpool *pop;
 
         /* create the pmemobj pool or open it if it already exists */
         //pop = pmemobj_create(path, LAYOUT_NAME, POOL_SIZE*10, 0666);
-        //pop = pmemobj_create(path, LAYOUT_NAME, 10737418240, 0666);
-	pop = pmemobj_create(path, LAYOUT_NAME, 0, 0664);
+        pop = pmemobj_create(path, LAYOUT_NAME, 10737418240, 0666);
+	//pop = pmemobj_create(path, LAYOUT_NAME, 0, 0664);
 
         if (pop == NULL)
         	pop = pmemobj_open(path, LAYOUT_NAME);
