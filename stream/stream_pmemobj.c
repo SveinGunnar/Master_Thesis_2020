@@ -216,7 +216,8 @@ TOID(double) c;
 #define POOL_SIZE ((size_t)(1 << 30))
 
 /* name of our layout in the pool */
-#define LAYOUT_NAME "example_layout"
+//#define LAYOUT_NAME "example_layout"
+#define LAYOUT_NAME "my_layout"
 
 //#define BILLION 1E9
 //#define ARRAY_SIZE (1073741824)// 1GB * a_number
@@ -259,8 +260,9 @@ void initiate()
 int main()
 {	
 	//double poolSize = (1 << 30)*10;
-	const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
+	//const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
 	//const char path[] = "/mnt/pmem1/sveingf/pmem_objects";
+	const char path[] = "/mnt/pmem0-xfs/pool.obj";
 	//const char path[] = "myobjpool.set";
         //PMEMobjpool *pop;
 

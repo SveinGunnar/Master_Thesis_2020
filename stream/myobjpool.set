@@ -1,4 +1,4 @@
 PMEMPOOLSET
 #OPTION SINGLEHDR
-100G /mnt/pmem0/myfile.part0
-100G /mnt/pmem1/myfile.part1
+20G /mnt/pmem0-xfs/myfile.part0
+20G /mnt/pmem1-ext4/myfile.part1

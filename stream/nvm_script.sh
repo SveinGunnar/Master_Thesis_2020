@@ -7,7 +7,8 @@ file="test2.txt"
 CPUs=""
 
 echo NVM test > $file
-echo Socket 1 >> $file
+echo Socket 0 >> $file
+echo "Copy:|Scale:|Add:|Triad:" >> $file
 for (( n=0; n<16; n++ ))
 do
 	CPUs+="{$((socket1 + n))}"
@@ -24,6 +25,7 @@ num_threads=1
 CPUs=""
 
 echo Socket 1 >> $file
+echo "Copy:|Scale:|Add:|Triad:" >> $file
 
 for (( n=0; n<16; n++ ))
 do

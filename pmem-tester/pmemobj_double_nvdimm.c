@@ -11,25 +11,25 @@ POBJ_LAYOUT_END(array);
 
 double mysecond();
 
-#define LAYOUT_NAME "example_layout"
+#define LAYOUT_NAME "my_layout"
 #define ARRAY_LENGTH 100000000
 
 int main(int argc, char *argv[])
 {
-	const char path0[] = "/mnt/pmem0/sveingf/pmem_objects";
-	const char path1[] = "/mnt/pmem1/sveingf/pmem_objects";
+	const char path0[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path1[] = "/mnt/pmem1-ext4/pool.obj";
         PMEMobjpool *pop0;
 	PMEMobjpool *pop1;
 	 /* create the pmemobj pool or open it if it already exists */
 
-	pop0 = pmemobj_create(path0, LAYOUT_NAME, 10737418240, 0666);
+	//pop0 = pmemobj_create(path0, LAYOUT_NAME, 10737418240, 0666);
         if (pop0 == NULL)
             pop0 = pmemobj_open(path0, LAYOUT_NAME);
         if (pop0 == NULL) {
                 perror(path0);
                 exit(1);
         }
-	pop1 = pmemobj_create(path1, LAYOUT_NAME, 10737418240, 0666);
+	//pop1 = pmemobj_create(path1, LAYOUT_NAME, 10737418240, 0666);
         if (pop1 == NULL)
             pop1 = pmemobj_open(path1, LAYOUT_NAME);
         if (pop1 == NULL) {
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	TOID(double) nvm_read_array1;
 	POBJ_ALLOC(pop0, &nvm_read_array1, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 	TOID(double) nvm_write_array1;
-	POBJ_ALLOC(pop0, &nvm_write_array1, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
+	POBJ_ALLOC(pop1, &nvm_write_array1, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 
 	double a=5.40, b=9.79, c=3.23, d=5.599;
         srand((unsigned int)time(NULL));

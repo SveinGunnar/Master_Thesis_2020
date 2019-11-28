@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 
         /* ... */
 	//Her er testkoden
+	int nvmThreads = atoi(argv[1]);
 	int nthreads;
 	double scalar = 3.0;
 	double bytes = 2 * sizeof(double) * ARRAY_LENGTH;	
@@ -93,24 +94,24 @@ int main(int argc, char *argv[])
 		
 		#pragma omp barrier
 		printf("%d\n", thread_id);
-		if(thread_id%2 == 0){
+		if(thread_id < 16-nvmThreads){
 			drm_read_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
         		drm_write_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
 			#pragma omp critical
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
-                       		printf("thread_id: %d, %f\n", thread_id, drm_read_array[11235]);
+                       		printf("DRAM thread_id: %d, %f\n", thread_id, drm_read_array[11235]);
 			}
 		}
-		else if(thread_id%2 == 1){
+		else if(thread_id >= 16-nvmThreads){
         		POBJ_ALLOC(pop, &nvm_read_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
         		POBJ_ALLOC(pop, &nvm_write_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 			#pragma omp critical
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
-                        	printf("thread_id: %d, %f\n", thread_id, D_RO(nvm_read_array)[11235]);
+                        	printf("NVM thread_id: %d, %f\n", thread_id, D_RO(nvm_read_array)[11235]);
 			}
 		}
 		if(thread_id==0)
@@ -121,7 +122,7 @@ int main(int argc, char *argv[])
 			if(thread_id==0)
                                 printf("%d\n", x);
 			#pragma omp barrier
-			if(thread_id%2 == 0){
+			if(thread_id < 16-nvmThreads){
 				//From DRAM to DRAM:
 				//Time start
 				test_time[thread_id][x] = mysecond();
@@ -137,7 +138,7 @@ int main(int argc, char *argv[])
 				//////////////////////////////////////////////////
 
 			}
-			else if(thread_id%2 == 1){
+			else if(thread_id >= 16-nvmThreads){
 				//From NVM to NVM:
 				//Time start
 				test_time[thread_id][x] = mysecond2();
@@ -159,11 +160,11 @@ int main(int argc, char *argv[])
 			#pragma omp barrier
 		}
 		/**/
-		if(thread_id%2 == 0){
+		if(thread_id < 16-nvmThreads){
 			free(drm_read_array);
         		free(drm_write_array);
 		}
-		else if(thread_id%2 == 1){
+		else if(thread_id >= 16-nvmThreads){
         		POBJ_FREE(&nvm_read_array);
         		POBJ_FREE(&nvm_write_array);
 		}
@@ -178,60 +179,25 @@ int main(int argc, char *argv[])
 	//Average
 	// i%2 == 0 -> DRAM
 	// i%2 == 1 -> NVM
-	double **average = (double**)malloc(10*sizeof(double*));
-        for(i=0;i<10;i++){
-                average[i] = (double*)malloc(2*sizeof(double));
-                average[i][0] = 0;
-                average[i][1] = 0;
-        }
+	double *sumMBS = (double*)malloc(10*sizeof(double));
+	for(i=0;i<10;i++)
+		sumMBS[i] = 0.0;
 	
-	printf("test 1\n");
 	for(i=0;i<nthreads;i++){
 		for(j=0;j<10;j++){
-			if( i%2 == 0 ){
-				average[j][0] += test_time[i][j];
-			}
-			else if( i%2 == 1 ){
-				average[j][1] += test_time[i][j];
-			}
+			sumMBS[j] += 1.01E-06 * bytes/test_time[i][j];
 		}
 	}
-	printf("test 2\n");
-	for(i=0;i<10;i++){
-		average[i][0] = average[i][0]/(nthreads/2);
-                average[i][1] = average[i][1]/(nthreads/2);
-	}
-	int fastest_dram = 2;
-	int fastest_nvm = 2;
-	printf("test 3\n");
-	for(i=3;i<10;i++){
-		if( average[i][0]<average[fastest_dram][0] )
-			fastest_dram = i;
-		if( average[i][1]<average[fastest_nvm][1] )
-                        fastest_nvm = i;
-        }
 	
-	printf("Best DRAM\n");
-        printf("From DRAM to DRAM\n");
-        printf("Time: %lf\n", average[fastest_dram][0]);
-        printf("MB/S: %0.2f\n\n", 1.01E-06 * bytes/average[fastest_dram][0]);
-        printf("From NVM to NVM\n");
-        printf("Time: %lf\n", average[fastest_dram][1]);
-        printf("MB/S: %0.2f\n\n", 1.0E-06 * bytes/average[fastest_dram][1]);
+	double biggestMBS = 0.0;
+	for(i=0;i<10;i++)
+		if(sumMBS[i]>biggestMBS)
+			biggestMBS = sumMBS[i];
+	
+	printf("Biggest MB/S: %f\n\n", biggestMBS);
 
-        printf("Best NVM\n");
-        printf("From DRAM to DRAM\n");
-        printf("Time: %lf\n", average[fastest_nvm][0]);
-        printf("MB/S: %0.2f\n\n", 1.0E-06 * bytes/average[fastest_nvm][0]);
-        printf("From NVM to NVM\n");
-        printf("Time: %lf\n", average[fastest_nvm][1]);
-        printf("MB/S: %0.2f\n\n", 1.0E-06 * bytes/average[fastest_nvm][1]);
-	/**/
-	
-	printf("fastest_dram: %d, fastest_nvm: %d\n", fastest_dram, fastest_nvm);
-	for(i=0;i<10;i++){
-		printf("Interval %d: DRAM: %f, NVM: %f\n", i, average[i][0], average[i][1]);
-        }
+	for(i=0;i<10;i++)
+		printf("%d: %f\n", i, sumMBS[i]);
 
         printf("Ended successfully\n");
 	pmemobj_close(pop);
