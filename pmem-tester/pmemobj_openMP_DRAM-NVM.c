@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 		int i,j;
 		double *drm_read_array;
 		double *drm_write_array;
-		TOID(double) nvm_read_array;
+		//TOID(double) nvm_read_array;
                 TOID(double) nvm_write_array;
 		srand((unsigned int)time(NULL));
 		
@@ -110,13 +110,13 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
-        		POBJ_ALLOC(pop, &nvm_read_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
+			drm_read_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
         		POBJ_ALLOC(pop, &nvm_write_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 			#pragma omp critical
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
-					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
-                        	printf("NVM thread_id: %d, %f\n", thread_id, D_RO(nvm_read_array)[11235]);
+					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
+                        	printf("NVM thread_id: %d, %f\n", thread_id, drm_read_array[11235]);
 			}
 		}
 		
@@ -137,16 +137,16 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
-			//From NVM to NVM:
+			//From DRAM to NVM:
 			for(i=0;i<total_tests;i++){
 				//Time start
-				test_time[thread_id][i] = mysecond2();
+				test_time[thread_id][i] = mysecond();
 				
 				for(j=0;j<ARRAY_LENGTH;j++)
-					D_RW(nvm_write_array)[j] = D_RO(nvm_read_array)[j];		
+					D_RW(nvm_write_array)[j] = drm_read_array[j];		
 
 				//Time stop.
-				test_time[thread_id][i] = mysecond2() - test_time[thread_id][i];
+				test_time[thread_id][i] = mysecond() - test_time[thread_id][i];
 			}
 		}
 		else
@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
         		free(drm_write_array);
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
-        		POBJ_FREE(&nvm_read_array);
+        		//POBJ_FREE(&nvm_read_array);
         		POBJ_FREE(&nvm_write_array);
 		}
 		/**/
@@ -212,7 +212,7 @@ int main(int argc, char *argv[])
         printf("Time: %lf\n", average[fastest_dram]);
         printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_dram]);
 	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaDRAM);
-        printf("From NVM to NVM\n");
+        printf("From DRAM to NVM\n");
         printf("Time: %lf\n", average[fastest_nvm]);
         printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_nvm]);
 	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaNVM);

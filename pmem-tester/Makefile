@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O2
 
-all: Pmemobj_copy.out Pmemobj_add.out Pmemobj_scale.out Pmemobj_triad.out Pmemobj_openMP.out Pmemobj_openMP_2.out Pmemobj_multitest.out Pmemobj_average.out Pmemobj_latency.out Pmemobj_rw.out Pmemobj_double_nvdimm.out
+all: Pmemobj_copy.out Pmemobj_add.out Pmemobj_scale.out Pmemobj_triad.out Pmemobj_openMP.out Pmemobj_openMP_2.out Pmemobj_multitest.out Pmemobj_average.out Pmemobj_latency.out Pmemobj_rw.out Pmemobj_double_nvdimm.out Pmemobj_copy_isolated.out Pmemobj_openMP_DRAM-NVM.out Pmemobj_openMP_NVM-DRAM.out
 
 Pmemobj_copy.out: pmemobj_copy.c
 	$(CC) $(CFLAGS) pmemobj_copy.c -o Pmemobj_copy.out -lpmemobj -lpmem
@@ -12,12 +12,19 @@ Pmemobj_add.out: pmemobj_add.c
 Pmemobj_triad.out: pmemobj_triad.c
 	$(CC) $(CFLAGS) pmemobj_triad.c -o Pmemobj_triad.out -lpmemobj -lpmem
 
+Pmemobj_copy_isolated.out: pmemobj_copy_isolated.c
+	$(CC) $(CFLAGS) pmemobj_copy_isolated.c -o Pmemobj_copy_isolated.out -lpmemobj -lpmem
+
 Pmemobj_multitest.out: pmemobj_multitest.c
 	$(CC) $(CFLAGS) pmemobj_multitest.c -o Pmemobj_multitest.out -lpmemobj -lpmem
 Pmemobj_openMP.out: pmemobj_openMP.c
 	$(CC) $(CFLAGS) pmemobj_openMP.c -o Pmemobj_openMP.out -lpmemobj -lpmem -fopenmp
 Pmemobj_openMP_2.out: pmemobj_openMP_2.c
 	$(CC) $(CFLAGS) pmemobj_openMP_2.c -o Pmemobj_openMP_2.out -lpmemobj -lpmem -fopenmp
+Pmemobj_openMP_DRAM-NVM.out: pmemobj_openMP_DRAM-NVM.c
+	$(CC) $(CFLAGS) pmemobj_openMP_DRAM-NVM.c -o Pmemobj_openMP_DRAM-NVM.out -lpmemobj -lpmem -fopenmp
+Pmemobj_openMP_NVM-DRAM.out: pmemobj_openMP_NVM-DRAM.c
+	$(CC) $(CFLAGS) pmemobj_openMP_NVM-DRAM.c -o Pmemobj_openMP_NVM-DRAM.out -lpmemobj -lpmem -fopenmp
 
 Pmemobj_rw.out: pmemobj_rw.c
 	$(CC) $(CFLAGS) pmemobj_rw.c -o Pmemobj_rw.out -lpmemobj -lpmem -fopenmp

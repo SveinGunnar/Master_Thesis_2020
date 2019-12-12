@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 		double *drm_read_array;
 		double *drm_write_array;
 		TOID(double) nvm_read_array;
-                TOID(double) nvm_write_array;
+                //TOID(double) nvm_write_array;
 		srand((unsigned int)time(NULL));
 		
 		#pragma omp master
@@ -110,8 +110,8 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
+			drm_write_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
         		POBJ_ALLOC(pop, &nvm_read_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
-        		POBJ_ALLOC(pop, &nvm_write_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 			#pragma omp critical
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
@@ -137,16 +137,16 @@ int main(int argc, char *argv[])
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
-			//From NVM to NVM:
+			//From NVM to DRAM:
 			for(i=0;i<total_tests;i++){
 				//Time start
-				test_time[thread_id][i] = mysecond2();
+				test_time[thread_id][i] = mysecond();
 				
 				for(j=0;j<ARRAY_LENGTH;j++)
-					D_RW(nvm_write_array)[j] = D_RO(nvm_read_array)[j];		
+					drm_write_array[j] = D_RO(nvm_read_array)[j];		
 
 				//Time stop.
-				test_time[thread_id][i] = mysecond2() - test_time[thread_id][i];
+				test_time[thread_id][i] = mysecond() - test_time[thread_id][i];
 			}
 		}
 		else
@@ -160,8 +160,10 @@ int main(int argc, char *argv[])
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
         		POBJ_FREE(&nvm_read_array);
-        		POBJ_FREE(&nvm_write_array);
+        		//POBJ_FREE(&nvm_write_array);
+			free(drm_write_array);
 		}
+
 		/**/
 		#pragma omp barrier
 	}
@@ -212,7 +214,7 @@ int main(int argc, char *argv[])
         printf("Time: %lf\n", average[fastest_dram]);
         printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_dram]);
 	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaDRAM);
-        printf("From NVM to NVM\n");
+        printf("From NVM to DRAM\n");
         printf("Time: %lf\n", average[fastest_nvm]);
         printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_nvm]);
 	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaNVM);
