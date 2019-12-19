@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
 		else if(i >= totalThreads-nvmThreads)
 			printf("%d NVM,", i);
 		for(j=0;j<total_tests;j++){
-			printf("%f", 1.0E-06 * bytes/test_time[i][j]);
+			printf("%0.2f", 1.0E-06 * bytes/test_time[i][j]);
 			if( j != total_tests-1 )
 				printf(",");
 		}
