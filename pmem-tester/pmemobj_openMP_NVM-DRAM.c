@@ -66,8 +66,8 @@ int main(int argc, char *argv[])
 	int nvmThreads = atoi(argv[1]);
 	int totalThreads = atoi(argv[2]);
 	int nthreads;
-	int total_tests = 50;
-	int valid_tests = 10;
+	int total_tests = 500;
+	//int valid_tests = 10;
 	double scalar = 3.0;
 	double bytes = 2 * sizeof(double) * ARRAY_LENGTH;	
 	double** test_time;
@@ -98,7 +98,6 @@ int main(int argc, char *argv[])
 		
 		//Creates all the arrays needed for the test.
 		#pragma omp barrier
-		printf("%d\n", thread_id);
 		if(thread_id < totalThreads-nvmThreads){
 			drm_read_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
         		drm_write_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
@@ -106,7 +105,6 @@ int main(int argc, char *argv[])
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
-                       		printf("DRAM thread_id: %d, %f\n", thread_id, drm_read_array[11235]);
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
@@ -116,7 +114,6 @@ int main(int argc, char *argv[])
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
-                        	printf("NVM thread_id: %d, %f\n", thread_id, D_RO(nvm_read_array)[11235]);
 			}
 		}
 		
@@ -167,74 +164,25 @@ int main(int argc, char *argv[])
 		/**/
 		#pragma omp barrier
 	}
-	printf("END of parallel\n");
 	int i,j;
 
 	//Average
 	// i%2 == 0 -> DRAM
 	// i%2 == 1 -> NVM
-	//Creates an array with zeros
-	double *average = (double*)malloc(nthreads*sizeof(double));
-        for(i=0;i<nthreads;i++)
-                average[i] = 0;
-
-	//Finds the average of the threads
-        for(i=0;i<nthreads;i++){
-                for(j=2;j<valid_tests+2;j++){
-                        average[i] += test_time[i][j];
-                }
-                average[i] = average[i]/valid_tests;
-        }
-
-	//
-        int fastest_dram = 0;
-        int fastest_nvm = totalThreads-nvmThreads;
-        for(i=1;i<nthreads;i++){
-                if( i < 16-nvmThreads )
-                        if( average[i] < average[fastest_dram] )
-                                fastest_dram = i;
-                else if( i >= 16-nvmThreads )
-                        if( average[i] < average[fastest_nvm] )
-                                fastest_nvm = i;
-        }
-
-	double aaDRAM=0.0,aaNVM=0.0;
-	for(i=0;i<nthreads;i++){
-		if( i < 16-nvmThreads )
-			aaDRAM += average[i];
-		else if( i >= 16-nvmThreads )
-			aaNVM += average[i];
-	}
-
-	aaDRAM = aaDRAM/(nthreads-nvmThreads);
-	aaNVM = aaNVM/(nvmThreads);
-
-	//
-        printf("From DRAM to DRAM\n");
-        printf("Time: %lf\n", average[fastest_dram]);
-        printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_dram]);
-	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaDRAM);
-        printf("From NVM to DRAM\n");
-        printf("Time: %lf\n", average[fastest_nvm]);
-        printf("MB/S: %0.2f\n", 1.0E-06 * bytes/average[fastest_nvm]);
-	printf("Average of Average: %0.2f\n\n", 1.0E-06 * bytes/aaNVM);
 
 	for(i=0;i<nthreads;i++){
-		if( i < 16-nvmThreads )
-			printf("Thread_id DRAM: %d,\tMB/S: %0.2f\n", i, 1.0E-06 * bytes/average[i]);
-                else if( i >= 16-nvmThreads )
-			printf("Thread_id  NVM: %d,\tMB/S: %0.2f\n", i, 1.0E-06 * bytes/average[i]);
-	}
-
-	printf("Full printout\n");
-	for(i=0;i<nthreads;i++){
-		printf("%d:\t", i);
-		for(j=0;j<valid_tests;j++)
-			printf("%f, ", test_time[i][j]);
+		if(i < totalThreads-nvmThreads)
+			printf("%d DRAM,", i);
+		else if(i >= totalThreads-nvmThreads)
+			printf("%d NVM,", i);
+		for(j=0;j<total_tests;j++){
+			printf("%0.2f", 1.0E-06 * bytes/test_time[i][j]);
+			if( j != total_tests-1 )
+				printf(",");
+		}
 		printf("\n");
 	}
 
-        printf("Ended successfully\n");
 	pmemobj_close(pop);
 	return 0;
 }
