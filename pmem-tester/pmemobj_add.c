@@ -29,7 +29,7 @@ POBJ_LAYOUT_END(array);
 #define POOL_SIZE ((size_t)(1 << 30))
 
 /* name of our layout in the pool */
-#define LAYOUT_NAME "example_layout"
+#define LAYOUT_NAME "my_layout"
 
 #define BILLION 1E9
 //#define ARRAY_SIZE (1073741824)// 1GB * a_number
@@ -42,7 +42,7 @@ int array_length[9] = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 10000
 
 int main(int argc, char *argv[])
 {	
-        const char path[] = "/mnt/pmem1/sveingf/pmem_objects";
+        const char path[] = "/mnt/pmem0-xfs/pool.obj";
         PMEMobjpool *pop;
 
         /* create the pmemobj pool or open it if it already exists */

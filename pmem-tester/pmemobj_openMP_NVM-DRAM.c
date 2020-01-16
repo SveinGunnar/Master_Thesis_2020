@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 	int nvmThreads = atoi(argv[1]);
 	int totalThreads = atoi(argv[2]);
 	int nthreads;
-	int total_tests = 500;
+	int total_tests = atoi(argv[3]);
 	//int valid_tests = 10;
 	double scalar = 3.0;
 	double bytes = 2 * sizeof(double) * ARRAY_LENGTH;	

@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 	int nvmThreads = atoi(argv[1]);
 	int totalThreads = atoi(argv[2]);
 	int nthreads;
-	int total_tests = 500;
+	int total_tests = atoi(argv[3]);
 	//int valid_tests = 10;
 	double scalar = 3.0;
 	double bytes = 2 * sizeof(double) * ARRAY_LENGTH;	
@@ -87,6 +87,7 @@ int main(int argc, char *argv[])
 		{
 			//Creates array where the testresult will be added.
 			nthreads = omp_get_num_threads();
+			printf("%d\n", nthreads);
 			test_time = (double**)malloc(nthreads*sizeof(double*));
 			for(i=0;i<nthreads;i++){
                 		test_time[i] = (double*)malloc(total_tests*sizeof(double));
