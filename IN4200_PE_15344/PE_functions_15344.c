@@ -3,14 +3,15 @@
 void read_graph_from_file(char filename[]){
 	int i, j, k, temp;
 	FILE *fp = fopen( filename, "r" );
+	char trashbin[100];
 	char str[100];
 
 	//First and second line in file are thrown away
-	fgets(str, 100, fp);
-	fgets(str, 100, fp);
+	if( fgets(str, 100, fp) == NULL ) return;
+	if( fgets(str, 100, fp) == NULL ) return;
 
 	//Extract Nodes and edges from the third line.
-	fgets(str, 100, fp);
+	if( fgets(str, 100, fp) == NULL ) return;;
 	char * wordPointer;
 	wordPointer = strtok (str," ");
 	int line3_counter = 0;
@@ -24,7 +25,7 @@ void read_graph_from_file(char filename[]){
 	}
 
 	//Throws away the forth line.
-	fgets (str, 100, fp);
+	if( fgets (str, 100, fp) == NULL ) return;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -39,7 +40,7 @@ void read_graph_from_file(char filename[]){
 	//Feeds the filestream into the newly created array.
 	int fromNode, toNode;
 	for( i=0; i<edges; i++){
-		fgets(str, 100, fp);
+		if( fgets(str, 100, fp) == NULL ) return;
 		fromNode = atoi(strtok(str,"\t"));
 		toNode = atoi(strtok(NULL,"\t"));
 
@@ -116,9 +117,9 @@ void PageRank_iterations(double d, double e){
 	//inverse N
 	double iN = 1.0/nodes;
 	//x^k-1
-	double *xk_1 = (double*)malloc(nodes*sizeof(double));
+	//xk_1 = (double*)malloc(nodes*sizeof(double));
 	//x^k
-	x = (double*)malloc(nodes*sizeof(double));
+	//x = (double*)malloc(nodes*sizeof(double));
 
 	//This variable will be compared against the convergence threshold value
 	double *diffX;
@@ -128,26 +129,28 @@ void PageRank_iterations(double d, double e){
 	int n=0;
 	int i;
 
-	clock_t start = clock();
-	double *wClock;
+	int forDiv;
+	//int startDiv, endDiv;
 
-	#pragma omp parallel// num_threads(4)
+	int b1=1,b2=1;
+
+	#pragma omp parallel num_threads(10)
 	{
 		#pragma omp single
 		{
 			num_threads = omp_get_num_threads();
 			diffX = (double*)malloc(num_threads*sizeof(double));
-			wClock = (double*)malloc(num_threads*sizeof(double));
+
+			forDiv = nodes/iter_threads;
 		}
-		double startTime = omp_get_wtime();
 
 		int thread_id = omp_get_thread_num();
 		int j;
 
 		//Adds values to x^0.
-		#pragma omp for
-		for( i=0; i<nodes; i++)
-			x[i] = iN;
+		//#pragma omp for
+		//for( i=0; i<nodes; i++)
+		//	x[i] = iN;
 
 		while( 1==1 ){
 			#pragma omp single
@@ -165,7 +168,6 @@ void PageRank_iterations(double d, double e){
 
 				//completes the first part of the formula.
 				Wk_1_product = (omd + (d*Wk_1))*iN;
-
 			}
 
 			//Computing the x^k formula
@@ -201,35 +203,11 @@ void PageRank_iterations(double d, double e){
 			if( diffX_scalar < e){
 				break;
 			}
-		}
-		double stopTime = omp_get_wtime();
-		wClock[thread_id] = stopTime - startTime;
+		}//end of while-loop
 	}//End parallel
-
-	//clock_t end = clock();
-	//double seconds = (double)(end - start) / CLOCKS_PER_SEC;
-	//printf("Hva er dette: %f \n", seconds);
-	for( i=0; i<num_threads; i++)
-		printf("Tid %d: %f \n", i, wClock[i]);
-
 
 	//For testing:
 	printf("iterations: %d\n\n", n);
-/*
-	for( i=0; i<nodes; i++){
-		printf("%f\n", x[i] );
-	}
-	printf("\n");
-	/*
-	double sum;
-	//int i;
-	for( i=0; i<nodes; i++){
-		printf("%d: %f\n", i+1, x[i] );
-		sum += x[i];
-	}
-	printf("Sum: %.2f\n", sum );
-	//*/
-	//printf("Core dumped!\n");
 }
 
 void top_n_webpages(int n){
@@ -289,7 +267,8 @@ void top_n_webpages(int n){
 			}
 			m+=len;
 		}
-	}
+	}//End of parallell.
+
 	//The n highest nodes will be added to this array.
 	int *n_index = (int*)calloc(n, sizeof(int));
 	double *n_value = (double*)calloc(n, sizeof(double));
@@ -324,4 +303,31 @@ void top_n_webpages(int n){
 	for( i=0; i<n; i++){
 		printf("%d, %f\n", n_index[i], n_value[i]);
 	}
+}
+
+//TOID(double) *nvm_values;
+void transfer_DRAM_to_NVM(){
+	int i;
+	for(i=0; i<nodes; i++){
+		D_RW(nvm_values)[i]=xk_1[i];
+	}
+	double ddd = D_RO(nvm_values)[15];
+	printf("nvm test: %d\n", i);
+}
+
+void top_n(){
+	int i;
+	#pragma omp for
+	for(i=0;i<nodes;i++){
+		
+	}
+}
+
+double mysecond(){
+        struct timeval tp;
+        struct timezone tzp;
+        int i;
+
+        i = gettimeofday(&tp,&tzp);
+        return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
 }
