@@ -43,25 +43,26 @@ int main(int argc, char **argv){
 
 	double test_time = mysecond();
 
-	//#pragma omp parallel num_threads(1)
-	//{
+	#pragma omp parallel num_threads(3)
+	{
 		int k;
 		//Adds values to x^0.
                 #pragma omp for
                 for( k=0; k<nodes; k++){
                         x[k] = iN;
 			xk_1[k] = iN;
+			D_RW(nvm_values)[k]=iN;
 		}
 
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0)
 			PageRank_iterations( atof(argv[2]), atof(argv[3]) );	
-		//else if( thread_id == 1)
+		else if( thread_id == 1)
 			transfer_DRAM_to_NVM();
-		//else if( thread_id == 2)
+		else if( thread_id == 2)
 			top_n_index = top_n();
 		printf("I'm number %d\n", thread_id);
-	//}
+	}
 	test_time = mysecond() - test_time;
 	printf("Time: %lf\n\n", test_time);
 

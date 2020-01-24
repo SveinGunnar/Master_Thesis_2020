@@ -9,12 +9,12 @@ file4="100nodes_graphs.txt"
 #d=0.85
 d=0.99
 # 0.0000001
-e=0.00000001
+e=0.00000000001
 n=10
 
 #./PageRank.exe $file $d $e $n
 #./PageRank.exe $file2 $d $e $n
-./Page_rank.out $file3 $d $e $n
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
 #./PageRank.exe $file4 $d $e $n
 
 #./PageRank.exe 0.85 0.000001 3

@@ -129,7 +129,7 @@ void PageRank_iterations(double d, double e){
 	int n=0;
 	int i;
 
-	#pragma omp parallel num_threads(10)
+	#pragma omp parallel num_threads(6)
 	{
 		#pragma omp single
 		{
@@ -301,15 +301,15 @@ void top_n_webpages(int n){
 //TOID(double) *nvm_values;
 void transfer_DRAM_to_NVM(){
 	int i;
-	//double tt = mysecond();
-	#pragma omp parallel num_threads(1)
+	double tt = mysecond();
+	#pragma omp parallel num_threads(5)
         {
 		#pragma omp for
 		for(i=0; i<nodes; i++){
 			D_RW(nvm_values)[i]=x[i];
 		}
 	}
-	//printf("nvm time: %lf\n", mysecond()-tt );
+	printf("nvm time: %lf\n", mysecond()-tt );
 }
 
 int top_n(){
@@ -318,6 +318,7 @@ int top_n(){
 	int x_index=0;
 	int a[5] = {0,0,0,0,0};
 
+	double tt = mysecond();
 	#pragma omp parallel num_threads(5)
         {
 		int thread_id = omp_get_thread_num();
@@ -331,6 +332,7 @@ int top_n(){
 		if( D_RO(nvm_values)[a[i]] > D_RO(nvm_values)[a[x_index]] )
 			x_index = i;
 	}
+	printf("top_n time: %lf\n", mysecond()-tt );
 	return a[x_index];
 }
 
