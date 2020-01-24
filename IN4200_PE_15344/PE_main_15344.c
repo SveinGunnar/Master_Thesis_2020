@@ -35,16 +35,16 @@ int main(int argc, char **argv){
 
 	int i,j;
 	double iN = 1.0/nodes;
+	int top_n_index;
 	x = (double*)malloc(nodes*sizeof(double));
 	xk_1 = (double*)malloc(nodes*sizeof(double));
 
-	TOID(double) nvm_values;
         POBJ_ALLOC(pop, &nvm_values, double, sizeof(double) * nodes, NULL, NULL);
 
 	double test_time = mysecond();
 
-	#pragma omp parallel num_threads(3)
-	{
+	//#pragma omp parallel num_threads(1)
+	//{
 		int k;
 		//Adds values to x^0.
                 #pragma omp for
@@ -56,14 +56,16 @@ int main(int argc, char **argv){
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0)
 			PageRank_iterations( atof(argv[2]), atof(argv[3]) );	
-		else if( thread_id == 1)
-			;//transfer_DRAM_to_NVM();
-		else if( thread_id == 2)
-			;//top_n();
+		//else if( thread_id == 1)
+			transfer_DRAM_to_NVM();
+		//else if( thread_id == 2)
+			top_n_index = top_n();
 		printf("I'm number %d\n", thread_id);
-	}
+	//}
 	test_time = mysecond() - test_time;
 	printf("Time: %lf\n\n", test_time);
+
+	printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 
 	top_n_webpages( atof(argv[4]) );
 	

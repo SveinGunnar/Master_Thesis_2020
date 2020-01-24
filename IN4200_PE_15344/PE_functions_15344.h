@@ -24,14 +24,14 @@ double *xk_1;
 POBJ_LAYOUT_BEGIN(array);
 POBJ_LAYOUT_TOID(array, double);
 POBJ_LAYOUT_END(array);
-//#define LAYOUT_NAME "my_layout"
+#define LAYOUT_NAME "my_layout"
 TOID(double) nvm_values;
 
 void read_graph_from_file(char[]);
 void PageRank_iterations(double, double);
 void top_n_webpages(int);
 void transfer_DRAM_to_NVM();
-void top_n();
+int top_n();
 double mysecond();
 
 #endif
