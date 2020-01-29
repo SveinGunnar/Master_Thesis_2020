@@ -43,30 +43,27 @@ int main(int argc, char **argv){
 
 	double test_time = mysecond();
 
-	#pragma omp parallel num_threads(3)
-	{
-		int k;
-		//Adds values to x^0.
-                #pragma omp for
-                for( k=0; k<nodes; k++){
-                        x[k] = iN;
-			xk_1[k] = iN;
-			D_RW(nvm_values)[k]=iN;
-		}
+	//omp_set_lock(&top_n_lock);
+	omp_init_lock(&lock_a);
+	omp_init_lock(&lock_b);
+	omp_set_lock(&lock_b);
+	iteration_ongoing = 1;
 
+	#pragma omp parallel num_threads(2)
+	{
 		int thread_id = omp_get_thread_num();
-		if( thread_id == 0)
-			PageRank_iterations( atof(argv[2]), atof(argv[3]) );	
-		else if( thread_id == 1)
-			transfer_DRAM_to_NVM();
-		else if( thread_id == 2)
+		if( thread_id == 0){
+			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
+		}
+		else if( thread_id == 1){
 			top_n_index = top_n();
+		}
 		printf("I'm number %d\n", thread_id);
 	}
 	test_time = mysecond() - test_time;
 	printf("Time: %lf\n\n", test_time);
 
-	printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
+	printf("Top n is: %d and has value %lf\n", top_webpage, D_RO(nvm_values)[top_webpage]);
 
 	top_n_webpages( atof(argv[4]) );
 	

@@ -9,7 +9,7 @@ file4="100nodes_graphs.txt"
 #d=0.85
 d=0.99
 # 0.0000001
-e=0.00000000001
+e=0.0000001
 n=10
 
 #./PageRank.exe $file $d $e $n
