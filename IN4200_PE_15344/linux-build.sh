@@ -14,7 +14,8 @@ n=10
 
 #./PageRank.exe $file $d $e $n
 #./PageRank.exe $file2 $d $e $n
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
+./Page_rank.out $file3 $d $e $n 12 1 3
 #./PageRank.exe $file4 $d $e $n
 
 #./PageRank.exe 0.85 0.000001 3

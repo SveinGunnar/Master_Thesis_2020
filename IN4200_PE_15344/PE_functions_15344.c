@@ -128,12 +128,14 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
+	//double tt;
 
-	#pragma omp parallel num_threads(10)
+	#pragma omp parallel num_threads(iter_threads)
 	{
 		#pragma omp single
 		{
 			num_threads = omp_get_num_threads();
+			//printf("Number of iter threads %d\n", num_threads);
 			diffX = (double*)malloc(num_threads*sizeof(double));
 		}
 
@@ -143,16 +145,16 @@ void PageRank_iterations(double d, double e){
 		//Adds values to x^0.
 		#pragma omp for
 		for( i=0; i<nodes; i++)
-			x[i] = iN;
+			xk_1[i] = iN;
 
 		while( 1==1 ){
 			#pragma omp single
 			{
 				n++;
 				//x^k becomes x^k-1
-				temp_x = xk_1;
-				xk_1 = x;
-				x = temp_x;
+				//temp_x = xk_1;
+				//xk_1 = x;
+				//x = temp_x;
 
 				//Sum of all dangling websites. W^k-1
 				Wk_1=0;
@@ -183,18 +185,18 @@ void PageRank_iterations(double d, double e){
 					diffX[thread_id] = x[i] - xk_1[i];
 			}
 			
-			//transfer the result from dram to nvm.
+			//
 			#pragma omp single
 			{
 				omp_set_lock(&lock_a);
+				//tt = mysecond();
+				temp_x = xk_1;
+                                xk_1 = x;
+                                x = temp_x;
 			}
-			#pragma omp for
-                        for(i=0; i<nodes; i++){
-                                D_RW(nvm_values)[i]=x[i];
-                        }
-			//#pragma omp single
-                        //{
-			//	omp_unset_lock(&lock_b);
+			//#pragma omp for
+                        //for(i=0; i<nodes; i++){
+                        //        D_RW(nvm_values)[i]=x[i];
                         //}
 
 			#pragma omp single
@@ -212,6 +214,7 @@ void PageRank_iterations(double d, double e){
 			}
 			#pragma omp single
                         {
+				//tt = mysecond()-tt;
                                 omp_unset_lock(&lock_b);
                         }
 		}//end of while-loop
@@ -219,63 +222,87 @@ void PageRank_iterations(double d, double e){
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
 	//For testing:
-	printf("iterations: %d\n\n", n);
+	//printf("iterations: %d\n\n", n);
 }
+
+//TOID(double) *nvm_values;
+void transfer_DRAM_to_NVM(){
+        int i;
+	//double tt;
+        //double tt = mysecond();
+        #pragma omp parallel num_threads(transfer_threads)
+        {
+                while(1==1){
+                        #pragma omp single
+                        {
+                                omp_set_lock(&lock_b);
+				//tt = mysecond();
+                        }
+			//if(iteration_ongoing==0)
+                        //        break;
+                        #pragma omp for
+                        for(i=0; i<nodes; i++){
+                                D_RW(nvm_values)[i]=x[i];
+                        }
+			if(iteration_ongoing==0)
+                                break;
+                        #pragma omp single
+                        {
+				//tt = mysecond()-tt;
+                                omp_unset_lock(&lock_c);
+                        }
+                }
+        }
+	transfer_ongoing = 0;
+	omp_unset_lock(&lock_c);
+	//printf("top_n time: %lf\n", tt );
+        //printf("nvm time: %lf\n", tt );
+}
+
 
 int top_n(){
         int i;
-        int size = 5;
+        int size = max_threads;
         int x_index=0;
-        int a[5] = {0,0,0,0,0};
+        //int a[5] = {0,0,0,0,0};
+	int *a = (int*)calloc(size, sizeof(int));
+	//double tt;
 
-        //double tt = mysecond();
-        #pragma omp parallel num_threads(6)
+        #pragma omp parallel num_threads(max_threads)
         {
-		
                 int thread_id = omp_get_thread_num();
 		while( iteration_ongoing==1 )
 		{
 			#pragma omp single
 			{
-				omp_set_lock(&lock_b);
+				omp_set_lock(&lock_c);
+				//tt = mysecond();
 			}
-
-			if(iteration_ongoing==0)
-				break;
 
                 	#pragma omp for
                 	for(i=0;i<nodes;i++){
                 	        if( D_RO(nvm_values)[i] > D_RO(nvm_values)[ a[thread_id] ] )
                 	                a[thread_id] = i;
                 	}
+			if(transfer_ongoing==0)
+                        	break;
 			#pragma omp single
 			{
+				//tt = mysecond()-tt;
 				omp_unset_lock(&lock_a);
 			}
 		}
+
         }
+	omp_unset_lock(&lock_a);
+	//printf("a[index]: %d\n", a[x_index] );
         for(i=0;i<size; i++){
+		//printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );
                 if( D_RO(nvm_values)[a[i]] > D_RO(nvm_values)[a[x_index]] )
                         x_index = i;
         }
-        //printf("top_n time: %lf\n", mysecond()-tt );
+        //printf("a[index]: %d\n", a[x_index] );
         return a[x_index];
-}
-
-//TOID(double) *nvm_values;
-void transfer_DRAM_to_NVM(){
-        int i;
-        double tt = mysecond();
-        #pragma omp parallel num_threads(5)
-        {
-                while(1==1){
-                        #pragma omp for
-                        for(i=0; i<nodes; i++){
-                                D_RW(nvm_values)[i]=x[i];
-                        }
-                }
-        }
-        printf("nvm time: %lf\n", mysecond()-tt );
 }
 
 void top_n_webpages(int n){

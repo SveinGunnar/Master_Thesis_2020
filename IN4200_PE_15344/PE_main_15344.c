@@ -19,6 +19,9 @@ static PMEMobjpool *pop;
 	argv[2] = damping constant d
 	argv[3] = convergence threshold value e
 	argv[4] = n value for showing the top n webpages
+	argv[5] = Number of iteration threads
+	argv[6] = Number of transfer threads
+	argv[7] = Number of max threads
 */
 int main(int argc, char **argv){
         const char path[] = "/mnt/pmem0-xfs/pool.obj";
@@ -31,7 +34,7 @@ int main(int argc, char **argv){
         }
 	
 	read_graph_from_file(argv[1]);
-        printf("Nodes: %d, Edges: %d\n", nodes, edges);
+        //printf("Nodes: %d, Edges: %d\n", nodes, edges);
 
 	int i,j;
 	double iN = 1.0/nodes;
@@ -46,10 +49,17 @@ int main(int argc, char **argv){
 	//omp_set_lock(&top_n_lock);
 	omp_init_lock(&lock_a);
 	omp_init_lock(&lock_b);
+	omp_init_lock(&lock_c);
 	omp_set_lock(&lock_b);
+	omp_set_lock(&lock_c);
 	iteration_ongoing = 1;
+	transfer_ongoing = 1;
 
-	#pragma omp parallel num_threads(2)
+	iter_threads = atof(argv[5]);
+	transfer_threads = atof(argv[6]);
+	max_threads = atof(argv[7]);
+
+	#pragma omp parallel num_threads(3)
 	{
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0){
@@ -58,17 +68,21 @@ int main(int argc, char **argv){
 		else if( thread_id == 1){
 			top_n_index = top_n();
 		}
-		printf("I'm number %d\n", thread_id);
+		else if( thread_id == 2){
+			transfer_DRAM_to_NVM();
+		}
+		//printf("Number %d is done.\n", thread_id);
 	}
 	test_time = mysecond() - test_time;
-	printf("Time: %lf\n\n", test_time);
+	//printf("Iteration_threads transfer_threads max_threads time\n");
+	printf("%d, %d, %d, %lf\n", iter_threads, transfer_threads, max_threads, test_time);
 
-	printf("Top n is: %d and has value %lf\n", top_webpage, D_RO(nvm_values)[top_webpage]);
+	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 
-	top_n_webpages( atof(argv[4]) );
+	//top_n_webpages( atof(argv[4]) );
 	
 	//Prints "return 0" when program ends without crashing
-	printf("\nreturn 0 det er slutt!\n");
+	//printf("\nreturn 0 det er slutt!\n");
 	POBJ_FREE(&nvm_values);
 	pmemobj_close(pop);
 	return 0;
