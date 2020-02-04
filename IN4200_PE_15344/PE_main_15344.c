@@ -59,23 +59,23 @@ int main(int argc, char **argv){
 	transfer_threads = atof(argv[6]);
 	max_threads = atof(argv[7]);
 
-	#pragma omp parallel num_threads(3)
+	#pragma omp parallel num_threads(2)
 	{
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0){
 			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
 		}
 		else if( thread_id == 1){
-			top_n_index = top_n();
-		}
-		else if( thread_id == 2){
 			transfer_DRAM_to_NVM();
 		}
+		//else if( thread_id == 1){
+                //      top_n_index = top_n();
+                //}
 		//printf("Number %d is done.\n", thread_id);
 	}
 	test_time = mysecond() - test_time;
 	//printf("Iteration_threads transfer_threads max_threads time\n");
-	printf("%d, %d, %d, %lf\n", iter_threads, transfer_threads, max_threads, test_time);
+	//printf("%d, %d, %d, %lf\n", iter_threads, transfer_threads, max_threads, test_time);
 
 	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 

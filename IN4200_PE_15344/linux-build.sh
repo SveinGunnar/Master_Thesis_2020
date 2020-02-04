@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export OMP_NESTED=TRUE
 #gcc -fopenmp PE_main_15344.c PE_functions_15344.c -o PageRank.out
 
 file="testfile.txt"
@@ -11,6 +12,7 @@ d=0.99
 # 0.0000001
 e=0.0000001
 n=10
+
 
 #./PageRank.exe $file $d $e $n
 #./PageRank.exe $file2 $d $e $n
