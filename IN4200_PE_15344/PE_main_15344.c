@@ -24,6 +24,7 @@ static PMEMobjpool *pop;
 	argv[7] = Number of max threads
 */
 int main(int argc, char **argv){
+	//printf("seg fault test");
         const char path[] = "/mnt/pmem0-xfs/pool.obj";
         //PMEMobjpool *pop;
 	pop = pmemobj_open(path, LAYOUT_NAME);
@@ -35,9 +36,10 @@ int main(int argc, char **argv){
 	
 	read_graph_from_file(argv[1]);
         //printf("Nodes: %d, Edges: %d\n", nodes, edges);
-
+	//printf("seg fault test");
 	int i,j;
 	double iN = 1.0/nodes;
+	iteration_time=0.0, transfer_time=0.0;
 	int top_n_index;
 	x = (double*)malloc(nodes*sizeof(double));
 	xk_1 = (double*)malloc(nodes*sizeof(double));
@@ -57,10 +59,11 @@ int main(int argc, char **argv){
 
 	iter_threads = atof(argv[5]);
 	transfer_threads = atof(argv[6]);
-	max_threads = atof(argv[7]);
+	//max_threads = atof(argv[7]);
 
 	#pragma omp parallel num_threads(2)
 	{
+		//printf("seg fault test");
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0){
 			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
@@ -75,7 +78,7 @@ int main(int argc, char **argv){
 	}
 	test_time = mysecond() - test_time;
 	//printf("Iteration_threads transfer_threads max_threads time\n");
-	//printf("%d, %d, %d, %lf\n", iter_threads, transfer_threads, max_threads, test_time);
+	printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
 
 	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 

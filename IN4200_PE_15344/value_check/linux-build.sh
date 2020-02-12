@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export OMP_NESTED=TRUE
 #gcc -fopenmp PE_main_15344.c PE_functions_15344.c -o PageRank.out
 
 file="testfile.txt"

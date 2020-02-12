@@ -12,9 +12,9 @@ int main(int argc, char **argv){
 	clock_t start = clock();
 	read_graph_from_file(argv[1]);
 	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
-	top_n_webpages( atof(argv[4]) );
+	//top_n_webpages( atof(argv[4]) );
 
 	//Prints "return 0" when program ends without crashing
-	printf("\nreturn 0\n");
+	//printf("\nreturn 0\n");
 	return 0;
 }

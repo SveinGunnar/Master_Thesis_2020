@@ -19,6 +19,7 @@ int *CRS_row_ptr, *CRS_col_idx;
 double *CRS_values;
 double *x;
 double *xk_1;
+double iteration_time, transfer_time;
 omp_lock_t lock_a, lock_b, lock_c;
 int top_webpage;
 int iteration_ongoing, transfer_ongoing;

@@ -128,7 +128,10 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	//double tt;
+	
+	double idle_time=0.0;
+	double temp_time;
+	iteration_time = mysecond();
 
 	#pragma omp parallel num_threads(iter_threads)
 	{
@@ -187,8 +190,11 @@ void PageRank_iterations(double d, double e){
 			
 			//
 			#pragma omp single
-			{
+			{	
+				temp_time = mysecond();
 				omp_set_lock(&lock_a);
+				idle_time += mysecond() - temp_time;
+
 				//tt = mysecond();
 				temp_x = xk_1;
                                 xk_1 = x;
@@ -221,8 +227,10 @@ void PageRank_iterations(double d, double e){
 	}//End parallel
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
+	iteration_time = mysecond() - iteration_time;
+	printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
 	//For testing:
-	//printf("iterations: %d\n\n", n);
+	//printf("iterations: %d\n", n);
 }
 
 //TOID(double) *nvm_values;
@@ -231,31 +239,46 @@ void transfer_DRAM_to_NVM(){
 	int size;
 	int maximum_index=0, minimum_index=0;
 	double average=0.0;
-	double *average_vector = (double*)calloc(size, sizeof(double));
+	double *average_vector; //= (double*)calloc(size, sizeof(double));
         int *maximum = (int*)calloc(size, sizeof(int));
 	int *minimum = (int*)calloc(size, sizeof(int));
-	//double tt;
-        //double tt = mysecond();
-        #pragma omp parallel num_threads(transfer_threads)
+	
+	double idle_time=0.0, DRAM_to_NVM_time=0.0, Analyse_time=0.0;
+        double temp_time;
+        transfer_time = mysecond();
+        
+	#pragma omp parallel num_threads(transfer_threads)
         {
 		#pragma omp single
 		{
 			size = omp_get_num_threads();
+			average_vector = (double*)calloc(size, sizeof(double));
 		}
 		int thread_id = omp_get_thread_num();
                 while(1==1){
                         #pragma omp single
                         {
+				temp_time = mysecond();
                                 omp_set_lock(&lock_b);
+				idle_time += mysecond() - temp_time;
 				//tt = mysecond();
+				temp_time = mysecond();
                         }
 
 			//Transfer array to nvdimm.
+			//DRAM_to_NVM=
                         #pragma omp for
                         for(i=0; i<nodes; i++){
-                                D_RW(nvm_values)[i]=x[i];
+                                D_RW(nvm_values)[i]=xk_1[i];
                         }
 			
+			#pragma omp single
+			{
+				DRAM_to_NVM_time += mysecond() - temp_time;
+				temp_time = mysecond();
+			}
+
+			//printf("seg fault test: %d", thread_id);
 			//maximum, minimum and average.
 			#pragma omp for
                         for(i=0;i<nodes;i++){
@@ -277,10 +300,13 @@ void transfer_DRAM_to_NVM(){
                                                 minimum_index = i;
 					average += average_vector[i];
         			}
-				average /= nodes;
-				printf("Top n is: %d and has value %lf\n", maximum[maximum_index], D_RO(nvm_values)[maximum[maximum_index]]);
-				printf("Min n is: %d and has value %lf\n", minimum[minimum_index], D_RO(nvm_values)[minimum[minimum_index]]);
-				printf("The average value is %lf\n", average);
+				Analyse_time += mysecond() - temp_time;
+				//average /= nodes;
+				//printf("%d, %f\n", maximum[maximum_index], D_RO(nvm_values)[maximum[maximum_index]]);
+				//printf("%f, %f\n", average/nodes, average)
+				//printf("Top n is: %d and has value %lf\n", maximum[maximum_index], D_RO(nvm_values)[maximum[maximum_index]]);
+				//printf("Min n is: %d and has value %lf\n", minimum[minimum_index], D_RO(nvm_values)[minimum[minimum_index]]);
+				//printf("The average value is %lf\n", average);
 			}
 
 			if(iteration_ongoing==0)
@@ -294,6 +320,10 @@ void transfer_DRAM_to_NVM(){
         }
 	transfer_ongoing = 0;
 	omp_unset_lock(&lock_c);
+
+	transfer_time = mysecond() - transfer_time;
+        printf("Transfer time: %f, Analyse time: %f, idle time: %f, total time: %f\n", DRAM_to_NVM_time, Analyse_time, idle_time, transfer_time);
+	
 	//printf("top_n time: %lf\n", tt );
         //printf("nvm time: %lf\n", tt );
 } 

@@ -188,8 +188,13 @@ void PageRank_iterations(double d, double e){
 					diffX[thread_id] = x[i] - xk_1[i];
 			}
 
+			#pragma omp barrier
 			#pragma omp single
 			{
+				//for( i=0; i<nodes; i++){
+				//
+				//}
+				top_n_webpages( 10 );
 				//Turns the vector into a scalar
 				diffX_scalar = 0;
 				for( i=0; i<num_threads; i++)
@@ -209,12 +214,12 @@ void PageRank_iterations(double d, double e){
 	//clock_t end = clock();
 	//double seconds = (double)(end - start) / CLOCKS_PER_SEC;
 	//printf("Hva er dette: %f \n", seconds);
-	for( i=0; i<num_threads; i++)
-		printf("Tid %d: %f \n", i, wClock[i]);
+	//for( i=0; i<num_threads; i++)
+	//	printf("Tid %d: %f \n", i, wClock[i]);
 
 
 	//For testing:
-	printf("iterations: %d\n\n", n);
+	//printf("iterations: %d\n\n", n);
 /*
 	for( i=0; i<nodes; i++){
 		printf("%f\n", x[i] );
@@ -238,13 +243,15 @@ void top_n_webpages(int n){
 	//index of the biggest nodes and their values.
 	int *result_index;
 	double *result_value;
-	#pragma omp parallel
+	double *average_vector;
+	#pragma omp parallel num_threads(4)
 	{
 		#pragma omp single
 		{
 			num_threads = omp_get_num_threads();
 			result_index = (int*)malloc((num_threads*n)*sizeof(int));
 			result_value = (double*)malloc((num_threads*n)*sizeof(double));
+			average_vector = (double*)calloc(num_threads, sizeof(double));
 		}
 		//Each thread creates their own array with index of the biggest
 		//nodes and their values.
@@ -289,6 +296,11 @@ void top_n_webpages(int n){
 			}
 			m+=len;
 		}
+
+		#pragma omp for
+		for(i=0;i<nodes;i++){
+                   	average_vector[thread_id] += x[i];
+            	}
 	}
 	//The n highest nodes will be added to this array.
 	int *n_index = (int*)calloc(n, sizeof(int));
@@ -319,9 +331,18 @@ void top_n_webpages(int n){
 		n_index[i] = result_index[i];
 		n_value[i] = result_value[i];
 	}
-
-	printf("n_index, n_value:\n");
-	for( i=0; i<n; i++){
-		printf("%d, %f\n", n_index[i], n_value[i]);
+	
+	double average=0.0;
+	for( i=0; i<num_threads; i++){
+		average += average_vector[i];
+		printf("vector: %f\n", average_vector[i]);
 	}
+
+	//printf("n_index, n_value:\n");
+	printf("%d, %f\n", n_index[0], n_value[0]);
+	printf("%f\n", average/nodes);
+	//for( i=0; i<n; i++){
+	//	printf("%d, %f\n", n_index[i], n_value[i]);
+	//}
+	free(average_vector);
 }
