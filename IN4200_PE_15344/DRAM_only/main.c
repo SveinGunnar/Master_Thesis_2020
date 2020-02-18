@@ -22,37 +22,17 @@ int main(int argc, char **argv){
 	x = (double*)malloc(nodes*sizeof(double));
 	xk_1 = (double*)malloc(nodes*sizeof(double));
 
+	iter_threads = atof(argv[5]);
+	transfer_threads = atof(argv[6]);
+	//max_threads = atof(argv[7]);|
 
 	double test_time = mysecond();
 
-	//omp_set_lock(&top_n_lock);
-	omp_init_lock(&lock_a);
-	omp_init_lock(&lock_b);
-	omp_init_lock(&lock_c);
-	omp_set_lock(&lock_b);
-	omp_set_lock(&lock_c);
-	iteration_ongoing = 1;
-	transfer_ongoing = 1;
-
-	iter_threads = atof(argv[5]);
-	transfer_threads = atof(argv[6]);
-	//max_threads = atof(argv[7]);
-
-	#pragma omp parallel num_threads(2)
-	{
-		int thread_id = omp_get_thread_num();
-		if( thread_id == 0){
-			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
-		}
-		else if( thread_id == 1){
-			transfer_DRAM_to_NVM();
-		}
-		//else if( thread_id == 1){
-                //      top_n_index = top_n();
-                //}
-		//printf("Number %d is done.\n", thread_id);
-	}
+	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
+	transfer_DRAM_to_NVM();
+	
 	test_time = mysecond() - test_time;
+	
 	//printf("Iteration_threads transfer_threads max_threads time\n");
 	printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
 

@@ -13,11 +13,18 @@ d=0.99
 e=0.0000001
 n=10
 
+threads=16
+
+for (( i=1; i<16; i++ ))
+do
+	./numactl --physcpubind=0-15 Page_rank.out $file3 $d $e $n $threads $threads
+done
+
 
 #./PageRank.exe $file $d $e $n
 #./PageRank.exe $file2 $d $e $n
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
-./Page_rank.out $file3 $d $e $n 10 1
+./Page_rank.out $file3 $d $e $n $threads $threads
 #./PageRank.exe $file4 $d $e $n
 
 #./PageRank.exe 0.85 0.000001 3

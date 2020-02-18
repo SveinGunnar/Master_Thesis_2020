@@ -192,7 +192,6 @@ void PageRank_iterations(double d, double e){
 			#pragma omp single
 			{
 				temp_time = mysecond();
-				omp_set_lock(&lock_a);
 				idle_time += mysecond() - temp_time;
 				//tt = mysecond();
 				temp_x = xk_1;
@@ -217,17 +216,10 @@ void PageRank_iterations(double d, double e){
 			if( diffX_scalar < e){
 				break;
 			}
-			#pragma omp single
-                        {
-				//tt = mysecond()-tt;
-                                omp_unset_lock(&lock_b);
-                        }
 		}//end of while-loop
 	}//End parallel
-	iteration_ongoing=0;
 	iteration_time = mysecond() - iteration_time;
         printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
-	omp_unset_lock(&lock_b);
 	//For testing:
 	//printf("iterations: %d\n\n", n);
 }
@@ -238,29 +230,25 @@ void transfer_DRAM_to_NVM(){
 	int size;
 	int maximum_index=0, minimum_index=0;
 	double average=0.0;
-	double *average_vector = (double*)calloc(size, sizeof(double));
-        int *maximum = (int*)calloc(size, sizeof(int));
-	int *minimum = (int*)calloc(size, sizeof(int));
+	double *average_vector; // = (double*)calloc(size, sizeof(double));
+        int *maximum; // = (int*)calloc(size, sizeof(int));
+	int *minimum; // = (int*)calloc(size, sizeof(int));
 	//double tt;
         //double tt = mysecond();
 	double idle_time=0.0;
         double temp_time;
         double transfer_time = mysecond();
-        #pragma omp parallel num_threads(transfer_threads)
+        #pragma omp parallel num_threads(iter_threads)
         {
 		#pragma omp single
 		{
 			size = omp_get_num_threads();
+			maximum = (int*)calloc(size, sizeof(int));
+			minimum = (int*)calloc(size, sizeof(int));
+			average_vector = (double*)calloc(size, sizeof(double));
 		}
 		int thread_id = omp_get_thread_num();
                 while(1==1){
-                        #pragma omp single
-                        {
-				temp_time = mysecond();
-                                omp_set_lock(&lock_b);
-				idle_time += mysecond() - temp_time;
-				//tt = mysecond();
-                        }
 
 			//Transfer array to nvdimm.
                         //#pragma omp for
@@ -297,17 +285,12 @@ void transfer_DRAM_to_NVM(){
 
 			if(iteration_ongoing==0)
                                 break;
-                        #pragma omp single
-                        {
-				//tt = mysecond()-tt;
-                                omp_unset_lock(&lock_a);
-                        }
                 }
         }
 	transfer_ongoing = 0;
 	transfer_time = mysecond() - transfer_time;
         printf("Transfer: Work time: %f, idle time: %f, total time: %f\n", transfer_time-idle_time, idle_time, transfer_time);
-	omp_unset_lock(&lock_c);
+	
 	//printf("top_n time: %lf\n", tt );
         //printf("nvm time: %lf\n", tt );
 } 
