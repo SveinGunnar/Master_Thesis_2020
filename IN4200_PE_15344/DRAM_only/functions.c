@@ -125,6 +125,13 @@ void PageRank_iterations(double d, double e){
 	double *diffX;
 	double diffX_scalar;
 
+	double average=0.0;
+	double *average_vector; // = (double*)calloc(size, sizeof(double));
+        int *maximum; // = (int*)calloc(size, sizeof(int));
+        int *minimum;
+	int size;
+	int maximum_index=0, minimum_index=0;
+
 	//Counts the number of iterations.
 	int n=0;
 	int i;
@@ -132,6 +139,7 @@ void PageRank_iterations(double d, double e){
 	double idle_time=0.0;
         double temp_time;
         double iteration_time = mysecond();
+	double calculation=0.0, temp_calc;
 
 	#pragma omp parallel num_threads(iter_threads)
 	{
@@ -140,6 +148,12 @@ void PageRank_iterations(double d, double e){
 			num_threads = omp_get_num_threads();
 			//printf("Number of iter threads %d\n", num_threads);
 			diffX = (double*)malloc(num_threads*sizeof(double));
+
+			//For calculation
+			size = omp_get_num_threads();
+                        maximum = (int*)calloc(size, sizeof(int));
+                        minimum = (int*)calloc(size, sizeof(int));
+                        average_vector = (double*)calloc(size, sizeof(double));
 		}
 
 		int thread_id = omp_get_thread_num();
@@ -188,23 +202,55 @@ void PageRank_iterations(double d, double e){
 					diffX[thread_id] = x[i] - xk_1[i];
 			}
 			
-			//
+			//calculation
 			#pragma omp single
 			{
-				temp_time = mysecond();
-				idle_time += mysecond() - temp_time;
+				//temp_time = mysecond();
+				//idle_time += mysecond() - temp_time;
 				//tt = mysecond();
 				temp_x = xk_1;
                                 xk_1 = x;
                                 x = temp_x;
+
+				//starting time measurement of calculation.
+				temp_calc=mysecond();
 			}
 			//#pragma omp for
                         //for(i=0; i<nodes; i++){
                         //        D_RW(nvm_values)[i]=x[i];
                         //}
+			
+			//transfer_DRAM_to_NVM();
+			#pragma omp for
+                        for(i=0;i<nodes;i++){
+                                if( xk_1[i] > xk_1[ maximum[thread_id] ] )
+                                        maximum[thread_id] = i;
+                                if( xk_1[i] < xk_1[ minimum[thread_id] ] )
+                                        minimum[thread_id] = i;
+                                average_vector[thread_id] += xk_1[i];
+                        }
+
+                        #pragma omp single
+                        {
+                                //converts the vectors into scalars.
+                                for(i=0;i<size; i++){
+                                        //printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );
+                                        if( xk_1[maximum[i]] > xk_1[maximum[maximum_index]] )
+                                                maximum_index = i;
+                                        if( xk_1[maximum[i]] < xk_1[maximum[maximum_index]] )
+                                                minimum_index = i;
+                                        average += average_vector[i];
+                                }
+                                average /= nodes;
+                                //printf("Top n is: %d and has value %lf\n", maximum[maximum_index], xk_1[maximum[maximum_index]]);
+                                //printf("Min n is: %d and has value %lf\n", minimum[minimum_index], xk_1[minimum[minimum_index]]);
+                                //printf("The average value is %lf\n", average);
+                        }
 
 			#pragma omp single
 			{
+				calculation+=mysecond()-temp_calc;
+
 				//Turns the vector into a scalar
 				diffX_scalar = 0;
 				for( i=0; i<num_threads; i++)
@@ -219,7 +265,8 @@ void PageRank_iterations(double d, double e){
 		}//end of while-loop
 	}//End parallel
 	iteration_time = mysecond() - iteration_time;
-        printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
+	//printf("Threads, Total time, Iteration time, Calculation time\n");
+        printf("%d,%f,%f,%f\n", num_threads, iteration_time, iteration_time-calculation, calculation);
 	//For testing:
 	//printf("iterations: %d\n\n", n);
 }
@@ -289,7 +336,7 @@ void transfer_DRAM_to_NVM(){
         }
 	transfer_ongoing = 0;
 	transfer_time = mysecond() - transfer_time;
-        printf("Transfer: Work time: %f, idle time: %f, total time: %f\n", transfer_time-idle_time, idle_time, transfer_time);
+        //printf("Transfer: Work time: %f, idle time: %f, total time: %f\n", transfer_time-idle_time, idle_time, transfer_time);
 	
 	//printf("top_n time: %lf\n", tt );
         //printf("nvm time: %lf\n", tt );
@@ -310,7 +357,7 @@ int top_n(){
 		{
 			#pragma omp single
 			{
-				omp_set_lock(&lock_c);
+				//omp_set_lock(&lock_c);
 				//tt = mysecond();
 			}
 
@@ -324,12 +371,12 @@ int top_n(){
 			#pragma omp single
 			{
 				//tt = mysecond()-tt;
-				omp_unset_lock(&lock_a);
+				//omp_unset_lock(&lock_a);
 			}
 		}
 
         }
-	omp_unset_lock(&lock_a);
+	//omp_unset_lock(&lock_a);
 	//printf("a[index]: %d\n", a[x_index] );
         for(i=0;i<size; i++){
 		//printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );

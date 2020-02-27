@@ -15,9 +15,10 @@ n=10
 
 threads=16
 
+echo Threads, Total time, Iteration time, Calculation time
 for (( i=1; i<16; i++ ))
 do
-	./numactl --physcpubind=0-15 Page_rank.out $file3 $d $e $n $threads $threads
+	numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n $i $i
 done
 
 

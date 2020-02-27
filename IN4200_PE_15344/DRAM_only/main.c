@@ -26,15 +26,15 @@ int main(int argc, char **argv){
 	transfer_threads = atof(argv[6]);
 	//max_threads = atof(argv[7]);|
 
-	double test_time = mysecond();
+	//double test_time = mysecond();
 
 	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
-	transfer_DRAM_to_NVM();
+	//transfer_DRAM_to_NVM();
 	
-	test_time = mysecond() - test_time;
+	//test_time = mysecond() - test_time;
 	
 	//printf("Iteration_threads transfer_threads max_threads time\n");
-	printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
+	//printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
 
 	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 
