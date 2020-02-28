@@ -46,8 +46,6 @@ int main(int argc, char **argv){
 
         POBJ_ALLOC(pop, &nvm_values, double, sizeof(double) * nodes, NULL, NULL);
 
-	double test_time = mysecond();
-
 	//omp_set_lock(&top_n_lock);
 	omp_init_lock(&lock_a);
 	omp_init_lock(&lock_b);
@@ -60,7 +58,8 @@ int main(int argc, char **argv){
 	iter_threads = atof(argv[5]);
 	transfer_threads = atof(argv[6]);
 	//max_threads = atof(argv[7]);
-
+	//printf("test 1\n");
+	double test_time = mysecond();
 	#pragma omp parallel num_threads(2)
 	{
 		//printf("seg fault test");
@@ -78,7 +77,9 @@ int main(int argc, char **argv){
 	}
 	test_time = mysecond() - test_time;
 	//printf("Iteration_threads transfer_threads max_threads time\n");
-	printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
+	
+	printf("%d,%d,%d,%f,%f,%f,%f,%f,%f,%f\n", iter_threads+transfer_threads, iter_threads, transfer_threads, iteration_time, iteration_idle_time, transfer_time, transfer_idle_time, DRAM_to_NVM_time, Analyse_time, test_time);
+	//printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
 
 	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);
 

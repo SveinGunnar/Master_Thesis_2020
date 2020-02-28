@@ -129,7 +129,7 @@ void PageRank_iterations(double d, double e){
 	int n=0;
 	int i;
 	
-	double idle_time=0.0;
+	iteration_idle_time=0.0;
 	double temp_time;
 	iteration_time = mysecond();
 
@@ -193,7 +193,7 @@ void PageRank_iterations(double d, double e){
 			{	
 				temp_time = mysecond();
 				omp_set_lock(&lock_a);
-				idle_time += mysecond() - temp_time;
+				iteration_idle_time += mysecond() - temp_time;
 
 				//tt = mysecond();
 				temp_x = xk_1;
@@ -228,7 +228,7 @@ void PageRank_iterations(double d, double e){
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
 	iteration_time = mysecond() - iteration_time;
-	printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
+	//printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
 	//For testing:
 	//printf("iterations: %d\n", n);
 }
@@ -239,29 +239,36 @@ void transfer_DRAM_to_NVM(){
 	int size;
 	int maximum_index=0, minimum_index=0;
 	double average=0.0;
+	double inverseN = 1/nodes;
+	double sumSquare = 0.0;
 	double *average_vector; //= (double*)calloc(size, sizeof(double));
-        int *maximum = (int*)calloc(size, sizeof(int));
-	int *minimum = (int*)calloc(size, sizeof(int));
+	double *sumSquare_vector;
+        int *maximum;
+	int *minimum;
 	
-	double idle_time=0.0, DRAM_to_NVM_time=0.0, Analyse_time=0.0;
+	transfer_idle_time=0.0, DRAM_to_NVM_time=0.0, Analyse_time=0.0;
         double temp_time;
         transfer_time = mysecond();
         
 	#pragma omp parallel num_threads(transfer_threads)
         {
+		double temp_value=0;
 		#pragma omp single
 		{
 			size = omp_get_num_threads();
 			average_vector = (double*)calloc(size, sizeof(double));
+			sumSquare_vector = (double*)calloc(size, sizeof(double));
+			maximum = (int*)calloc(size, sizeof(int));
+			minimum = (int*)calloc(size, sizeof(int));
 		}
+
 		int thread_id = omp_get_thread_num();
                 while(1==1){
                         #pragma omp single
                         {
 				temp_time = mysecond();
                                 omp_set_lock(&lock_b);
-				idle_time += mysecond() - temp_time;
-				//tt = mysecond();
+				transfer_idle_time += mysecond() - temp_time;
 				temp_time = mysecond();
                         }
 
@@ -282,11 +289,13 @@ void transfer_DRAM_to_NVM(){
 			//maximum, minimum and average.
 			#pragma omp for
                         for(i=0;i<nodes;i++){
-                                if( D_RO(nvm_values)[i] > D_RO(nvm_values)[ maximum[thread_id] ] )
-                                        maximum[thread_id] = i;
-				if( D_RO(nvm_values)[i] < D_RO(nvm_values)[ minimum[thread_id] ] )
-					minimum[thread_id] = i;
-				average_vector[thread_id] += D_RO(nvm_values)[i];
+                                //if( D_RO(nvm_values)[i] > D_RO(nvm_values)[ maximum[thread_id] ] )
+                                //        maximum[thread_id] = i;
+				//if( D_RO(nvm_values)[i] < D_RO(nvm_values)[ minimum[thread_id] ] )
+				//	minimum[thread_id] = i;
+				temp_value=D_RO(nvm_values)[i];
+				average_vector[thread_id] += temp_value;;
+				sumSquare_vector[thread_id] += temp_value*temp_value;
                         }
 			
 			#pragma omp single
@@ -294,12 +303,14 @@ void transfer_DRAM_to_NVM(){
 				//converts the vectors into scalars.
 				for(i=0;i<size; i++){
                 			//printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );
-                			if( D_RO(nvm_values)[maximum[i]] > D_RO(nvm_values)[maximum[maximum_index]] )
-                        			maximum_index = i;
-					if( D_RO(nvm_values)[maximum[i]] < D_RO(nvm_values)[maximum[maximum_index]] )
-                                                minimum_index = i;
+                			//if( D_RO(nvm_values)[maximum[i]] > D_RO(nvm_values)[maximum[maximum_index]] )
+                        		//	maximum_index = i;
+					//if( D_RO(nvm_values)[maximum[i]] < D_RO(nvm_values)[maximum[maximum_index]] )
+                                        //        minimum_index = i;
 					average += average_vector[i];
+					sumSquare *= sumSquare_vector[i];
         			}
+				average = average*inverseN;
 				Analyse_time += mysecond() - temp_time;
 				//average /= nodes;
 				//printf("%d, %f\n", maximum[maximum_index], D_RO(nvm_values)[maximum[maximum_index]]);
@@ -309,20 +320,24 @@ void transfer_DRAM_to_NVM(){
 				//printf("The average value is %lf\n", average);
 			}
 
-			if(iteration_ongoing==0)
+			if(iteration_ongoing==0){
                                 break;
+			}
                         #pragma omp single
                         {
-				//tt = mysecond()-tt;
                                 omp_unset_lock(&lock_a);
                         }
                 }
+		#pragma omp single
+		{
+			free(average_vector);
+		}
         }
-	transfer_ongoing = 0;
-	omp_unset_lock(&lock_c);
+	//transfer_ongoing = 0;
+	//omp_unset_lock(&lock_c);
 
 	transfer_time = mysecond() - transfer_time;
-        printf("Transfer time: %f, Analyse time: %f, idle time: %f, total time: %f\n", DRAM_to_NVM_time, Analyse_time, idle_time, transfer_time);
+        //printf("Transfer time: %f, Analyse time: %f, idle time: %f, total time: %f\n", DRAM_to_NVM_time, Analyse_time, idle_time, transfer_time);
 	
 	//printf("top_n time: %lf\n", tt );
         //printf("nvm time: %lf\n", tt );

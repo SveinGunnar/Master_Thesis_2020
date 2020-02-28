@@ -19,11 +19,14 @@ int *CRS_row_ptr, *CRS_col_idx;
 double *CRS_values;
 double *x;
 double *xk_1;
-double iteration_time, transfer_time;
 omp_lock_t lock_a, lock_b, lock_c;
 int top_webpage;
+
 int iteration_ongoing, transfer_ongoing;
 int iter_threads, transfer_threads, max_threads;
+double iteration_time, iteration_idle_time;
+double transfer_time, transfer_idle_time, DRAM_to_NVM_time, Analyse_time;
+
 
 //double nvm_values
 POBJ_LAYOUT_BEGIN(array);
