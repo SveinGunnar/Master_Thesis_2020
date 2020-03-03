@@ -30,7 +30,7 @@ do
                 temp5=$(echo "scale=6;$DRAM_to_NVM_time / $t" | bc)
                 temp6=$(echo "scale=6;$Analyse_time / $t" | bc)
                 temp7=$(echo "scale=6;$total_time / $t" | bc)
-                echo $total_thread,$iteration_thread,$transfer_thread,$temp7,$temp1,$temp2,$temp3,$temp4,$temp5,$temp6 >> $output
+                echo $total_thread,$iteration_thread,$transfer_thread,$temp1,$temp2,$temp3,$temp4,$temp5,$temp6,$temp7 >> $output
                 echo $total_thread,$iteration_thread,$transfer_thread
 		
 		iteration_time=0
