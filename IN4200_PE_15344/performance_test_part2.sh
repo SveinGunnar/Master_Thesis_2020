@@ -18,6 +18,8 @@ total_time=0
 
 temp=""
 
+echo "" > $output
+
 while IFS= read -r line
 do
 #: <<'END'
