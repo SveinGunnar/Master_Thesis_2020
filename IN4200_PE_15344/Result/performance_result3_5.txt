@@ -1,2 +1,0 @@
-total_threads iteration_threads transfer_threads total_time iteration_time iteration_idle_time transfer_time transfer_idle_time DRAM_to_NVM_time Analyse_time
-16,14,2,1.517988,1.494699,.357519,1.517840,.136015,.075387,1.288359
