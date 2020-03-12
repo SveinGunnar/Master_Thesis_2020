@@ -25,7 +25,7 @@ for (( i=1; i<=16; i++ ))
 do
 	for (( j=0; j<100; j++ ))
 	do
-		numactl --physcpubind=0-$i ./Page_rank.out $file3 $d $e $n $i $i >> $output
+		numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n $i $i >> $output
 	done
 	echo $i
 	echo "" >> $output
