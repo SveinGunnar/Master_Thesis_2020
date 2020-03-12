@@ -1,8 +1,8 @@
 #!/bin/bash
 
-input="Result/rawdata_100.txt"
-output="Result/performance_result_100.txt"
-t=100
+input="Result/rawdata2.txt"
+output="Result/performance_result.txt"
+t=10
 
 total_thread=0
 iteration_thread=0

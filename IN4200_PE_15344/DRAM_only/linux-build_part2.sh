@@ -1,8 +1,8 @@
 #!/bin/bash
 
-input="DRAM_only.txt"
-output="DRAM_only_average.txt"
-t=10
+input="DRAM_only_100.txt"
+output="DRAM_only_average_100.txt"
+t=100
 
 total_time=0
 iteration_time=0

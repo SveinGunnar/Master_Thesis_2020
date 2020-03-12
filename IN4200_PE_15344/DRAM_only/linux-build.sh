@@ -8,7 +8,7 @@ file2="testfile2.txt"
 file3="web-NotreDame.txt"
 file4="100nodes_graphs.txt"
 
-output=DRAM_only.txt
+output=DRAM_only_100.txt
 
 #d=0.85
 d=0.99
@@ -23,9 +23,9 @@ echo "" > $output
 #echo Threads, Total time, Iteration time, Calculation time
 for (( i=1; i<=16; i++ ))
 do
-	for (( j=0; j<10; j++ ))
+	for (( j=0; j<100; j++ ))
 	do
-		numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n $i $i >> $output
+		numactl --physcpubind=0-$i ./Page_rank.out $file3 $d $e $n $i $i >> $output
 	done
 	echo $i
 	echo "" >> $output

@@ -103,6 +103,11 @@ void read_graph_from_file(char filename[]){
 	free(CCS);
 	free(CCS_values);
 	free(row_nodes_occurrence);
+
+	printf("Nodes: %d\n", nodes);
+	printf("Edges: %d\n", edges);
+	printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
+	printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -116,14 +121,8 @@ void PageRank_iterations(double d, double e){
 	double omd = 1.0-d;
 	//inverse N
 	double iN = 1.0/nodes;
-	//x^k-1
-	//xk_1 = (double*)malloc(nodes*sizeof(double));
-	//x^k
-	//x = (double*)malloc(nodes*sizeof(double));
 
 	//This variable will be compared against the convergence threshold value
-	//double *diffX;
-	//double diffX_scalar;
 	double diff=0.0;
 
 	//Counts the number of iterations.
@@ -148,41 +147,40 @@ void PageRank_iterations(double d, double e){
 
 		//Adds values to x^0.
 		#pragma omp for
-		for( i=0; i<nodes; i++)
+		for( i=0; i<nodes; i++) // F: 325,729 W: 651,458
 			xk_1[i] = iN;
 
-		while( 1==1 ){
+		while( 1==1 ){ //F: 1,950,645,706,000+7
 			#pragma omp single
 			{
-				n++;
-				//x^k becomes x^k-1
-				//temp_x = xk_1;
-				//xk_1 = x;
-				//x = temp_x;
+				n++; // F: 1 W:2
 
 				//Sum of all dangling websites. W^k-1
-				Wk_1=0;
-				for( i=0; i<dwp_size; i++)
-					Wk_1 += xk_1[ dwp[i] ];
+				//dwp_size=187,788
+				Wk_1=0; //W:1
+				for( i=0; i<dwp_size; i++) // F: 187,788*2=375,576, W: 187,788*3=563,364
+					Wk_1 += xk_1[ dwp[i] ]; //F: 1 W: 3
 
 				//completes the first part of the formula.
-				Wk_1_product = (omd + (d*Wk_1))*iN;
+				Wk_1_product = (omd + (d*Wk_1))*iN; //F: 3 w: 5
 			}
 
 			//Computing the x^k formula
-			//diffX[thread_id]=0;
+			//Nodes 325 729
 			diff=0.0;
 			#pragma omp for reduction(max:diff)
-			for( i=0; i<nodes; i++){
+			for( i=0; i<nodes; i++){ // F: 325,729*(2+5,988,552)=1,950,645,706,000
+				// F: 1
 				//This is A*x^k-1
 				x[i] = 0;
-				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
-					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
+				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ // F: 4*1,497,138=5,988,552
+					// F:2
+					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]]; // F:2
 				}
 				//d*Ax^k-1
-				x[i] *= d;
+				x[i] *= d; // F:1
 				//Adding the first part and second part together.
-				x[i] += Wk_1_product;
+				x[i] += Wk_1_product; // F:1
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
@@ -195,28 +193,14 @@ void PageRank_iterations(double d, double e){
 			{	
 				temp_time = mysecond();
 				omp_set_lock(&lock_a);
-				iteration_idle_time += mysecond() - temp_time;
+				iteration_idle_time += mysecond() - temp_time; // F:1
 
 				//tt = mysecond();
 				temp_x = xk_1;
                                 xk_1 = x;
                                 x = temp_x;
 			}
-			//#pragma omp for
-                        //for(i=0; i<nodes; i++){
-                        //        D_RW(nvm_values)[i]=x[i];
-                        //}
-
-			/*
-			#pragma omp single
-			{
-				//Turns the vector into a scalar
-				diffX_scalar = 0;
-				for( i=0; i<num_threads; i++)
-					if( diffX[i] > diffX_scalar )
-						diffX_scalar = diffX[i];
-			}
-			*/
+			
 			//stopping criterion.
 			if( diff < e){
 				break;
@@ -231,9 +215,6 @@ void PageRank_iterations(double d, double e){
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
 	iteration_time = mysecond() - iteration_time;
-	//printf("Iteration: Work time: %f, idle time: %f, total time: %f\n", iteration_time-idle_time, idle_time, iteration_time);
-	//For testing:
-	//printf("iterations: %d\n", n);
 }
 
 //TOID(double) *nvm_values;
@@ -263,7 +244,7 @@ void transfer_DRAM_to_NVM(){
                         {
 				temp_time = mysecond();
                                 omp_set_lock(&lock_b);
-				transfer_idle_time += mysecond() - temp_time;
+				transfer_idle_time += mysecond() - temp_time; // 1
 				temp_time = mysecond();
 
 				average=0.0;
@@ -272,22 +253,22 @@ void transfer_DRAM_to_NVM(){
 			//Transfer array to nvdimm.
 			//DRAM_to_NVM=
                         #pragma omp for
-                        for(i=0; i<nodes; i++){
+                        for(i=0; i<nodes; i++){ // 1
                                 D_RW(nvm_values)[i]=xk_1[i];
                         }
 			
-			#pragma omp single
+			#pragma omp single 
 			{
-				DRAM_to_NVM_time += mysecond() - temp_time;
+				DRAM_to_NVM_time += mysecond() - temp_time; // 1
 				temp_time = mysecond();
 			}
 
 			//maximum, minimum and average.
 			#pragma omp for reduction(+ : sumSquare, average)
-                        for(i=0;i<nodes;i++){
+                        for(i=0;i<nodes;i++){ // 1
                                 temp_value=D_RO(nvm_values)[i];
-                                average += temp_value;
-                                sumSquare += temp_value*temp_value;
+                                average += temp_value; // 1
+                                sumSquare += temp_value*temp_value; // 2
                         }
 
 			if(iteration_ongoing==0){
@@ -295,20 +276,14 @@ void transfer_DRAM_to_NVM(){
 			}
                         #pragma omp single
                         {
-				Analyse_time += mysecond() - temp_time;
+				Analyse_time += mysecond() - temp_time; // 1
                                 omp_unset_lock(&lock_a);
                         }
                 }
         }
-	Analyse_time += mysecond() - temp_time;
-	//transfer_ongoing = 0;
-	//omp_unset_lock(&lock_c);
+	Analyse_time += mysecond() - temp_time; // 1
 
 	transfer_time = mysecond() - transfer_time;
-        //printf("Transfer time: %f, Analyse time: %f, idle time: %f, total time: %f\n", DRAM_to_NVM_time, Analyse_time, idle_time, transfer_time);
-	
-	//printf("top_n time: %lf\n", tt );
-        //printf("nvm time: %lf\n", tt );
 } 
 
 
@@ -451,7 +426,7 @@ void top_n_webpages(int n){
 	}
 }
 
-double mysecond(){
+double mysecond(){ //fpo 2
         struct timeval tp;
         struct timezone tzp;
         int i;
