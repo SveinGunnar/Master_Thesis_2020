@@ -4,7 +4,7 @@ export OMP_NESTED=TRUE
 
 file="web-NotreDame.txt"
 file2="100nodes_graphs.txt"
-result="rawdata_10.txt"
+result="rawdata_100.txt"
 #d=0.85
 d=0.99
 # 0.0000001
@@ -29,7 +29,7 @@ do
 		do
 			if [ $(($j+$k)) == $i ]
 			then
-				for (( l=0; l<10; l++))
+				for (( l=0; l<100; l++))
 				do
 					numactl --physcpubind=0-15 ./Page_rank.out $file $d $e $p $j $k $i >> $result
 					echo $i, $j, $k
