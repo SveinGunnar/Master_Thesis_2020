@@ -1,19 +1,6 @@
-The program can be compiled and run by using the build.bat on winsdows
-or linux-build.sh on linux.
+This folder contain the test where datageneration are done by one group of threads and the transfer to nvm and analyze of the data are done by another group of threads.
 
-The commands I used to compile the program was:
-Windows
-gcc -fopenmp PE_main_15344.c PE_functions_15344.c -o PageRank.exe
+The performance_test_part1.sh tests all the different combinations of threads X amount of times and output the data to a file.
+The performance_test_part2.sh takes the data from the first script and calculate the average of all the tests and output this to another file that can be pasted into excel.
 
-Linux
-gcc -fopenmp PE_main_15344.c PE_functions_15344.c -o PageRank.out
-
-The inputs variables are in following order:
-textfile damping epsilon top-N
-
-The commandlines I used to start the program was
-Windows
-PageRank.exe web-NotreDame.txt 0.99 0.0000001 10
-
-Linux
-./PageRank.out web-NotreDame.txt 0.99 0.0000001 10
+The performance_test_spread_part1.sh are not yet complete.
