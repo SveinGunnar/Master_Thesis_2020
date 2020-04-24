@@ -8,7 +8,7 @@ file2="testfile2.txt"
 file3="web-NotreDame.txt"
 file4="100nodes_graphs.txt"
 
-output=DRAM_only_100.txt
+output=DRAM_only_100_chunksize1000.txt
 
 #d=0.85
 d=0.99

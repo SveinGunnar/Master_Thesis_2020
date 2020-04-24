@@ -1,7 +1,7 @@
 #!/bin/bash
 
-input="DRAM_only_100.txt"
-output="DRAM_only_average_100.txt"
+input="DRAM_only_100_chunksize1000.txt"
+output="DRAM_only_average_100_chunksize1000.txt"
 t=100
 
 total_time=0

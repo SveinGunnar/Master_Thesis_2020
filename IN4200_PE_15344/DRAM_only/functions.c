@@ -187,7 +187,7 @@ void PageRank_iterations(double d, double e){
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
 			diff=0.0;
-			#pragma omp for reduction(max:diff)
+			#pragma omp for schedule(static, 1000) reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
 				x[i] = 0;
