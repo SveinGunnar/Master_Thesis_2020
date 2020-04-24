@@ -4,7 +4,7 @@ export OMP_NESTED=TRUE
 
 file="web-NotreDame.txt"
 file2="100nodes_graphs.txt"
-result="Result/rawdata_100.txt"
+result="Result/rawdata_100_chunksize1000.txt"
 #d=0.85
 d=0.99
 # 0.0000001

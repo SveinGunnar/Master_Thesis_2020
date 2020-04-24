@@ -96,6 +96,21 @@ void read_graph_from_file(char filename[]){
 		CRS_values[temp] = CCS_values[i];
 	}
 
+	/*
+	int kjerner=16;
+	int nnn = nodes/kjerner;
+	int *nnn_array = (int*)calloc((kjerner), sizeof(int));
+	int nc=0;
+	for ( i=0; i<kjerner;i++){
+               	//printf("%d\n", row_nodes_occurrence[i]);
+		for(j=0;j<nnn;j++){
+			nnn_array[i] += row_nodes_occurrence[nc];
+			nc++;
+		}
+		printf("%d\n", nnn_array[i]);
+        }
+	*/
+
 	//free up memory
 	free(column_nodes_occurrence);
 	for ( i=0; i<edges; i++)
@@ -104,10 +119,10 @@ void read_graph_from_file(char filename[]){
 	free(CCS_values);
 	free(row_nodes_occurrence);
 
-	printf("Nodes: %d\n", nodes);
-	printf("Edges: %d\n", edges);
-	printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-	printf("dwp_size: %d\n", dwp_size);
+	//printf("Nodes: %d\n", nodes);
+	//printf("Edges: %d\n", edges);
+	//printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
+	//printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -168,7 +183,7 @@ void PageRank_iterations(double d, double e){
 			//Computing the x^k formula
 			//Nodes 325 729
 			diff=0.0;
-			#pragma omp for reduction(max:diff)
+			#pragma omp for schedule(static, 1000) reduction(max:diff)
 			for( i=0; i<nodes; i++){ // F: 325,729*(2+5,988,552)=1,950,645,706,000
 				// F: 1
 				//This is A*x^k-1

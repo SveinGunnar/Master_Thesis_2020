@@ -1,7 +1,7 @@
 #!/bin/bash
 
-input="Result/rawdata_100.txt"
-output="Result/performance_result_100.txt"
+input="Result/rawdata_100_chunksize1000.txt"
+output="Result/performance_result_100_chunksize1000.txt"
 t=100
 
 total_thread=0
