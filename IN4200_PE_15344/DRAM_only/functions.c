@@ -128,6 +128,8 @@ void PageRank_iterations(double d, double e){
 
 	double average=0.0;
 	double sumSquare = 0.0;
+	double test1 = 0.0;
+	double test2 = 0.0;
 
         //int *maximum; // = (int*)calloc(size, sizeof(int));
         //int *minimum;
@@ -150,15 +152,15 @@ void PageRank_iterations(double d, double e){
 			num_threads = omp_get_num_threads();
 			//printf("Number of iter threads %d\n", num_threads);
 			//diffX = (double*)malloc(num_threads*sizeof(double));
-
+			
 			//For calculation
-			size = omp_get_num_threads();
+			//size = omp_get_num_threads();
                         //maximum = (int*)calloc(size, sizeof(int));
                         //minimum = (int*)calloc(size, sizeof(int));
                         //average_vector = (double*)calloc(size, sizeof(double));
 		}
 
-		int thread_id = omp_get_thread_num();
+		//int thread_id = omp_get_thread_num();
 		int j;
 
 		//Adds values to x^0.
@@ -167,9 +169,11 @@ void PageRank_iterations(double d, double e){
 			xk_1[i] = iN;
 
 		while( 1==1 ){
+			#pragma omp barrier
 			#pragma omp single
 			{
 				n++;
+				diff=0.0;
 				//x^k becomes x^k-1
 				//temp_x = xk_1;
 				//xk_1 = x;
@@ -186,7 +190,6 @@ void PageRank_iterations(double d, double e){
 
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
-			diff=0.0;
 			#pragma omp for schedule(static, 1000) reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
@@ -204,7 +207,6 @@ void PageRank_iterations(double d, double e){
 				if( x[i]-xk_1[i] > diff )
 					diff = x[i] - xk_1[i];
 			}
-			
 			//calculation
 			#pragma omp single
 			{
@@ -218,25 +220,21 @@ void PageRank_iterations(double d, double e){
 				//starting time measurement of calculation.
 				temp_calc=mysecond();
 			}
-			
-			//transfer_DRAM_to_NVM();
+			//Analyse part
 			#pragma omp for reduction(+ : sumSquare, average)
                         for(i=0;i<nodes;i++){
-                                //if( xk_1[i] > xk_1[ maximum[thread_id] ] )
-                                //        maximum[thread_id] = i;
-                                //if( xk_1[i] < xk_1[ minimum[thread_id] ] )
-                                //        minimum[thread_id] = i;
-                                average += xk_1[i];
-				sumSquare += xk_1[i];
-
+                               	//if( xk_1[i] > xk_1[ maximum[thread_id] ] )
+                               	//        maximum[thread_id] = i;
+                               	//if( xk_1[i] < xk_1[ minimum[thread_id] ] )
+                               	//        minimum[thread_id] = i;
+                               	average += xk_1[i];
+				sumSquare += xk_1[i]*xk_1[i];
                         }
-
 			#pragma omp single
 			{
-				average /= nodes;
+				average *= iN;
 				calculation+=mysecond()-temp_calc;
 			}
-
 			//stopping criterion.
 			if( diff < e){
 				break;
@@ -247,9 +245,11 @@ void PageRank_iterations(double d, double e){
 	//printf("Threads, Total time, Iteration time, Calculation time\n");
         printf("%d,%f,%f,%f\n", num_threads, iteration_time, iteration_time-calculation, calculation);
 	//For testing:
-	//printf("iterations: %d\n\n", n);
+	printf("iterations: %d\n", n);
+	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
 }
 
+/*
 //TOID(double) *nvm_values;
 void transfer_DRAM_to_NVM(){
         int i;
@@ -459,7 +459,7 @@ void top_n_webpages(int n){
 	for( i=0; i<n; i++){
 		printf("%d, %f\n", n_index[i], n_value[i]);
 	}
-}
+}*/
 
 double mysecond(){
         struct timeval tp;

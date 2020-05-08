@@ -138,16 +138,18 @@ void PageRank_iterations(double d, double e){
 	double iN = 1.0/nodes;
 
 	//This variable will be compared against the convergence threshold value
-	double diff=0.0;
+	//double diff=0.0;
 
 	//Counts the number of iterations.
 	int n=0;
 	int i;
+	int iteration_size = 1;
 	
 	iteration_idle_time=0.0;
 	double temp_time;
 	iteration_time = mysecond();
-
+	
+	double diff=0.0;
 	#pragma omp parallel num_threads(iter_threads)
 	{
 		#pragma omp single
@@ -169,7 +171,7 @@ void PageRank_iterations(double d, double e){
 			#pragma omp single
 			{
 				n++; // F: 1 W:2
-
+				diff=0.0;
 				//Sum of all dangling websites. W^k-1
 				//dwp_size=187,788
 				Wk_1=0; //W:1
@@ -182,7 +184,7 @@ void PageRank_iterations(double d, double e){
 
 			//Computing the x^k formula
 			//Nodes 325 729
-			diff=0.0;
+			//double diff=0.0;
 			#pragma omp for schedule(static, 1000) reduction(max:diff)
 			for( i=0; i<nodes; i++){ // F: 325,729*(2+5,988,552)=1,950,645,706,000
 				// F: 1
@@ -207,7 +209,8 @@ void PageRank_iterations(double d, double e){
 			#pragma omp single
 			{	
 				temp_time = mysecond();
-				omp_set_lock(&lock_a);
+				if( n % iteration_size == 0 ) 
+					omp_set_lock(&lock_a);
 				iteration_idle_time += mysecond() - temp_time; // F:1
 
 				//tt = mysecond();
@@ -223,13 +226,15 @@ void PageRank_iterations(double d, double e){
 			#pragma omp single
                         {
 				//tt = mysecond()-tt;
-                                omp_unset_lock(&lock_b);
+				if( n % iteration_size == 0 )
+                                	omp_unset_lock(&lock_b);
                         }
 		}//end of while-loop
 	}//End parallel
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
 	iteration_time = mysecond() - iteration_time;
+	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
 }
 
 //TOID(double) *nvm_values;
@@ -240,7 +245,10 @@ void transfer_DRAM_to_NVM(){
 	double average=0.0;
 	double inverseN = 1.0/nodes;
 	double sumSquare = 0.0;
-	
+
+	double test1 = 0.0;
+	double test2 = 0.0;
+
 	transfer_idle_time=0.0, DRAM_to_NVM_time=0.0, Analyse_time=0.0;
         double temp_time;
         transfer_time = mysecond();
@@ -275,6 +283,7 @@ void transfer_DRAM_to_NVM(){
 			#pragma omp single 
 			{
 				DRAM_to_NVM_time += mysecond() - temp_time; // 1
+				omp_unset_lock(&lock_a);
 				temp_time = mysecond();
 			}
 
@@ -292,13 +301,15 @@ void transfer_DRAM_to_NVM(){
                         #pragma omp single
                         {
 				Analyse_time += mysecond() - temp_time; // 1
-                                omp_unset_lock(&lock_a);
+                                //omp_unset_lock(&lock_a);
                         }
                 }
-        }
+        }//end of parallel
 	Analyse_time += mysecond() - temp_time; // 1
 
 	transfer_time = mysecond() - transfer_time;
+	
+	//printf("%f,%f\n", average, sumSquare);
 } 
 
 

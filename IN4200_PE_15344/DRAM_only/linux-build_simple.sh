@@ -21,10 +21,9 @@ p=10
 
 for (( i=1; i<=10; i++ ))
 do
-	numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 1 16
-	#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 1 2
+	numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 16 16
+	#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 1
 done
-
 #./Page_rank.out $file3 $d $e $n 3 8
 
 #./PageRank.exe $file4 $d $e $n
