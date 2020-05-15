@@ -28,6 +28,7 @@ int main(int argc, char **argv){
 
 	//double test_time = mysecond();
 
+	//printf("test\n");
 	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
 	//transfer_DRAM_to_NVM();
 	

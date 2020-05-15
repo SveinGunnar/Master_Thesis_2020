@@ -143,7 +143,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size = 1;
+	int iteration_size = 50;
 	
 	iteration_idle_time=0.0;
 	double temp_time;
@@ -167,7 +167,8 @@ void PageRank_iterations(double d, double e){
 		for( i=0; i<nodes; i++) // F: 325,729 W: 651,458
 			xk_1[i] = iN;
 
-		while( 1==1 ){ //F: 1,950,645,706,000+7
+		while( n<50000 ){ //F: 1,950,645,706,000+7
+			#pragma omp barrier
 			#pragma omp single
 			{
 				n++; // F: 1 W:2
@@ -220,9 +221,9 @@ void PageRank_iterations(double d, double e){
 			}
 			
 			//stopping criterion.
-			if( diff < e){
-				break;
-			}
+			//if( diff < e){
+			//	break;
+			//}
 			#pragma omp single
                         {
 				//tt = mysecond()-tt;
@@ -235,6 +236,8 @@ void PageRank_iterations(double d, double e){
 	omp_unset_lock(&lock_b);
 	iteration_time = mysecond() - iteration_time;
 	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
+	//printf("%d\n", dwp_size);
+	printf("%d\n", n);
 }
 
 //TOID(double) *nvm_values;

@@ -139,11 +139,14 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
+	int iteration_size=50;
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
         double iteration_time = mysecond();
 	double calculation=0.0, temp_calc;
+
+	//printf("test\n");
 
 	#pragma omp parallel num_threads(iter_threads)
 	{
@@ -167,8 +170,8 @@ void PageRank_iterations(double d, double e){
 		#pragma omp for
 		for( i=0; i<nodes; i++)
 			xk_1[i] = iN;
-
-		while( 1==1 ){
+		
+		while( n<50000 ){
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -219,26 +222,34 @@ void PageRank_iterations(double d, double e){
 
 				//starting time measurement of calculation.
 				temp_calc=mysecond();
+				//printf("%d\n", n);
 			}
-			//Analyse part
-			#pragma omp for reduction(+ : sumSquare, average)
-                        for(i=0;i<nodes;i++){
-                               	//if( xk_1[i] > xk_1[ maximum[thread_id] ] )
-                               	//        maximum[thread_id] = i;
-                               	//if( xk_1[i] < xk_1[ minimum[thread_id] ] )
-                               	//        minimum[thread_id] = i;
-                               	average += xk_1[i];
-				sumSquare += xk_1[i]*xk_1[i];
-                        }
+
+			if( n % iteration_size == 0 ){
+				//Analyse part
+				#pragma omp for reduction(+ : sumSquare, average)
+                        	for(i=0;i<nodes;i++){
+                                	//if( xk_1[i] > xk_1[ maximum[thread_id] ] )
+                               		//        maximum[thread_id] = i;
+                               		//if( xk_1[i] < xk_1[ minimum[thread_id] ] )
+                               		//        minimum[thread_id] = i;
+                               		average += xk_1[i];
+					sumSquare += xk_1[i]*xk_1[i];
+                        	}
+			}
+
+
 			#pragma omp single
 			{
 				average *= iN;
 				calculation+=mysecond()-temp_calc;
+				//if( n % 10000 == 0 )
+				//	printf("%d\n", n);
 			}
 			//stopping criterion.
-			if( diff < e){
-				break;
-			}
+			//if( diff < e){
+			//	break;
+			//}
 		}//end of while-loop
 	}//End parallel
 	iteration_time = mysecond() - iteration_time;
