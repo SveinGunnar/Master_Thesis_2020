@@ -143,7 +143,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size = 50;
+	int iteration_size = 3;
 	
 	iteration_idle_time=0.0;
 	double temp_time;
@@ -237,7 +237,7 @@ void PageRank_iterations(double d, double e){
 	iteration_time = mysecond() - iteration_time;
 	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
 	//printf("%d\n", dwp_size);
-	printf("%d\n", n);
+	//printf("%d\n", n);
 }
 
 //TOID(double) *nvm_values;
@@ -289,8 +289,17 @@ void transfer_DRAM_to_NVM(){
 				omp_unset_lock(&lock_a);
 				temp_time = mysecond();
 			}
-
+			
+			//first time
 			//maximum, minimum and average.
+			#pragma omp for reduction(+ : sumSquare, average)
+                        for(i=0;i<nodes;i++){ // 1
+                                temp_value=D_RO(nvm_values)[i];
+                                average += temp_value; // 1
+                                sumSquare += temp_value*temp_value; // 2
+                        }
+			
+			//Second time.
 			#pragma omp for reduction(+ : sumSquare, average)
                         for(i=0;i<nodes;i++){ // 1
                                 temp_value=D_RO(nvm_values)[i];

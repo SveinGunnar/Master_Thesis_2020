@@ -139,7 +139,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size=50;
+	int iteration_size=3;
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
@@ -226,16 +226,21 @@ void PageRank_iterations(double d, double e){
 			}
 
 			if( n % iteration_size == 0 ){
+				//first time
 				//Analyse part
 				#pragma omp for reduction(+ : sumSquare, average)
                         	for(i=0;i<nodes;i++){
-                                	//if( xk_1[i] > xk_1[ maximum[thread_id] ] )
-                               		//        maximum[thread_id] = i;
-                               		//if( xk_1[i] < xk_1[ minimum[thread_id] ] )
-                               		//        minimum[thread_id] = i;
                                		average += xk_1[i];
 					sumSquare += xk_1[i]*xk_1[i];
                         	}
+				
+				//Second time.
+				#pragma omp for reduction(+ : sumSquare, average)
+                                for(i=0;i<nodes;i++){
+                                        average += xk_1[i];
+                                        sumSquare += xk_1[i]*xk_1[i];
+                                }
+				
 			}
 
 
@@ -254,9 +259,9 @@ void PageRank_iterations(double d, double e){
 	}//End parallel
 	iteration_time = mysecond() - iteration_time;
 	//printf("Threads, Total time, Iteration time, Calculation time\n");
-        printf("%d,%f,%f,%f\n", num_threads, iteration_time, iteration_time-calculation, calculation);
+        printf("%d,%f,%f,%f\n", iter_threads, iteration_time, iteration_time-calculation, calculation);
 	//For testing:
-	printf("iterations: %d\n", n);
+	//printf("iterations: %d\n", n);
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
 }
 
