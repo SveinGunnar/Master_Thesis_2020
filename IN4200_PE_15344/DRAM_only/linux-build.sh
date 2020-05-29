@@ -18,7 +18,7 @@ n=10
 
 threads=16
 
-echo "" > $output
+#echo "" > $output
 
 #echo Threads, Total time, Iteration time, Calculation time
 for (( i=1; i<=16; i++ ))

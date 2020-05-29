@@ -83,10 +83,18 @@ void read_graph_from_file(char filename[]){
 	CRS_values = (double*)malloc(edges*sizeof(double));
 
 	//Adds the indices for col_idx into the row_ptr
+	int divided = edges/nodes;
 	CRS_row_ptr[0] = 0;
 	for( i=1; i<nodes; i++){
-		CRS_row_ptr[i] = CRS_row_ptr[i-1] + row_nodes_occurrence[i-1];
+		//CRS_row_ptr[i] = CRS_row_ptr[i-1] + row_nodes_occurrence[i-1];
+		if(i%17==0)
+                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided+2);
+                else if(i%2==0)
+                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided+1);
+                else
+                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided);
 	}
+	CRS_row_ptr[nodes-1] = CRS_row_ptr[nodes-2] + edges-CRS_row_ptr[nodes-2];
 	CRS_row_ptr[nodes] = edges; //Adds the index of last node in node-1.
 
 	//Adds columns into col_idx and values to CRS_values
@@ -103,6 +111,15 @@ void read_graph_from_file(char filename[]){
 	free(CCS);
 	free(CCS_values);
 	free(row_nodes_occurrence);
+
+	//printf("Nodes: %d\n", nodes);
+        //printf("Edges: %d\n", edges);
+        //printf("Edges/nodes: %d\n", edges/nodes);
+        //printf("Nodes-2: %d, %d\n", CRS_row_ptr[nodes-2], CRS_row_ptr[nodes-2]-CRS_row_ptr[nodes-3]);
+        //printf("Nodes-1: %d, %d\n", CRS_row_ptr[nodes-1], CRS_row_ptr[nodes-1]-CRS_row_ptr[nodes-2]);
+        //printf("Nodes: %d\n", CRS_row_ptr[nodes]);
+        //printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
+        //printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -139,7 +156,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size=3;
+	int iteration_size=2;
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
@@ -184,16 +201,21 @@ void PageRank_iterations(double d, double e){
 
 				//Sum of all dangling websites. W^k-1
 				Wk_1=0;
-				for( i=0; i<dwp_size; i++)
-					Wk_1 += xk_1[ dwp[i] ];
+			}
+			
+			#pragma omp for reduction( + : Wk_1 )
+			for( i=0; i<dwp_size; i++)
+				Wk_1 += xk_1[ dwp[i] ];
 
+			#pragma omp single
+                        {
 				//completes the first part of the formula.
 				Wk_1_product = (omd + (d*Wk_1))*iN;
 			}
 
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
-			#pragma omp for schedule(static, 1000) reduction(max:diff)
+			#pragma omp for reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
 				x[i] = 0;
@@ -234,13 +256,14 @@ void PageRank_iterations(double d, double e){
 					sumSquare += xk_1[i]*xk_1[i];
                         	}
 				
+				/*
 				//Second time.
 				#pragma omp for reduction(+ : sumSquare, average)
                                 for(i=0;i<nodes;i++){
                                         average += xk_1[i];
                                         sumSquare += xk_1[i]*xk_1[i];
                                 }
-				
+				*/
 			}
 
 
