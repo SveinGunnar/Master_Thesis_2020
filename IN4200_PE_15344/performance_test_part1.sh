@@ -4,7 +4,7 @@ export OMP_NESTED=TRUE
 
 file="web-NotreDame.txt"
 file2="100nodes_graphs.txt"
-result="Result/rawdata_100_Balanced2.txt"
+result="Result/rawdata_30MB_it-1.txt"
 #d=0.85
 d=0.99
 # 0.0000001
@@ -34,7 +34,7 @@ do
 					numactl --physcpubind=0-15 ./Page_rank.out $file $d $e $p $j $k $i >> $result
 					echo $i, $j, $k
 				done
-				echo "" >> $result
+				#echo "" >> $result
 			fi
 		done
 	done

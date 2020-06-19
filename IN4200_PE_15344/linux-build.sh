@@ -7,6 +7,7 @@ file="testfile.txt"
 file2="testfile2.txt"
 file3="web-NotreDame.txt"
 file4="100nodes_graphs.txt"
+altfile="web-Stanford.txt"
 #d=0.85
 d=0.99
 # 0.0000001
@@ -34,6 +35,8 @@ numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 14 2 16
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 3 13 16
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 2 14 16
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 15 16
+
+#numactl --physcpubind=0-15 ./Page_rank.out $altfile $d $e $p 14 2 16
 
 #for (( i=1; i<=10; i++ ))
 #do

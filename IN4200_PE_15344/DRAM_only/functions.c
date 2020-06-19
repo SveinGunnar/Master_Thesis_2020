@@ -2,10 +2,11 @@
 
 void read_graph_from_file(char filename[]){
 	int i, j, k, temp;
-	FILE *fp = fopen( filename, "r" );
+	//FILE *fp = fopen( filename, "r" );
 	char trashbin[100];
 	char str[100];
 
+	/*
 	//First and second line in file are thrown away
 	if( fgets(str, 100, fp) == NULL ) return;
 	if( fgets(str, 100, fp) == NULL ) return;
@@ -26,6 +27,11 @@ void read_graph_from_file(char filename[]){
 
 	//Throws away the forth line.
 	if( fgets (str, 100, fp) == NULL ) return;
+	*/
+
+	//Sets the number of nodes and edges.
+        nodes = 1001107;
+        edges = 4000883;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -38,11 +44,16 @@ void read_graph_from_file(char filename[]){
 	double *CCS_values = (double*)malloc(edges*sizeof(double));
 
 	//Feeds the filestream into the newly created array.
-	int fromNode, toNode;
+	int fromNode=0, toNode;
 	for( i=0; i<edges; i++){
-		if( fgets(str, 100, fp) == NULL ) return;
-		fromNode = atoi(strtok(str,"\t"));
-		toNode = atoi(strtok(NULL,"\t"));
+		//if( fgets(str, 100, fp) == NULL ) return;
+		//fromNode = atoi(strtok(str,"\t"));
+		//toNode = atoi(strtok(NULL,"\t"));
+
+		if( fromNode % 5 == 0 && fromNode != 0)
+                        fromNode++;
+                toNode = rand() % (nodes-1);
+		printf("%d\n", toNode);
 
 		CCS[i][0] = fromNode;
 		CCS[i][1] = toNode;
@@ -156,7 +167,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size=2;
+	int iteration_size=3;
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
