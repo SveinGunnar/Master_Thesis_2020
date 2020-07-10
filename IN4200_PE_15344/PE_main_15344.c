@@ -64,12 +64,12 @@ int main(int argc, char **argv){
 	{
 		//printf("seg fault test");
 		int thread_id = omp_get_thread_num();
-		if( thread_id == 0){
-			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
-		}
-		else if( thread_id == 1){
-			transfer_DRAM_to_NVM();
-		}
+		//if( thread_id == 0){
+		//	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
+		//}
+		//else if( thread_id == 1){
+		//	transfer_DRAM_to_NVM();
+		//}
 		//else if( thread_id == 1){
                 //      top_n_index = top_n();
                 //}
@@ -78,7 +78,7 @@ int main(int argc, char **argv){
 	test_time = mysecond() - test_time;
 	//printf("Iteration_threads transfer_threads max_threads time\n");
 	
-	printf("%d,%d,%d,%f,%f,%f,%f,%f,%f,%f\n", iter_threads+transfer_threads, iter_threads, transfer_threads, iteration_time, iteration_idle_time, transfer_time, transfer_idle_time, DRAM_to_NVM_time, Analyse_time, test_time);
+	//printf("%d,%d,%d,%f,%f,%f,%f,%f,%f,%f\n", iter_threads+transfer_threads, iter_threads, transfer_threads, iteration_time, iteration_idle_time, transfer_time, transfer_idle_time, DRAM_to_NVM_time, Analyse_time, test_time);
 	//printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);
 
 	//printf("Top n is: %d and has value %lf\n", top_n_index, D_RO(nvm_values)[top_n_index]);

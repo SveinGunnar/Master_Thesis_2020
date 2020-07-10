@@ -31,7 +31,11 @@ void read_graph_from_file(char filename[]){
 
 	//Sets the number of nodes and edges.
         nodes = 1001107;
+	//nodes = 3276803;
+	//nodes = 6000000;
         edges = 4000883;
+	//edges = 13107200;
+	//edges = 16000000;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -53,7 +57,7 @@ void read_graph_from_file(char filename[]){
 		if( fromNode % 5 == 0 && fromNode != 0)
                         fromNode++;
                 toNode = rand() % (nodes-1);
-		printf("%d\n", toNode);
+		//printf("%d\n", toNode);
 
 		CCS[i][0] = fromNode;
 		CCS[i][1] = toNode;
@@ -130,7 +134,7 @@ void read_graph_from_file(char filename[]){
         //printf("Nodes-1: %d, %d\n", CRS_row_ptr[nodes-1], CRS_row_ptr[nodes-1]-CRS_row_ptr[nodes-2]);
         //printf("Nodes: %d\n", CRS_row_ptr[nodes]);
         //printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-        //printf("dwp_size: %d\n", dwp_size);
+        printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -148,6 +152,7 @@ void PageRank_iterations(double d, double e){
 	//xk_1 = (double*)malloc(nodes*sizeof(double));
 	//x^k
 	//x = (double*)malloc(nodes*sizeof(double));
+	double *testArray = (double*)malloc(nodes*sizeof(double));
 
 	//This variable will be compared against the convergence threshold value
 	//double *diffX;
@@ -167,7 +172,7 @@ void PageRank_iterations(double d, double e){
 	//Counts the number of iterations.
 	int n=0;
 	int i;
-	int iteration_size=3;
+	int iteration_size=1;
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
@@ -196,8 +201,10 @@ void PageRank_iterations(double d, double e){
 
 		//Adds values to x^0.
 		#pragma omp for
-		for( i=0; i<nodes; i++)
+		for( i=0; i<nodes; i++){
 			xk_1[i] = iN;
+			//x[i] = iN;
+		}
 		
 		while( n<50000 ){
 			#pragma omp barrier
@@ -214,9 +221,11 @@ void PageRank_iterations(double d, double e){
 				Wk_1=0;
 			}
 			
+			
 			#pragma omp for reduction( + : Wk_1 )
 			for( i=0; i<dwp_size; i++)
 				Wk_1 += xk_1[ dwp[i] ];
+			
 
 			#pragma omp single
                         {
@@ -243,8 +252,11 @@ void PageRank_iterations(double d, double e){
 				if( x[i]-xk_1[i] > diff )
 					diff = x[i] - xk_1[i];
 			}
+			
+
 			//calculation
 			#pragma omp single
+			{
 			{
 				//temp_time = mysecond();
 				//idle_time += mysecond() - temp_time;
@@ -258,24 +270,15 @@ void PageRank_iterations(double d, double e){
 				//printf("%d\n", n);
 			}
 
-			if( n % iteration_size == 0 ){
+			//if( n % iteration_size == 0 ){
 				//first time
 				//Analyse part
 				#pragma omp for reduction(+ : sumSquare, average)
                         	for(i=0;i<nodes;i++){
                                		average += xk_1[i];
-					sumSquare += xk_1[i]*xk_1[i];
+					//sumSquare += xk_1[i]*xk_1[i];
                         	}
-				
-				/*
-				//Second time.
-				#pragma omp for reduction(+ : sumSquare, average)
-                                for(i=0;i<nodes;i++){
-                                        average += xk_1[i];
-                                        sumSquare += xk_1[i]*xk_1[i];
-                                }
-				*/
-			}
+			//}
 
 
 			#pragma omp single
@@ -518,4 +521,3 @@ double mysecond(){
 
         i = gettimeofday(&tp,&tzp);
         return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
-}

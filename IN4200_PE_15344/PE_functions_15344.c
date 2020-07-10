@@ -57,7 +57,11 @@ void read_graph_from_file(char filename[]){
 
 		if( fromNode % 5 == 0 && fromNode != 0)
 			fromNode++;
-		toNode = rand() % (nodes-1);
+		//toNode = rand() % (nodes-1);
+		if( fromNode == nodes-1 )
+			toNode = 0;
+		else 
+			toNode = fromNode+1;
 
 		CCS[i][0] = fromNode;
 		CCS[i][1] = toNode;
@@ -159,7 +163,7 @@ void read_graph_from_file(char filename[]){
 	//printf("Nodes: %d\n", CRS_row_ptr[nodes]);
 
 	//printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-	//printf("dwp_size: %d\n", dwp_size);
+	printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
