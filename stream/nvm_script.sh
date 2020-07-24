@@ -2,7 +2,7 @@
 socket1=0
 socket2=16
 num_threads=1
-file="test2.txt"
+file="temp.txt"
 #CPUs='{0}'
 CPUs=""
 

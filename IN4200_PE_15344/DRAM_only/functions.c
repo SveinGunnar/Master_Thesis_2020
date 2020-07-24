@@ -31,11 +31,12 @@ void read_graph_from_file(char filename[]){
 
 	//Sets the number of nodes and edges.
         nodes = 1001107;
-	//nodes = 3276803;
+	//nodes = 3428500;
 	//nodes = 6000000;
-        edges = 4000883;
+        //edges = 4000883;
 	//edges = 13107200;
-	//edges = 16000000;
+	edges = 16000000;
+	//edges = 24000000;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -54,7 +55,7 @@ void read_graph_from_file(char filename[]){
 		//fromNode = atoi(strtok(str,"\t"));
 		//toNode = atoi(strtok(NULL,"\t"));
 
-		if( fromNode % 5 == 0 && fromNode != 0)
+		if( fromNode % 15 == 0 && fromNode != 0)
                         fromNode++;
                 toNode = rand() % (nodes-1);
 		//printf("%d\n", toNode);
@@ -134,7 +135,7 @@ void read_graph_from_file(char filename[]){
         //printf("Nodes-1: %d, %d\n", CRS_row_ptr[nodes-1], CRS_row_ptr[nodes-1]-CRS_row_ptr[nodes-2]);
         //printf("Nodes: %d\n", CRS_row_ptr[nodes]);
         //printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-        printf("dwp_size: %d\n", dwp_size);
+        //printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -176,9 +177,11 @@ void PageRank_iterations(double d, double e){
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
-        double iteration_time = mysecond();
+        double iteration_time;
 	double calculation=0.0, temp_calc;
 
+	double temp_counter_ana=0;
+	double temp_counter_double=0;
 	//printf("test\n");
 
 	#pragma omp parallel num_threads(iter_threads)
@@ -203,7 +206,12 @@ void PageRank_iterations(double d, double e){
 		#pragma omp for
 		for( i=0; i<nodes; i++){
 			xk_1[i] = iN;
-			//x[i] = iN;
+			x[i] = iN;
+		}
+
+		#pragma omp single
+                {
+			iteration_time = mysecond();
 		}
 		
 		while( n<50000 ){
@@ -219,12 +227,15 @@ void PageRank_iterations(double d, double e){
 
 				//Sum of all dangling websites. W^k-1
 				Wk_1=0;
+				average = 0;
 			}
 			
 			
-			#pragma omp for reduction( + : Wk_1 )
-			for( i=0; i<dwp_size; i++)
+			#pragma omp for reduction( + : Wk_1 ) reduction(+:temp_counter_double)
+			for( i=0; i<dwp_size; i++){
 				Wk_1 += xk_1[ dwp[i] ];
+				temp_counter_double++;
+			}
 			
 
 			#pragma omp single
@@ -235,28 +246,35 @@ void PageRank_iterations(double d, double e){
 
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
-			#pragma omp for reduction(max:diff)
+			#pragma omp for reduction(max:diff) reduction(+:temp_counter_double)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
 				x[i] = 0;
+				temp_counter_double++;
+
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
 					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					temp_counter_double+=5;
 				}
 				//d*Ax^k-1
 				x[i] *= d;
+				temp_counter_double++;
 				//Adding the first part and second part together.
 				x[i] += Wk_1_product;
+				temp_counter_double++;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
-				if( x[i]-xk_1[i] > diff )
+				temp_counter_double+=2;
+				if( x[i]-xk_1[i] > diff ){
 					diff = x[i] - xk_1[i];
+					temp_counter_double+=2;
+				}
 			}
 			
 
 			//calculation
 			#pragma omp single
-			{
 			{
 				//temp_time = mysecond();
 				//idle_time += mysecond() - temp_time;
@@ -273,10 +291,11 @@ void PageRank_iterations(double d, double e){
 			//if( n % iteration_size == 0 ){
 				//first time
 				//Analyse part
-				#pragma omp for reduction(+ : sumSquare, average)
+				#pragma omp for reduction(+ : sumSquare, average, temp_counter_ana)
                         	for(i=0;i<nodes;i++){
                                		average += xk_1[i];
 					//sumSquare += xk_1[i]*xk_1[i];
+					temp_counter_ana++;
                         	}
 			//}
 
@@ -300,6 +319,8 @@ void PageRank_iterations(double d, double e){
 	//For testing:
 	//printf("iterations: %d\n", n);
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
+	printf("temp_counter_double: %f\n", temp_counter_double);
+	printf("temp_counter_int: %f\n", temp_counter_ana);
 }
 
 /*
@@ -521,3 +542,4 @@ double mysecond(){
 
         i = gettimeofday(&tp,&tzp);
         return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+}

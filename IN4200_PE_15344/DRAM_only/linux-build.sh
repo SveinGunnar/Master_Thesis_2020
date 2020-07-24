@@ -21,7 +21,7 @@ threads=16
 #echo "" > $output
 
 #echo Threads, Total time, Iteration time, Calculation time
-for (( i=1; i<=16; i++ ))
+for (( i=8; i<=16; i++ ))
 do
 	#for (( j=0; j<100; j++ ))
 	#do

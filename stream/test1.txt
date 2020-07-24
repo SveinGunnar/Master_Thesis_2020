@@ -1,13 +1,1 @@
 DRAM test
-OMP_NUM_THREADS=1
-export OMP_PLACES='{0}'
-
-
-
-
-OMP_NUM_THREADS=2
-export OMP_PLACES='{0},{16}'
-
-
-
-
