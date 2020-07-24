@@ -1,0 +1,5 @@
+Pred. it. time
+(6*nodes+5*edges)*50000*8*0,000001/Stream,add
+
+Pred. a. time
+Nodes*50000*8*0,000001
