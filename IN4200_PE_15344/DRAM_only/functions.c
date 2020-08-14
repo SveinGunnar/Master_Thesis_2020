@@ -30,12 +30,13 @@ void read_graph_from_file(char filename[]){
 	*/
 
 	//Sets the number of nodes and edges.
-        nodes = 1001107;
+	nodes = 1000016;
+        //nodes = 1001107;
 	//nodes = 3428500;
 	//nodes = 6000000;
-        //edges = 4000883;
+        edges = 4000000;
 	//edges = 13107200;
-	edges = 16000000;
+	//edges = 16000000;
 	//edges = 24000000;
 
 	//Loads the rest of the files.
@@ -45,19 +46,27 @@ void read_graph_from_file(char filename[]){
 	//Creates a 2d array with dimension n x 3.
 	int **CCS = (int**)malloc(edges*sizeof(int*));
 	for ( i=0; i<edges; i++)
-		CCS[i] = (int*)malloc(3*sizeof(int));
+		CCS[i] = (int*)calloc(3, sizeof(int));
 	double *CCS_values = (double*)malloc(edges*sizeof(double));
 
 	//Feeds the filestream into the newly created array.
+	int fromNodeCounter=1;
 	int fromNode=0, toNode;
 	for( i=0; i<edges; i++){
 		//if( fgets(str, 100, fp) == NULL ) return;
 		//fromNode = atoi(strtok(str,"\t"));
 		//toNode = atoi(strtok(NULL,"\t"));
 
-		if( fromNode % 15 == 0 && fromNode != 0)
-                        fromNode++;
+		//if( fromNode % 15 == 0 && fromNode != 0)
+                //        fromNode++;
+		if(fromNodeCounter > 4){
+			fromNode++;
+			fromNodeCounter=1;
+		}
+		fromNodeCounter++;
+
                 toNode = rand() % (nodes-1);
+		//toNode = 5;
 		//printf("%d\n", toNode);
 
 		CCS[i][0] = fromNode;
@@ -66,6 +75,8 @@ void read_graph_from_file(char filename[]){
 		row_nodes_occurrence[toNode]++;
 		column_nodes_occurrence[fromNode]++;
 	}
+	//printf("test: %d\n", fromNode);
+	//printf("test: %d\n", CCS[edges-1][0]);
 
 	//Adds values to the matrix.
 	//Counts the number of outgoing links from node and add 1/sum to all Nodes
@@ -180,8 +191,6 @@ void PageRank_iterations(double d, double e){
         double iteration_time;
 	double calculation=0.0, temp_calc;
 
-	double temp_counter_ana=0;
-	double temp_counter_double=0;
 	//printf("test\n");
 
 	#pragma omp parallel num_threads(iter_threads)
@@ -201,6 +210,7 @@ void PageRank_iterations(double d, double e){
 
 		//int thread_id = omp_get_thread_num();
 		int j;
+		int temp;
 
 		//Adds values to x^0.
 		#pragma omp for
@@ -229,12 +239,10 @@ void PageRank_iterations(double d, double e){
 				Wk_1=0;
 				average = 0;
 			}
-			
-			
-			#pragma omp for reduction( + : Wk_1 ) reduction(+:temp_counter_double)
+
+			#pragma omp for reduction( + : Wk_1 )
 			for( i=0; i<dwp_size; i++){
 				Wk_1 += xk_1[ dwp[i] ];
-				temp_counter_double++;
 			}
 			
 
@@ -246,29 +254,29 @@ void PageRank_iterations(double d, double e){
 
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
-			#pragma omp for reduction(max:diff) reduction(+:temp_counter_double)
+			#pragma omp for reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
-				x[i] = 0;
-				temp_counter_double++;
+				//x[i] = 0;
+				temp = 0;
+				
+				//printf("test: %f, %f\n", CRS_values[0], xk_1[CRS_col_idx[0]]);
 
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
-					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
-					temp_counter_double+=5;
+					temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
 				}
+				
 				//d*Ax^k-1
-				x[i] *= d;
-				temp_counter_double++;
+				temp *= d;
 				//Adding the first part and second part together.
-				x[i] += Wk_1_product;
-				temp_counter_double++;
+				temp += Wk_1_product;
+
+				x[i] = temp;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
-				temp_counter_double+=2;
 				if( x[i]-xk_1[i] > diff ){
 					diff = x[i] - xk_1[i];
-					temp_counter_double+=2;
 				}
 			}
 			
@@ -291,11 +299,10 @@ void PageRank_iterations(double d, double e){
 			//if( n % iteration_size == 0 ){
 				//first time
 				//Analyse part
-				#pragma omp for reduction(+ : sumSquare, average, temp_counter_ana)
+				#pragma omp for reduction(+ : sumSquare, average)
                         	for(i=0;i<nodes;i++){
                                		average += xk_1[i];
 					//sumSquare += xk_1[i]*xk_1[i];
-					temp_counter_ana++;
                         	}
 			//}
 
@@ -319,8 +326,8 @@ void PageRank_iterations(double d, double e){
 	//For testing:
 	//printf("iterations: %d\n", n);
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
-	printf("temp_counter_double: %f\n", temp_counter_double);
-	printf("temp_counter_int: %f\n", temp_counter_ana);
+	//printf("temp_counter_double: %f\n", temp_counter_double);
+	//printf("temp_counter_int: %f\n", temp_counter_ana);
 }
 
 /*
