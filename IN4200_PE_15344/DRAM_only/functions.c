@@ -34,9 +34,9 @@ void read_graph_from_file(char filename[]){
         //nodes = 1001107;
 	//nodes = 3428500;
 	//nodes = 6000000;
-        edges = 4000000;
+        //edges = 4000000;
 	//edges = 13107200;
-	//edges = 16000000;
+	edges = 16000000;
 	//edges = 24000000;
 
 	//Loads the rest of the files.
@@ -59,7 +59,7 @@ void read_graph_from_file(char filename[]){
 
 		//if( fromNode % 15 == 0 && fromNode != 0)
                 //        fromNode++;
-		if(fromNodeCounter > 4){
+		if(fromNodeCounter > 16){
 			fromNode++;
 			fromNodeCounter=1;
 		}
@@ -164,7 +164,7 @@ void PageRank_iterations(double d, double e){
 	//xk_1 = (double*)malloc(nodes*sizeof(double));
 	//x^k
 	//x = (double*)malloc(nodes*sizeof(double));
-	double *testArray = (double*)malloc(nodes*sizeof(double));
+	//double *testArray = (double*)malloc(nodes*sizeof(double));
 
 	//This variable will be compared against the convergence threshold value
 	//double *diffX;
@@ -191,9 +191,9 @@ void PageRank_iterations(double d, double e){
         double iteration_time;
 	double calculation=0.0, temp_calc;
 
-	//printf("test\n");
+	//printf("test123\n");
 
-	#pragma omp parallel num_threads(iter_threads)
+	#pragma omp parallel
 	{
 		#pragma omp single
 		{
@@ -206,11 +206,12 @@ void PageRank_iterations(double d, double e){
                         //maximum = (int*)calloc(size, sizeof(int));
                         //minimum = (int*)calloc(size, sizeof(int));
                         //average_vector = (double*)calloc(size, sizeof(double));
+			//printf("sdf");
 		}
-
+		
+		//printf("sadf\n");
 		//int thread_id = omp_get_thread_num();
 		int j;
-		int temp;
 
 		//Adds values to x^0.
 		#pragma omp for
@@ -221,6 +222,7 @@ void PageRank_iterations(double d, double e){
 
 		#pragma omp single
                 {
+			//printf("sadf\n");
 			iteration_time = mysecond();
 		}
 		
@@ -244,7 +246,6 @@ void PageRank_iterations(double d, double e){
 			for( i=0; i<dwp_size; i++){
 				Wk_1 += xk_1[ dwp[i] ];
 			}
-			
 
 			#pragma omp single
                         {
@@ -257,21 +258,18 @@ void PageRank_iterations(double d, double e){
 			#pragma omp for reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
-				//x[i] = 0;
-				temp = 0;
+				x[i] = 0;
 				
 				//printf("test: %f, %f\n", CRS_values[0], xk_1[CRS_col_idx[0]]);
 
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
-					temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
 				}
-				
-				//d*Ax^k-1
-				temp *= d;
-				//Adding the first part and second part together.
-				temp += Wk_1_product;
 
-				x[i] = temp;
+				//d*Ax^k-1
+				x[i] *= d;
+				//Adding the first part and second part together.
+				x[i] += Wk_1_product;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
@@ -281,7 +279,9 @@ void PageRank_iterations(double d, double e){
 			}
 			
 
+
 			//calculation
+			#pragma omp barrier
 			#pragma omp single
 			{
 				//temp_time = mysecond();
@@ -306,7 +306,7 @@ void PageRank_iterations(double d, double e){
                         	}
 			//}
 
-
+			#pragma omp barrier
 			#pragma omp single
 			{
 				average *= iN;
