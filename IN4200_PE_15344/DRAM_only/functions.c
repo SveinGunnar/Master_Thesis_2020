@@ -30,7 +30,7 @@ void read_graph_from_file(char filename[]){
 	*/
 
 	//Sets the number of nodes and edges.
-	nodes = 1000016;
+	nodes = 1000001;
         //nodes = 1001107;
 	//nodes = 3428500;
 	//nodes = 6000000;
@@ -99,10 +99,10 @@ void read_graph_from_file(char filename[]){
 		if( column_nodes_occurrence[i] == 0)
 			column_nodes_occurrence[dwp_size++] = i;
 	//Puts the dangling websites into a smaller array.
-	dwp = (int*)malloc(dwp_size*sizeof(int));
-	for ( i=0; i<dwp_size; i++){
-		dwp[i] = column_nodes_occurrence[i];
-	}
+	//dwp = (int*)malloc(dwp_size*sizeof(int));
+	//for ( i=0; i<dwp_size; i++){
+	//	dwp[i] = column_nodes_occurrence[i];
+	//}
 
 	//Convert the CCS into a CRS.
 	CRS_row_ptr = (int*)malloc((edges+1)*sizeof(int));
@@ -183,7 +183,7 @@ void PageRank_iterations(double d, double e){
 
 	//Counts the number of iterations.
 	int n=0;
-	int i;
+	//int i;
 	int iteration_size=1;
 	//double tt;
 	double idle_time=0.0;
@@ -211,7 +211,7 @@ void PageRank_iterations(double d, double e){
 		
 		//printf("sadf\n");
 		//int thread_id = omp_get_thread_num();
-		int j;
+		int i,j;
 
 		//Adds values to x^0.
 		#pragma omp for
@@ -238,14 +238,14 @@ void PageRank_iterations(double d, double e){
 				//x = temp_x;
 
 				//Sum of all dangling websites. W^k-1
-				Wk_1=0;
+				Wk_1=1;
 				average = 0;
 			}
 
-			#pragma omp for reduction( + : Wk_1 )
-			for( i=0; i<dwp_size; i++){
-				Wk_1 += xk_1[ dwp[i] ];
-			}
+			//#pragma omp for reduction( + : Wk_1 )
+			//for( i=0; i<dwp_size; i++){
+			//	Wk_1 += xk_1[ dwp[i] ];
+			//}
 
 			#pragma omp single
                         {
@@ -260,12 +260,9 @@ void PageRank_iterations(double d, double e){
 				//This is A*x^k-1
 				x[i] = 0;
 				
-				//printf("test: %f, %f\n", CRS_values[0], xk_1[CRS_col_idx[0]]);
-
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
 					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
 				}
-
 				//d*Ax^k-1
 				x[i] *= d;
 				//Adding the first part and second part together.
