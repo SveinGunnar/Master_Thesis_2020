@@ -19,13 +19,14 @@ n=10
 threads=16
 
 #echo "" > $output
-
+j=8
 #echo Threads, Total time, Iteration time, Calculation time
-for (( i=9; i<=15; i++ ))
+for (( i=7; i<9; i++ ))
 do
 	#for (( j=0; j<100; j++ ))
 	#do
-	numactl --physcpubind=0-$i ./Page_rank.out $file3 $d $e $n $i $i 
+	numactl --physcpubind=0-$i ./Page_rank.out $file3 $d $e $n $j $j 
+	((j=j+1))
 	#>> $output
 	#done
 	#echo $i

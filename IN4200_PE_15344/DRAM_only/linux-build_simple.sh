@@ -19,7 +19,7 @@ p=10
 #./PageRank.exe $file2 $d $e $n
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
 
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 16 16
+numactl --physcpubind=0-0 ./Page_rank.out $file3 $d $e $p 16 16
 
 #for (( i=1; i<=10; i++ ))
 #do

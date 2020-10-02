@@ -30,10 +30,10 @@ void read_graph_from_file(char filename[]){
 	*/
 
 	//Sets the number of nodes and edges.
-	nodes = 1001107;
-	edges = 4000883;
-	//nodes = 3001927;
-	//edges = 12001207;
+	//nodes = 1001107;
+	//edges = 4000883;
+	nodes = 1000001;
+	edges = 16000000;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -49,19 +49,29 @@ void read_graph_from_file(char filename[]){
 	//Feeds the filestream into the newly created array.
 	//time_t t;
 	//srand((unsigned) time(&t));
+	int fromNodeCounter=1;
 	int fromNode=0, toNode;
 	for( i=0; i<edges; i++){
+		/*
 		//if( fgets(str, 100, fp) == NULL ) return;
 		//fromNode = atoi(strtok(str,"\t"));
 		//toNode = atoi(strtok(NULL,"\t"));
 
-		if( fromNode % 5 == 0 && fromNode != 0)
-			fromNode++;
+		//if( fromNode % 5 == 0 && fromNode != 0)
+		//	fromNode++;
 		//toNode = rand() % (nodes-1);
 		if( fromNode == nodes-1 )
 			toNode = 0;
 		else 
 			toNode = fromNode+1;
+		*/
+		if(fromNodeCounter > 16){
+                        fromNode++;
+                        fromNodeCounter=1;
+                }
+                fromNodeCounter++;
+
+                toNode = rand() % (nodes);
 
 		CCS[i][0] = fromNode;
 		CCS[i][1] = toNode;
@@ -94,10 +104,10 @@ void read_graph_from_file(char filename[]){
 		if( column_nodes_occurrence[i] == 0)
 			column_nodes_occurrence[dwp_size++] = i;
 	//Puts the dangling websites into a smaller array.
-	dwp = (int*)malloc(dwp_size*sizeof(int));
-	for ( i=0; i<dwp_size; i++){
-		dwp[i] = column_nodes_occurrence[i];
-	}
+	//dwp = (int*)malloc(dwp_size*sizeof(int));
+	//for ( i=0; i<dwp_size; i++){
+	//	dwp[i] = column_nodes_occurrence[i];
+	//}
 
 	//Convert the CCS into a CRS.
 	CRS_row_ptr = (int*)malloc((edges+1)*sizeof(int));
@@ -163,7 +173,7 @@ void read_graph_from_file(char filename[]){
 	//printf("Nodes: %d\n", CRS_row_ptr[nodes]);
 
 	//printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-	printf("dwp_size: %d\n", dwp_size);
+	//printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -207,10 +217,19 @@ void PageRank_iterations(double d, double e){
 
 		//Adds values to x^0.
 		#pragma omp for
-		for( i=0; i<nodes; i++) // F: 325,729 W: 651,458
+		for( i=0; i<nodes; i++){ // F: 325,729 W: 651,458
 			xk_1[i] = iN;
+			x[i] = iN;
+		}
 
-		while( n<50000 ){ //F: 1,950,645,706,000+7
+		#pragma omp single
+                {
+                        //printf("sadf\n");
+                        iteration_time = mysecond();
+                }
+
+
+		while( n<10000 ){ //F: 1,950,645,706,000+7
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -221,9 +240,9 @@ void PageRank_iterations(double d, double e){
 				Wk_1=0; //W:1
 			}
 			
-			#pragma omp for reduction( + : Wk_1 )
-			for( i=0; i<dwp_size; i++) // F: 187,788*2=375,576, W: 187,788*3=563,364
-				Wk_1 += xk_1[ dwp[i] ]; //F: 1 W: 3
+			//#pragma omp for reduction( + : Wk_1 )
+			//for( i=0; i<dwp_size; i++) // F: 187,788*2=375,576, W: 187,788*3=563,364
+			//	Wk_1 += xk_1[ dwp[i] ]; //F: 1 W: 3
 			
 			#pragma omp single
 			{
@@ -240,7 +259,6 @@ void PageRank_iterations(double d, double e){
 				//This is A*x^k-1
 				x[i] = 0;
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ // F: 4*1,497,138=5,988,552
-					// F:2
 					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]]; // F:2
 				}
 				//d*Ax^k-1

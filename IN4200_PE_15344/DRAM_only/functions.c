@@ -52,6 +52,7 @@ void read_graph_from_file(char filename[]){
 	//Feeds the filestream into the newly created array.
 	int fromNodeCounter=1;
 	int fromNode=0, toNode;
+	int *counting_array = (int*)malloc(nodes*sizeof(int));
 	for( i=0; i<edges; i++){
 		//if( fgets(str, 100, fp) == NULL ) return;
 		//fromNode = atoi(strtok(str,"\t"));
@@ -65,8 +66,20 @@ void read_graph_from_file(char filename[]){
 		}
 		fromNodeCounter++;
 
-                toNode = rand() % (nodes-1);
+                toNode = rand() % (nodes);
 		//toNode = 5;
+		/*
+		if(counting_array[toNode]==16 || toNode == fromNode){
+			for(j=0;j<nodes;j++){
+				if(counting_array[j]<16 && toNode != fromNode){
+					toNode=j;
+					break;
+				}
+			}
+
+		}
+		*/
+		
 		//printf("%d\n", toNode);
 
 		CCS[i][0] = fromNode;
@@ -74,6 +87,7 @@ void read_graph_from_file(char filename[]){
 		CCS[i][2] = row_nodes_occurrence[toNode];
 		row_nodes_occurrence[toNode]++;
 		column_nodes_occurrence[fromNode]++;
+		//counting_array[toNode]++;
 	}
 	//printf("test: %d\n", fromNode);
 	//printf("test: %d\n", CCS[edges-1][0]);
@@ -226,7 +240,7 @@ void PageRank_iterations(double d, double e){
 			iteration_time = mysecond();
 		}
 		
-		while( n<50000 ){
+		while( n<10000 ){
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -262,7 +276,10 @@ void PageRank_iterations(double d, double e){
 				
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
 					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					//printf("%d\n", CRS_col_idx[j]);
 				}
+				
+				//printf("\n");
 				//d*Ax^k-1
 				x[i] *= d;
 				//Adding the first part and second part together.
