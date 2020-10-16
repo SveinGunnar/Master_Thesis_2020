@@ -30,11 +30,11 @@ void read_graph_from_file(char filename[]){
 	*/
 
 	//Sets the number of nodes and edges.
-	//nodes = 1000001;
+	nodes = 3000001;
         //nodes = 1001107;
 	//nodes = 3428500;
 	//nodes = 6000000;
-        //edges = 4000000;
+        edges = 48000000;
 	//edges = 13107200;
 	//edges = 16000000;
 	//edges = 24000000;
@@ -60,7 +60,7 @@ void read_graph_from_file(char filename[]){
 
 		//if( fromNode % 15 == 0 && fromNode != 0)
                 //        fromNode++;
-		if(fromNodeCounter > 16){
+		if(fromNodeCounter > 48){
 			fromNode++;
 			fromNodeCounter=1;
 		}
@@ -241,7 +241,7 @@ void PageRank_iterations(double d, double e){
 			iteration_time = mysecond();
 		}
 		
-		while( n<10000 ){
+		while( n<5000 ){
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -328,6 +328,30 @@ void PageRank_iterations(double d, double e){
                                		average += D_RO(xk_1)[i];
 					//sumSquare += xk_1[i]*xk_1[i];
                         	}
+
+				#pragma omp for reduction(+ : sumSquare, average)
+                                for(i=0;i<nodes;i++){
+                                        average += D_RO(xk_1)[i];
+                                        //sumSquare += xk_1[i]*xk_1[i];
+                                }
+
+				#pragma omp for reduction(+ : sumSquare, average)
+                                for(i=0;i<nodes;i++){
+                                        average += D_RO(xk_1)[i];
+                                        //sumSquare += xk_1[i]*xk_1[i];
+                                }
+
+				#pragma omp for reduction(+ : sumSquare, average)
+                                for(i=0;i<nodes;i++){
+                                        average += D_RO(xk_1)[i];
+                                        //sumSquare += xk_1[i]*xk_1[i];
+                                }
+
+				#pragma omp for reduction(+ : sumSquare, average)
+                                for(i=0;i<nodes;i++){
+                                        average += D_RO(xk_1)[i];
+                                        //sumSquare += xk_1[i]*xk_1[i];
+                                }
 			//}
 
 			#pragma omp barrier

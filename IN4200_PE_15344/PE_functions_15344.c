@@ -32,8 +32,8 @@ void read_graph_from_file(char filename[]){
 	//Sets the number of nodes and edges.
 	//nodes = 1001107;
 	//edges = 4000883;
-	nodes = 1000001;
-	edges = 16000000;
+	nodes = 3000001;
+	edges = 48000000;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -65,7 +65,7 @@ void read_graph_from_file(char filename[]){
 		else 
 			toNode = fromNode+1;
 		*/
-		if(fromNodeCounter > 16){
+		if(fromNodeCounter > 48){
                         fromNode++;
                         fromNodeCounter=1;
                 }
@@ -229,7 +229,7 @@ void PageRank_iterations(double d, double e){
                 }
 
 
-		while( n<10000 ){ //F: 1,950,645,706,000+7
+		while( n<5000 ){ //F: 1,950,645,706,000+7
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -361,17 +361,41 @@ void transfer_DRAM_to_NVM(){
 			//maximum, minimum and average.
 			#pragma omp for reduction(+ : sumSquare, average)
                         for(i=0;i<nodes;i++){ // 1
-                                temp_value=D_RO(nvm_values)[i];
-                                average += temp_value; // 1
+                                //temp_value=D_RO(nvm_values)[i];
+                                average += D_RO(nvm_values)[i]; // 1
                                 sumSquare += temp_value*temp_value; // 2
                         }
 			
 			//Second time.
 			#pragma omp for reduction(+ : sumSquare, average)
                         for(i=0;i<nodes;i++){ // 1
-                                temp_value=D_RO(nvm_values)[i];
-                                average += temp_value; // 1
-                                sumSquare += temp_value*temp_value; // 2
+                                //temp_value=D_RO(nvm_values)[i];
+                                average += D_RO(nvm_values)[i]; // 1
+                                //sumSquare += temp_value*temp_value; // 2
+                        }
+
+			//Third time.
+                        #pragma omp for reduction(+ : sumSquare, average)
+                        for(i=0;i<nodes;i++){ // 1
+                                //temp_value=D_RO(nvm_values)[i];
+                                average += D_RO(nvm_values)[i]; // 1
+                                //sumSquare += temp_value*temp_value; // 2
+                        }
+
+			//fourth time.
+                        #pragma omp for reduction(+ : sumSquare, average)
+                        for(i=0;i<nodes;i++){ // 1
+                                //temp_value=D_RO(nvm_values)[i];
+                                average += D_RO(nvm_values)[i]; // 1
+                                //sumSquare += temp_value*temp_value; // 2
+                        }
+
+			//fifth time.
+                        #pragma omp for reduction(+ : sumSquare, average)
+                        for(i=0;i<nodes;i++){ // 1
+                                //temp_value=D_RO(nvm_values)[i];
+                                average += D_RO(nvm_values)[i]; // 1
+                                //sumSquare += temp_value*temp_value; // 2
                         }
 
 			if(iteration_ongoing==0){

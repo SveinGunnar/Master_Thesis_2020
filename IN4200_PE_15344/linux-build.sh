@@ -19,22 +19,33 @@ p=10
 #./PageRank.exe $file $d $e $n
 #./PageRank.exe $file2 $d $e $n
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
+#
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 1 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 14 2 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 13 3 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 12 4 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 11 5 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 10 6 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 9 7 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 8 8 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 7 9 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 6 10 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 5 11 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 4 12 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 3 13 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 15 16
 
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 1 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 14 2 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 13 3 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 12 4 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 11 5 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 10 6 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 9 7 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 8 8 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 7 9 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 6 10 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 5 11 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 4 12 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 3 13 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 2 14 16
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 15 16
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 2 17
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 16 2 18
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 17 2 19
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 18 2 20
+
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 19 2 21
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 20 2 22
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 21 2 23
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 22 2 24
+
 
 #numactl --physcpubind=0-15 ./Page_rank.out $altfile $d $e $p 14 2 16
 

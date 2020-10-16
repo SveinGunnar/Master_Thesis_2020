@@ -19,9 +19,9 @@ n=10
 threads=16
 
 #echo "" > $output
-j=8
+j=20
 #echo Threads, Total time, Iteration time, Calculation time
-for (( i=7; i<9; i++ ))
+for (( i=19; i<20; i++ ))
 do
 	#for (( j=0; j<100; j++ ))
 	#do
