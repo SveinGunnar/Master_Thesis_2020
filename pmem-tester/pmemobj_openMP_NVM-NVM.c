@@ -172,9 +172,17 @@ int main(int argc, char *argv[])
 	//Average
 	// i%2 == 0 -> DRAM
 	// i%2 == 1 -> NVM
-
-	
-	
+	/*
+	double average_temp=0;
+	test_time_average = (double*)malloc(nthreads*sizeof(double));
+	for(i=0;i<nthreads;i++){
+		average_temp=0;
+		for(j=0;j<total_tests;j++){
+			average_temp += 1.0E-06 * bytes/test_time[i][j];
+		}
+		test_time_average=
+	}
+	*/
 	//printf("Full printout\n");
 	for(i=0;i<nthreads;i++){
 		if(i < totalThreads-nvmThreads)
