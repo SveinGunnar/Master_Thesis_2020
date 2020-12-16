@@ -1,14 +1,14 @@
 #!/bin/bash
 #Pmemobj_openMP_singelSocket.sh
-#file1="Result/Raws/NVM-NVM_16t.txt"
-#file2="Result/Raws/DRAM-NVM_16t.txt"
-file3="Result/Raws/NVM-DRAM_16t.txt"
+file1="Result/Raws/NVM-NVM_16t_5000i.txt"
+file2="Result/Raws/DRAM-NVM_16t_5000i.txt"
+file3="Result/Raws/NVM-DRAM_16t_5000i.txt"
 
 #file1_average="Result/NVM-NVM_16t_average"
 #file2_average="Result/DRAM-NVM_16t_average"
-file3_average="Result/NVM-DRAM_16t_average"
+#file3_average="Result/NVM-DRAM_16t_average"
 
-iterations=1000
+iterations=5000
 total_threads=16
 #socket1=0
 #socket2=16
@@ -21,24 +21,24 @@ total_threads=16
 
 #NVM-NVM
 echo NVM-NVM
-#truncate -s 0 $file1
+truncate -s 0 $file1
 for (( n=1; n<16; n++ ))
 do
 	echo $n
-	#echo $n NVM thread >> $file1
-	#numactl --physcpubind=0-15 ./Pmemobj_openMP_NVM-NVM.out $n $total_threads $iterations >> $file1
+	echo $n NVM thread >> $file1
+	numactl --physcpubind=0-15 ./Pmemobj_openMP_NVM-NVM.out $n $total_threads $iterations >> $file1
 done
 
 
 
 #DRAM-NVM
 echo DRAM-NVM
-#truncate -s 0 $file2
+truncate -s 0 $file2
 for (( n=1; n<16; n++ ))
 do
 	echo $n
-        #echo $n >> $file2
-	#numactl --physcpubind=0-15 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
+        echo $n >> $file2
+	numactl --physcpubind=0-15 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
 done
 
 #NVM-DRAM
