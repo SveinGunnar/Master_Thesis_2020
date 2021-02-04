@@ -105,6 +105,7 @@ int main(int argc, char *argv[])
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
+					drm_write_array[i] = ((double)rand()/(double)(RAND_MAX));
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 			{
 				for(i=0;i<ARRAY_LENGTH;i++)
 					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
+					drm_write_array[i] = ((double)rand()/(double)(RAND_MAX));
 			}
 		}
 		
@@ -172,9 +174,9 @@ int main(int argc, char *argv[])
 
 	for(i=0;i<nthreads;i++){
 		if(i < totalThreads-nvmThreads)
-			printf("%d DRAM,", i);
+			printf("DRAM,");
 		else if(i >= totalThreads-nvmThreads)
-			printf("%d NVM,", i);
+			printf("NVMe,");
 		for(j=0;j<total_tests;j++){
 			printf("%0.2f", 1.0E-06 * bytes/test_time[i][j]);
 			if( j != total_tests-1 )
