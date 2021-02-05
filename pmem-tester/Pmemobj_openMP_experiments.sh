@@ -5,8 +5,8 @@ file2="Result/Raws/DRAM-NVM_12nvmt_12dramt_5000i.txt"
 file3="Result/Raws/NVM-DRAM_12nvmt_12dramt_5000i.txt"
 
 iterations=5000
-total_threads=16
-n=16
+total_threads=24
+n=12
 
 echo NVM-NVM
 echo $n
