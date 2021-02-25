@@ -1,8 +1,8 @@
 #!/bin/bash
 #Pmemobj_openMP_singelSocket.sh
-file1="Result/Raws/NVM-NVM_32t_5000iaaaa.txt"
-file2="Result/Raws/DRAM-NVM_32t_5000iaaaa.txt"
-file3="Result/Raws/NVM-DRAM_32t_5000iaaaa.txt"
+file1="Result/Raws/NVM-NVM_16t_5000i_v3.txt"
+file2="Result/Raws/DRAM-NVM_16t_5000i_v3.txt"
+file3="Result/Raws/NVM-DRAM_16t_5000i_v3.txt"
 
 #file1_average="Result/NVM-NVM_16t_average"
 #file2_average="Result/DRAM-NVM_16t_average"
@@ -18,10 +18,11 @@ total_threads=16
 #export OMP_PROC_BIND=close
 #export OMP_NUM_THREADS=$total_threads
 #export OMP_PLACES="'"$CPUs"'"
+#pmempool create --layout my_layout --size=50G obj pool.obj
 
 #NVM-NVM
 echo NVM-NVM
-truncate -s 0 $file1
+#truncate -s 0 $file1
 for (( n=1; n<16; n++ ))
 do
 	echo $n
@@ -43,7 +44,7 @@ done
 
 #NVM-DRAM
 echo NVM-DRAM
-truncate -s 0 $file3
+#truncate -s 0 $file3
 for (( n=1; n<16; n++ ))
 do
 	echo $n

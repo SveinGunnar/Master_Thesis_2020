@@ -30,10 +30,12 @@ void read_graph_from_file(char filename[]){
 	*/
 
 	//Sets the number of nodes and edges.
+	int ratio = 16;
 	//nodes = 1001107;
 	//edges = 4000883;
 	nodes = 3000001;
-	edges = 48000000;
+	//edges = 48000000;
+	edges = nodes * ratio;
 
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -51,33 +53,56 @@ void read_graph_from_file(char filename[]){
 	//srand((unsigned) time(&t));
 	int fromNodeCounter=1;
 	int fromNode=0, toNode;
-	for( i=0; i<edges; i++){
-		/*
-		//if( fgets(str, 100, fp) == NULL ) return;
-		//fromNode = atoi(strtok(str,"\t"));
-		//toNode = atoi(strtok(NULL,"\t"));
+	for( i=0; i<nodes; i++){
+		fromNode = i
+		
+		if( i < ratio*0.5 ){
+			for( j=0; j<ratio*0.5; j++ ){
+				toNode = i+j;
 
-		//if( fromNode % 5 == 0 && fromNode != 0)
-		//	fromNode++;
-		//toNode = rand() % (nodes-1);
-		if( fromNode == nodes-1 )
-			toNode = 0;
-		else 
-			toNode = fromNode+1;
-		*/
-		if(fromNodeCounter > 48){
-                        fromNode++;
-                        fromNodeCounter=1;
-                }
-                fromNodeCounter++;
+				CCS[i][0] = fromNode;
+                		CCS[i][1] = toNode;
+                		CCS[i][2] = row_nodes_occurrence[toNode];
+                		row_nodes_occurrence[toNode]++;
+                		column_nodes_occurrence[fromNode]++;
+			}
+		}
+		else if( i >= nodes*ratio-ratio*0.5 ){
+			for( j=0; j<ratio*0.5; j++ ){
+                                toNode = i-j;
 
-                toNode = rand() % (nodes);
+				CCS[i][0] = fromNode;
+                		CCS[i][1] = toNode;
+                		CCS[i][2] = row_nodes_occurrence[toNode];
+                		row_nodes_occurrence[toNode]++;
+                		column_nodes_occurrence[fromNode]++;
+                        }
+		}
+		else{
+			for( j=0; j<ratio*0.5; j++ ){
+                                toNode = i+j;
+				CCS[i][0] = fromNode;
+                		CCS[i][1] = toNode;
+                		CCS[i][2] = row_nodes_occurrence[toNode];
+                		row_nodes_occurrence[toNode]++;
+                		column_nodes_occurrence[fromNode]++;
+				
+				toNode = i-j;
+				CCS[i][0] = fromNode;
+                                CCS[i][1] = toNode;
+                                CCS[i][2] = row_nodes_occurrence[toNode];
+                                row_nodes_occurrence[toNode]++;
+                                column_nodes_occurrence[fromNode]++;
 
-		CCS[i][0] = fromNode;
-		CCS[i][1] = toNode;
-		CCS[i][2] = row_nodes_occurrence[toNode];
-		row_nodes_occurrence[toNode]++;
-		column_nodes_occurrence[fromNode]++;
+                        }
+		}
+		
+
+		//CCS[i][0] = fromNode;
+		//CCS[i][1] = toNode;
+		//CCS[i][2] = row_nodes_occurrence[toNode];
+		//row_nodes_occurrence[toNode]++;
+		//column_nodes_occurrence[fromNode]++;
 	}
 
 	//printf("testing\n");
