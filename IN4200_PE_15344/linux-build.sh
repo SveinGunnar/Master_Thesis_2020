@@ -5,7 +5,9 @@ export OMP_NESTED=TRUE
 
 file="testfile.txt"
 file2="testfile2.txt"
-file3="web-NotreDame.txt"
+#file3="web-NotreDame.txt"
+#file3="input_list/neighbours_8.txt"
+file3="input_list/forTesting.txt"
 file4="100nodes_graphs.txt"
 altfile="web-Stanford.txt"
 #d=0.85
@@ -41,11 +43,10 @@ p=10
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 17 2 19
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 18 2 20
 
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 19 2 21
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 20 2 22
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 21 2 23
-numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 22 2 24
-
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 19 2 21
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 20 2 22
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 21 2 23
+#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 22 2 24
 
 #numactl --physcpubind=0-15 ./Page_rank.out $altfile $d $e $p 14 2 16
 
@@ -62,3 +63,8 @@ numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 22 2 24
 
 #testing=$(./Page_rank.out $file3 $d $e $n 4 10)
 #echo $testing
+
+numactl --physcpubind=0-15 ./Page_rank.out web-NotreDame.txt $d $e $p 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out input_list/forTesting.txt $d $e $p 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out input_list/neighbours_8.txt $d $e $p 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out input_list/neighbours_24.txt $d $e $p 2 14 16

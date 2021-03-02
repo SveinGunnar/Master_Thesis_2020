@@ -1,5 +1,8 @@
 # stuff
 *.swp
+neighbours_24.txt
+neighbours_8.txt
+forTesting.txt
 
 # Prerequisites
 *.d
