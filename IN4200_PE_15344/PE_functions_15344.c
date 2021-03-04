@@ -242,6 +242,7 @@ void transfer_DRAM_to_NVM(){
         int i;
 	int size;
 	int maximum_index=0, minimum_index=0;
+	double iN = 1.0/nodes;
 	double average=0.0;
 	double inverseN = 1.0/nodes;
 	double sumSquare = 0.0;
@@ -331,8 +332,10 @@ void transfer_DRAM_to_NVM(){
 			if(iteration_ongoing==0){
                                 break;
 			}
+			#pragma omp barrier
                         #pragma omp single
                         {
+				average *= iN;
 				Analyse_time += mysecond() - temp_time; // 1
                                 //omp_unset_lock(&lock_a);
                         }

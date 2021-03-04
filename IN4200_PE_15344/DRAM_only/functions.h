@@ -21,7 +21,7 @@ double *xk_1;
 //omp_lock_t lock_a, lock_b, lock_c;
 int top_webpage;
 int iteration_ongoing, transfer_ongoing;
-int iter_threads, transfer_threads, max_threads;
+int max_threads;
 
 //double nvm_values
 

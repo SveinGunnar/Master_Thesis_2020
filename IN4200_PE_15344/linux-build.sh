@@ -6,10 +6,12 @@ export OMP_NESTED=TRUE
 file="testfile.txt"
 file2="testfile2.txt"
 #file3="web-NotreDame.txt"
-#file3="input_list/neighbours_8.txt"
-file3="input_list/forTesting.txt"
+file3="input_list/neighbours_8.txt"
+#file3="input_list/forTesting.txt"
 file4="100nodes_graphs.txt"
 altfile="web-Stanford.txt"
+output_file="Result/result_n5000_16threads_040321.txt"
+
 #d=0.85
 d=0.99
 # 0.0000001
@@ -22,21 +24,28 @@ p=10
 #./PageRank.exe $file2 $d $e $n
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $n
 #
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 1 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 14 2 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 13 3 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 12 4 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 11 5 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 10 6 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 9 7 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 8 8 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 7 9 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 6 10 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 5 11 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 4 12 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 3 13 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 2 14 16
-#numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 15 16
+
+#printf("%d,%d,%d,%f,%f,%f,%f,%f,%f,%f\n", iter_threads+transfer_threads, iter_threads, transfer_threads, iteration_time, iteration_idle_time, transfer_time, transfer_idle_time, DRAM_to_NVM_time, Analyse_time, test_time);
+echo Total threads,DataGen Threads,Analyze threads,DataGen time,DataGen idle time,Transfer time,Transfer idle time,DRAM-NVM time,Analyze time,TestTime > $output_file
+
+echo 1
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 1 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 14 2 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 13 3 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 12 4 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 11 5 16 >> $output_file
+echo 6
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 10 6 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 9 7 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 8 8 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 7 9 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 6 10 16 >> $output_file
+echo 11
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 5 11 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 4 12 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 3 13 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 2 14 16 >> $output_file
+numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 1 15 16 >> $output_file
 
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 15 2 17
 #numactl --physcpubind=0-15 ./Page_rank.out $file3 $d $e $p 16 2 18
@@ -64,7 +73,7 @@ p=10
 #testing=$(./Page_rank.out $file3 $d $e $n 4 10)
 #echo $testing
 
-numactl --physcpubind=0-15 ./Page_rank.out web-NotreDame.txt $d $e $p 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out web-NotreDame.txt $d $e $p 2 14 16
 #numactl --physcpubind=0-15 ./Page_rank.out input_list/forTesting.txt $d $e $p 2 14 16
 #numactl --physcpubind=0-15 ./Page_rank.out input_list/neighbours_8.txt $d $e $p 2 14 16
 #numactl --physcpubind=0-15 ./Page_rank.out input_list/neighbours_24.txt $d $e $p 2 14 16

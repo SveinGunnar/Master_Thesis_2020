@@ -6,10 +6,7 @@
 	argv[1] = filename of the webpage linkage information
 	argv[2] = damping constant d
 	argv[3] = convergence threshold value e
-	argv[4] = n value for showing the top n webpages
-	argv[5] = Number of iteration threads
-	argv[6] = Number of transfer threads
-	argv[7] = Number of max threads
+	argv[4] = Number of max threads
 */
 int main(int argc, char **argv){
 	
@@ -22,8 +19,8 @@ int main(int argc, char **argv){
 	x = (double*)malloc(nodes*sizeof(double));
 	xk_1 = (double*)malloc(nodes*sizeof(double));
 
-	iter_threads = atof(argv[5]);
-	transfer_threads = atof(argv[6]);
+	max_threads = atof(argv[4]);
+	//transfer_threads = atof(argv[6]);
 	//max_threads = atof(argv[7]);|
 
 	//double test_time = mysecond();

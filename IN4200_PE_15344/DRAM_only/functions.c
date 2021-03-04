@@ -2,17 +2,15 @@
 
 void read_graph_from_file(char filename[]){
 	int i, j, k, temp;
-	//FILE *fp = fopen( filename, "r" );
-	char trashbin[100];
+	FILE *fp = fopen( filename, "r" );
 	char str[100];
-
-	/*
+	
 	//First and second line in file are thrown away
-	if( fgets(str, 100, fp) == NULL ) return;
-	if( fgets(str, 100, fp) == NULL ) return;
+	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
+	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
 
 	//Extract Nodes and edges from the third line.
-	if( fgets(str, 100, fp) == NULL ) return;;
+	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
 	char * wordPointer;
 	wordPointer = strtok (str," ");
 	int line3_counter = 0;
@@ -24,21 +22,9 @@ void read_graph_from_file(char filename[]){
 			edges = atoi(wordPointer);
 		wordPointer = strtok (NULL, " ");
 	}
-
 	//Throws away the forth line.
-	if( fgets (str, 100, fp) == NULL ) return;
-	*/
-
-	//Sets the number of nodes and edges.
-	nodes = 3000001;
-        //nodes = 1001107;
-	//nodes = 3428500;
-	//nodes = 6000000;
-        //edges = 4000000;
-	//edges = 13107200;
-	edges = 48000000;
-	//edges = 24000000;
-
+	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
+	
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
 	int *column_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -46,51 +32,23 @@ void read_graph_from_file(char filename[]){
 	//Creates a 2d array with dimension n x 3.
 	int **CCS = (int**)malloc(edges*sizeof(int*));
 	for ( i=0; i<edges; i++)
-		CCS[i] = (int*)calloc(3, sizeof(int));
+		CCS[i] = (int*)malloc(3*sizeof(int));
 	double *CCS_values = (double*)malloc(edges*sizeof(double));
-
+	
 	//Feeds the filestream into the newly created array.
-	int fromNodeCounter=1;
-	int fromNode=0, toNode;
-	int *counting_array = (int*)malloc(nodes*sizeof(int));
+	int fromNode, toNode;
 	for( i=0; i<edges; i++){
-		//if( fgets(str, 100, fp) == NULL ) return;
-		//fromNode = atoi(strtok(str,"\t"));
-		//toNode = atoi(strtok(NULL,"\t"));
-
-		//if( fromNode % 15 == 0 && fromNode != 0)
-                //        fromNode++;
-		if(fromNodeCounter > 48){
-			fromNode++;
-			fromNodeCounter=1;
-		}
-		fromNodeCounter++;
-
-                toNode = rand() % (nodes);
-		//toNode = 5;
-		/*
-		if(counting_array[toNode]==16 || toNode == fromNode){
-			for(j=0;j<nodes;j++){
-				if(counting_array[j]<16 && toNode != fromNode){
-					toNode=j;
-					break;
-				}
-			}
-
-		}
-		*/
-		
-		//printf("%d\n", toNode);
+		//fgets(str, 100, fp);
+		if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
+		fromNode = atoi(strtok(str,"\t"));
+		toNode = atoi(strtok(NULL,"\t"));
 
 		CCS[i][0] = fromNode;
 		CCS[i][1] = toNode;
 		CCS[i][2] = row_nodes_occurrence[toNode];
 		row_nodes_occurrence[toNode]++;
 		column_nodes_occurrence[fromNode]++;
-		//counting_array[toNode]++;
 	}
-	//printf("test: %d\n", fromNode);
-	//printf("test: %d\n", CCS[edges-1][0]);
 
 	//Adds values to the matrix.
 	//Counts the number of outgoing links from node and add 1/sum to all Nodes
@@ -113,29 +71,23 @@ void read_graph_from_file(char filename[]){
 		if( column_nodes_occurrence[i] == 0)
 			column_nodes_occurrence[dwp_size++] = i;
 	//Puts the dangling websites into a smaller array.
-	//dwp = (int*)malloc(dwp_size*sizeof(int));
-	//for ( i=0; i<dwp_size; i++){
-	//	dwp[i] = column_nodes_occurrence[i];
-	//}
-
+	dwp = (int*)malloc(dwp_size*sizeof(int));
+	for ( i=0; i<dwp_size; i++){
+		dwp[i] = column_nodes_occurrence[i];
+	}
+	
 	//Convert the CCS into a CRS.
-	CRS_row_ptr = (int*)malloc((edges+1)*sizeof(int));
-	CRS_col_idx = (int*)malloc(edges*sizeof(int));
+	//CRS_row_ptr = (int*)malloc((edges+1)*sizeof(int));
+	CRS_row_ptr = (int*)calloc((edges+1), sizeof(int));
+	//CRS_col_idx = (int*)malloc(edges*sizeof(int));
+	CRS_col_idx = (int*)calloc((edges), sizeof(int));
 	CRS_values = (double*)malloc(edges*sizeof(double));
 
 	//Adds the indices for col_idx into the row_ptr
-	int divided = edges/nodes;
 	CRS_row_ptr[0] = 0;
 	for( i=1; i<nodes; i++){
-		//CRS_row_ptr[i] = CRS_row_ptr[i-1] + row_nodes_occurrence[i-1];
-		if(i%17==0)
-                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided+2);
-                else if(i%2==0)
-                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided+1);
-                else
-                        CRS_row_ptr[i] = CRS_row_ptr[i-1] + (divided);
+		CRS_row_ptr[i] = CRS_row_ptr[i-1] + row_nodes_occurrence[i-1];
 	}
-	CRS_row_ptr[nodes-1] = CRS_row_ptr[nodes-2] + edges-CRS_row_ptr[nodes-2];
 	CRS_row_ptr[nodes] = edges; //Adds the index of last node in node-1.
 
 	//Adds columns into col_idx and values to CRS_values
@@ -152,15 +104,6 @@ void read_graph_from_file(char filename[]){
 	free(CCS);
 	free(CCS_values);
 	free(row_nodes_occurrence);
-
-	//printf("Nodes: %d\n", nodes);
-        //printf("Edges: %d\n", edges);
-        //printf("Edges/nodes: %d\n", edges/nodes);
-        //printf("Nodes-2: %d, %d\n", CRS_row_ptr[nodes-2], CRS_row_ptr[nodes-2]-CRS_row_ptr[nodes-3]);
-        //printf("Nodes-1: %d, %d\n", CRS_row_ptr[nodes-1], CRS_row_ptr[nodes-1]-CRS_row_ptr[nodes-2]);
-        //printf("Nodes: %d\n", CRS_row_ptr[nodes]);
-        //printf("CRS_row_ptr: %d\n", CRS_row_ptr[edges]);
-        //printf("dwp_size: %d\n", dwp_size);
 }
 
 void PageRank_iterations(double d, double e){
@@ -207,7 +150,7 @@ void PageRank_iterations(double d, double e){
 
 	//printf("test123\n");
 
-	#pragma omp parallel
+	#pragma omp parallel num_threads(max_threads)
 	{
 		#pragma omp single
 		{
@@ -360,7 +303,7 @@ void PageRank_iterations(double d, double e){
 	}//End parallel
 	iteration_time = mysecond() - iteration_time;
 	//printf("Threads, Total time, Iteration time, Calculation time\n");
-        printf("%d,%f,%f,%f\n", iter_threads, iteration_time, iteration_time-calculation, calculation);
+        printf("%d,%f,%f,%f\n", max_threads, iteration_time, iteration_time-calculation, calculation);
 	//For testing:
 	//printf("iterations: %d\n", n);
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);

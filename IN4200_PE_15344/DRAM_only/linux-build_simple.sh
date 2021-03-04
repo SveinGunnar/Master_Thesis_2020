@@ -7,6 +7,7 @@ file="testfile.txt"
 file2="testfile2.txt"
 file3="web-NotreDame.txt"
 file4="100nodes_graphs.txt"
+file5="~/Master_Thesis_2020/IN4200_PE_15344/input_list/forTesting.txt"
 #d=0.85
 d=0.99
 # 0.0000001
