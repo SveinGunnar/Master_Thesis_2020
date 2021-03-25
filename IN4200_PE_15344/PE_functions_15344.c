@@ -104,9 +104,13 @@ void read_graph_from_file(char filename[]){
 	free(CCS);
 	free(CCS_values);
 	free(row_nodes_occurrence);
+
+	printf("Nodes: %d\n", nodes );
+	printf("edges: %d\n", edges );
 }
 
 void PageRank_iterations(double d, double e){
+	int testVariable=0;
 	int num_threads;
 
 	double Wk_1; //W^k-1 This is the scalar value for dangling webpages.
@@ -159,7 +163,7 @@ void PageRank_iterations(double d, double e){
                 }
 
 
-		while( n<5000 ){ //F: 1,950,645,706,000+7
+		while( n<1 ){ //F: 1,950,645,706,000+7
 			#pragma omp barrier
 			#pragma omp single
 			{
@@ -183,14 +187,16 @@ void PageRank_iterations(double d, double e){
 			//Computing the x^k formula
 			//Nodes 325 729
 			//double diff=0.0;
-			#pragma omp for reduction(max:diff)
+			#pragma omp for reduction(max:diff) reduction(+:testVariable)
 			for( i=0; i<nodes; i++){ // F: 325,729*(2+5,988,552)=1,950,645,706,000
 				// F: 1
 				//This is A*x^k-1
 				x[i] = 0;
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ // F: 4*1,497,138=5,988,552
 					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]]; // F:2
+					//testVariable++;
 				}
+				testVariable++;
 				//d*Ax^k-1
 				x[i] *= d; // F:1
 				//Adding the first part and second part together.
@@ -235,6 +241,7 @@ void PageRank_iterations(double d, double e){
 	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
 	//printf("%d\n", dwp_size);
 	//printf("%d\n", n);
+	printf("testVariable %d\n", testVariable);
 }
 
 //TOID(double) *nvm_values;

@@ -10,7 +10,7 @@ file4="100nodes_graphs.txt"
 #file5="~/Master_Thesis_2020/IN4200_PE_15344/input_list/neighbours_8.txt"
 file5="neighbours_8.txt"
 
-output_file="Result/result_n5000_01to16threads_0303_2021.txt"
+output_file="Result/result_n5000_01to16threads_2503_2021.txt"
 
 #d=0.85
 d=0.99

@@ -145,8 +145,9 @@ void PageRank_iterations(double d, double e){
 	//double tt;
 	double idle_time=0.0;
         double temp_time;
-        double iteration_time;
-	double calculation=0.0, temp_calc;
+        double data_generation_time;
+	double analyze_time=0.0, temp_calc;
+	Wk_1=1;
 
 	//printf("test123\n");
 
@@ -180,7 +181,7 @@ void PageRank_iterations(double d, double e){
 		#pragma omp single
                 {
 			//printf("sadf\n");
-			iteration_time = mysecond();
+			data_generation_time = mysecond();
 		}
 		
 		while( n<5000 ){
@@ -189,25 +190,9 @@ void PageRank_iterations(double d, double e){
 			{
 				n++;
 				diff=0.0;
-				//x^k becomes x^k-1
-				//temp_x = xk_1;
-				//xk_1 = x;
-				//x = temp_x;
-
-				//Sum of all dangling websites. W^k-1
-				Wk_1=1;
 				average = 0;
-			}
-
-			//#pragma omp for reduction( + : Wk_1 )
-			//for( i=0; i<dwp_size; i++){
-			//	Wk_1 += xk_1[ dwp[i] ];
-			//}
-
-			#pragma omp single
-                        {
 				//completes the first part of the formula.
-				Wk_1_product = (omd + (d*Wk_1))*iN;
+                                Wk_1_product = (omd + (d*Wk_1))*iN;
 			}
 
 			//Computing the x^k formula
@@ -241,69 +226,53 @@ void PageRank_iterations(double d, double e){
 			#pragma omp barrier
 			#pragma omp single
 			{
-				//temp_time = mysecond();
-				//idle_time += mysecond() - temp_time;
-				//tt = mysecond();
 				temp_x = xk_1;
                                 xk_1 = x;
                                 x = temp_x;
-
 				//starting time measurement of calculation.
 				temp_calc=mysecond();
-				//printf("%d\n", n);
 			}
 
-			//if( n % iteration_size == 0 ){
-				//first time
-				//Analyse part
-				#pragma omp for reduction(+ : sumSquare, average)
-                        	for(i=0;i<nodes;i++){
-                               		average += xk_1[i];
-					//sumSquare += xk_1[i]*xk_1[i];
-                        	}
+			//Analyse part
+			#pragma omp for reduction(+ : average)
+                       	for(i=0;i<nodes;i++){
+                       		average += xk_1[i];
+                       	}
+			#pragma omp for reduction(+ : average)
+			for(i=0;i<nodes;i++){
+                           	average += xk_1[i];
+                    	}
 
-				#pragma omp for reduction(+ : sumSquare, average)
-                                for(i=0;i<nodes;i++){
-                                        average += xk_1[i];
-                                        //sumSquare += xk_1[i]*xk_1[i];
-                                }
+			#pragma omp for reduction(+ : average)
+                     	for(i=0;i<nodes;i++){
+                          	average += xk_1[i];
+                    	}
 
-				#pragma omp for reduction(+ : sumSquare, average)
-                                for(i=0;i<nodes;i++){
-                                        average += xk_1[i];
-                                        //sumSquare += xk_1[i]*xk_1[i];
-                                }
+			#pragma omp for reduction(+ : average)
+                        for(i=0;i<nodes;i++){
+                        	average += xk_1[i];
+                     	}
 
-				#pragma omp for reduction(+ : sumSquare, average)
-                                for(i=0;i<nodes;i++){
-                                        average += xk_1[i];
-                                        //sumSquare += xk_1[i]*xk_1[i];
-                                }
-
-				#pragma omp for reduction(+ : sumSquare, average)
-                                for(i=0;i<nodes;i++){
-                                        average += xk_1[i];
-                                        //sumSquare += xk_1[i]*xk_1[i];
-                                }
-			//}
+			#pragma omp for reduction(+ : average)
+                     	for(i=0;i<nodes;i++){
+                         	average += xk_1[i];
+                    	}
 
 			#pragma omp barrier
 			#pragma omp single
 			{
 				average *= iN;
-				calculation+=mysecond()-temp_calc;
-				//if( n % 10000 == 0 )
-				//	printf("%d\n", n);
+				analyze_time+=mysecond()-temp_calc;
 			}
-			//stopping criterion.
-			//if( diff < e){
-			//	break;
-			//}
 		}//end of while-loop
+		#pragma omp single
+        	{
+			data_generation_time = mysecond() - data_generation_time;
+            	}
 	}//End parallel
-	iteration_time = mysecond() - iteration_time;
+	//iteration_time = mysecond() - iteration_time;
 	//printf("Threads, Total time, Iteration time, Calculation time\n");
-        printf("%d,%f,%f,%f\n", max_threads, iteration_time, iteration_time-calculation, calculation);
+        printf("%d,%f,%f,%f\n", max_threads, data_generation_time, data_generation_time-analyze_time, analyze_time);
 	//For testing:
 	//printf("iterations: %d\n", n);
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
