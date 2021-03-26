@@ -214,7 +214,7 @@ main()
     ssize_t		j;
     STREAM_TYPE		scalar;
     double		t, times[5][NTIMES];
-    double average;
+    STREAM_TYPE average=0.;
 
     /* --- SETUP --- determine precision and check timing --- */
 
@@ -354,7 +354,7 @@ main()
 #else
 #pragma omp parallel for reduction( + : average)
         for (j=0; j<STREAM_ARRAY_SIZE; j++)
-            average += b[j];
+            average += a[j];
 #endif
         times[4][k] = mysecond() - times[4][k];
 
