@@ -200,18 +200,19 @@ void PageRank_iterations(double d, double e){
 			#pragma omp for reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
-				x[i] = 0;
+				double double_temp = 0;
 				
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
-					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
 					//printf("%d\n", CRS_col_idx[j]);
 				}
 				
 				//printf("\n");
 				//d*Ax^k-1
-				x[i] *= d;
+				double_temp *= d;
 				//Adding the first part and second part together.
-				x[i] += Wk_1_product;
+				double_temp += Wk_1_product;
+				x[i] = double_temp;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
