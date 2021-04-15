@@ -17,9 +17,11 @@ if [ -f $file2 ]; then
    rm $file2
 fi
 
+#touch $file1
+
 echo DRAM average test cpu 0-32 > $file2
 
-for (( n=15; n>=0; n-- ))
+for (( n=0; n<16; n++ ))
 do
 	echo $(($n+1))
 	echo $(($n+1)) >> $file1

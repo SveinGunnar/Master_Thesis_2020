@@ -3,7 +3,7 @@
 #include <string.h>
 
 // argv[1] 2d array size.
-// argv[2] textfile name.
+// argv[2] textfile location and name.
 int main(int argc, char *argv[]) {
 	int n = atoi(argv[1]);
         //int naboer = atoi(argv[2]);

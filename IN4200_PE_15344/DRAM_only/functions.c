@@ -106,7 +106,10 @@ void read_graph_from_file(char filename[]){
 	free(row_nodes_occurrence);
 }
 
-void PageRank_iterations(double d, double e){
+void PageRank_iterations(){
+	double d=0.99;
+	double e=0.0000000000000000021413;
+
 	int num_threads;
 
 	double Wk_1; //W^k-1 This is the scalar value for dangling webpages.
@@ -151,7 +154,7 @@ void PageRank_iterations(double d, double e){
 
 	//printf("test123\n");
 
-	#pragma omp parallel num_threads(max_threads)
+	#pragma omp parallel
 	{
 		#pragma omp single
 		{
@@ -184,6 +187,8 @@ void PageRank_iterations(double d, double e){
 			data_generation_time = mysecond();
 		}
 		
+
+		double double_temp;
 		while( n<5000 ){
 			#pragma omp barrier
 			#pragma omp single
@@ -195,12 +200,13 @@ void PageRank_iterations(double d, double e){
                                 Wk_1_product = (omd + (d*Wk_1))*iN;
 			}
 
+
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
 			#pragma omp for reduction(max:diff)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
-				double double_temp = 0;
+				double_temp = 0;
 				
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
 					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
@@ -271,6 +277,12 @@ void PageRank_iterations(double d, double e){
 			data_generation_time = mysecond() - data_generation_time;
             	}
 	}//End parallel
+	free(dwp);
+        free(x);
+        free(xk_1);
+        free(CRS_row_ptr);
+        free(CRS_col_idx);
+        free(CRS_values);
 	//iteration_time = mysecond() - iteration_time;
 	//printf("Threads, Total time, Iteration time, Calculation time\n");
         printf("%d,%f,%f,%f\n", max_threads, data_generation_time, data_generation_time-analyze_time, analyze_time);
@@ -280,218 +292,6 @@ void PageRank_iterations(double d, double e){
 	//printf("temp_counter_double: %f\n", temp_counter_double);
 	//printf("temp_counter_int: %f\n", temp_counter_ana);
 }
-
-/*
-//TOID(double) *nvm_values;
-void transfer_DRAM_to_NVM(){
-        int i;
-	int size;
-	int maximum_index=0, minimum_index=0;
-	double average=0.0;
-	double *average_vector; // = (double*)calloc(size, sizeof(double));
-        int *maximum; // = (int*)calloc(size, sizeof(int));
-	int *minimum; // = (int*)calloc(size, sizeof(int));
-	//double tt;
-        //double tt = mysecond();
-	double idle_time=0.0;
-        double temp_time;
-        double transfer_time = mysecond();
-        #pragma omp parallel num_threads(iter_threads)
-        {
-		#pragma omp single
-		{
-			size = omp_get_num_threads();
-			maximum = (int*)calloc(size, sizeof(int));
-			minimum = (int*)calloc(size, sizeof(int));
-			average_vector = (double*)calloc(size, sizeof(double));
-		}
-		int thread_id = omp_get_thread_num();
-                while(1==1){
-
-			//Transfer array to nvdimm.
-                        //#pragma omp for
-                        //for(i=0; i<nodes; i++){
-                        //        D_RW(nvm_values)[i]=x[i];
-                        //}
-			
-			//maximum, minimum and average.
-			#pragma omp for
-                        for(i=0;i<nodes;i++){
-                                if( xk_1[i] > xk_1[ maximum[thread_id] ] )
-                                        maximum[thread_id] = i;
-				if( xk_1[i] < xk_1[ minimum[thread_id] ] )
-					minimum[thread_id] = i;
-				average_vector[thread_id] += xk_1[i];
-                        }
-			
-			#pragma omp single
-			{
-				//converts the vectors into scalars.
-				for(i=0;i<size; i++){
-                			//printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );
-                			if( xk_1[maximum[i]] > xk_1[maximum[maximum_index]] )
-                        			maximum_index = i;
-					if( xk_1[maximum[i]] < xk_1[maximum[maximum_index]] )
-                                                minimum_index = i;
-					average += average_vector[i];
-        			}
-				average /= nodes;
-				//printf("Top n is: %d and has value %lf\n", maximum[maximum_index], xk_1[maximum[maximum_index]]);
-				//printf("Min n is: %d and has value %lf\n", minimum[minimum_index], xk_1[minimum[minimum_index]]);
-				//printf("The average value is %lf\n", average);
-			}
-
-			if(iteration_ongoing==0)
-                                break;
-                }
-        }
-	transfer_ongoing = 0;
-	transfer_time = mysecond() - transfer_time;
-        //printf("Transfer: Work time: %f, idle time: %f, total time: %f\n", transfer_time-idle_time, idle_time, transfer_time);
-	
-	//printf("top_n time: %lf\n", tt );
-        //printf("nvm time: %lf\n", tt );
-} 
-
-
-int top_n(){
-        int i;
-        int size = max_threads;
-        int x_index=0;
-	int *a = (int*)calloc(size, sizeof(int));
-	//double tt;
-
-        #pragma omp parallel num_threads(max_threads)
-        {
-                int thread_id = omp_get_thread_num();
-		while( iteration_ongoing==1 )
-		{
-			#pragma omp single
-			{
-				//omp_set_lock(&lock_c);
-				//tt = mysecond();
-			}
-
-                	#pragma omp for
-                	for(i=0;i<nodes;i++){
-                	        if( xk_1[i] > xk_1[ a[thread_id] ] )
-                	                a[thread_id] = i;
-                	}
-			if(transfer_ongoing==0)
-                        	break;
-			#pragma omp single
-			{
-				//tt = mysecond()-tt;
-				//omp_unset_lock(&lock_a);
-			}
-		}
-
-        }
-	//omp_unset_lock(&lock_a);
-	//printf("a[index]: %d\n", a[x_index] );
-        for(i=0;i<size; i++){
-		//printf("enkelt time: %lf\n", D_RO(nvm_values)[a[i]] );
-                if( xk_1[a[i]] > xk_1[a[x_index]] )
-                        x_index = i;
-        }
-        //printf("a[index]: %d\n", a[x_index] );
-        return a[x_index];
-}
-
-void top_n_webpages(int n){
-	int num_threads;
-	int m = 0;
-	//index of the biggest nodes and their values.
-	int *result_index;
-	double *result_value;
-	#pragma omp parallel
-	{
-		#pragma omp single
-		{
-			num_threads = omp_get_num_threads();
-			result_index = (int*)malloc((num_threads*n)*sizeof(int));
-			result_value = (double*)malloc((num_threads*n)*sizeof(double));
-		}
-		//Each thread creates their own array with index of the biggest
-		//nodes and their values.
-		int thread_id = omp_get_thread_num();
-		int *index = (int*)calloc(n, sizeof(int));
-		double *value = (double*)calloc(n, sizeof(double));
-
-		int i,j;
-		int lvi = 0; //Index of the lowest value in index array.
-		int len=0;
-
-		//Finds the n highest nodes in the array.
-		#pragma omp for
-		for( i=0; i<nodes; i++){
-			if( x[i] > value[lvi]){
-				if(value[lvi]==0)
-					len++;
-
-				value[lvi] = x[i];
-				index[lvi] = i;
-
-				//Finds the index of node with the lowest value in the index array.
-				for( j=0; j<n; j++){
-					if( value[j] < value[lvi] ){
-						lvi = j;
-					}
-				}
-			}
-		}
-
-		if( len>n )
-			len=n;
-
-		//Merge all the index and value arrays into two arrays called
-		//result_index and result_value.
-		#pragma omp critical
-		{
-			int a = m+len;
-			for( i=0; i<len; i++){
-				result_index[m+i] = index[i];
-				result_value[m+i] = value[i];
-			}
-			m+=len;
-		}
-	}//End of parallell.
-
-	//The n highest nodes will be added to this array.
-	int *n_index = (int*)calloc(n, sizeof(int));
-	double *n_value = (double*)calloc(n, sizeof(double));
-
-	int i,j;
-	int lvi = 0;
-
-	//Sort the arrays from highest to lowest, but only until n
-	//highest values have been found.
-	int tempi;
-	double tempd;
-	for( i=0; i<n; i++){
-		for( j=i; j<m; j++){
-			if( result_value[i] < result_value[j] ){
-				tempi = result_index[i];
-				result_index[i] = result_index[j];
-				result_index[j] = tempi;
-
-				tempd = result_value[i];
-				result_value[i] = result_value[j];
-				result_value[j] = tempd;
-			}
-		}
-	}
-	//Transfer the n highest values to a new array.
-	for( i=0; i<n; i++){
-		n_index[i] = result_index[i];
-		n_value[i] = result_value[i];
-	}
-
-	printf("n_index, n_value:\n");
-	for( i=0; i<n; i++){
-		printf("%d, %f\n", n_index[i], n_value[i]);
-	}
-}*/
 
 double mysecond(){
         struct timeval tp;

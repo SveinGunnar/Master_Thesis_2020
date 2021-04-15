@@ -10,29 +10,36 @@ program="Stream_c_m.out"
 cores=0
 
 if [ -f $file1 ]; then
-   rm temp.txt
+   rm $file1
 fi
 
 if [ -f $file2 ]; then
    rm $file2
 fi
 
-echo DRAM test cpu 0-32 > $file2
+echo DRAM dual sockets test cpu 0-32 > $file2
+
+a=0
+b=16
 
 for (( n=0; n<32; n++ ))
 do
 	echo $(($n+1))
 	echo $(($n+1)) >> $file1
-	numactl --physcpubind=0-$n ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
-done
+	if (( $n == 0 )) ; then
+		numactl --physcpubind=0-$a ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
+	elif (( $n == 1 )) ; then
+		numactl --physcpubind=0-$a,16-$b ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
+	else
+		if ((n % 2)); then
+                	((b+=1))
+        	else
+                	((a+=1))
+        	fi
 
-#for (( n=17; n<33; n++ ))
-#do
-#	export OMP_NUM_THREADS=$n
-#	echo $n
-#	echo $n >> $file1
-#	numactl --physcpubind=0-15 ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
-#done
+		numactl --physcpubind=0-$a,16-$b ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
+	fi
+done
 
 m=0
 templine=""
@@ -52,8 +59,3 @@ do
 		m=$(($m+1))
 	fi
 done < "$file1"
-
-#./Stream_c_s.out
-#export OMP_NUM_THREADS=1
-#export OMP_PLACES='{0}'
-

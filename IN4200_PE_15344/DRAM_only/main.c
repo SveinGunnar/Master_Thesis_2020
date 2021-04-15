@@ -4,9 +4,7 @@
 
 /*
 	argv[1] = filename of the webpage linkage information
-	argv[2] = damping constant d
-	argv[3] = convergence threshold value e
-	argv[4] = Number of max threads
+	argv[2] = Number of max threads
 */
 int main(int argc, char **argv){
 	
@@ -19,17 +17,8 @@ int main(int argc, char **argv){
 	x = (double*)malloc(nodes*sizeof(double));
 	xk_1 = (double*)malloc(nodes*sizeof(double));
 
-	max_threads = atof(argv[4]);
-	//transfer_threads = atof(argv[6]);
-	//max_threads = atof(argv[7]);|
-
-	//double test_time = mysecond();
-
-	//printf("test\n");
-	PageRank_iterations( atof(argv[2]), atof(argv[3]) );
-	//transfer_DRAM_to_NVM();
-	
-	//test_time = mysecond() - test_time;
+	max_threads = atof(argv[2]);
+	PageRank_iterations();
 	
 	//printf("Iteration_threads transfer_threads max_threads time\n");
 	//printf("%d, %d, %lf\n", iter_threads, transfer_threads, test_time);

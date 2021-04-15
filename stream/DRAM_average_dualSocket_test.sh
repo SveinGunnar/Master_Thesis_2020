@@ -20,7 +20,7 @@ fi
 echo DRAM average dual sockets test cpu 0-32 > $file2
 
 a=0
-b=0
+b=16
 
 for (( n=0; n<32; n++ ))
 do

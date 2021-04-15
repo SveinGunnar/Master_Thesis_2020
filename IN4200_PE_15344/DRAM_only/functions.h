@@ -26,7 +26,7 @@ int max_threads;
 //double nvm_values
 
 void read_graph_from_file(char[]);
-void PageRank_iterations(double, double);
+void PageRank_iterations();
 void top_n_webpages(int);
 void transfer_DRAM_to_NVM();
 int top_n();
