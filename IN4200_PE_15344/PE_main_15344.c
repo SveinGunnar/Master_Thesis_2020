@@ -16,12 +16,9 @@ static PMEMobjpool *pop;
 
 /*
 	argv[1] = filename of the webpage linkage information
-	argv[2] = damping constant d
-	argv[3] = convergence threshold value e
-	argv[4] = n value for showing the top n webpages
-	argv[5] = Number of iteration threads
-	argv[6] = Number of transfer threads
-	argv[7] = Number of max threads
+	argv[2] = Number of iteration threads
+	argv[3] = Number of transfer threads
+	argv[4] = Number of max threads
 */
 int main(int argc, char **argv){
 	//printf("seg fault test");
@@ -55,9 +52,9 @@ int main(int argc, char **argv){
 	iteration_ongoing = 1;
 	transfer_ongoing = 1;
 
-	iter_threads = atof(argv[5]);
-	transfer_threads = atof(argv[6]);
-	//max_threads = atof(argv[7]);
+	iter_threads = atof(argv[2]);
+	transfer_threads = atof(argv[3]);
+	//max_threads = atof(argv[4]);
 	//printf("test 1\n");
 	double test_time = mysecond();
 	#pragma omp parallel num_threads(2)
@@ -65,7 +62,7 @@ int main(int argc, char **argv){
 		//printf("seg fault test");
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0){
-			PageRank_iterations( atof(argv[2]), atof(argv[3]) );
+			PageRank_iterations();
 		}
 		else if( thread_id == 1){
 			transfer_DRAM_to_NVM();

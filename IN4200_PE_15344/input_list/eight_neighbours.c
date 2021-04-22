@@ -13,12 +13,16 @@ int main(int argc, char *argv[]) {
 	int e=16000000;
 	int kanter= (((n-2)*(n-2))*8)+((n-2)*20)+(4*3);
 
+	printf("test\n");
+
 	FILE *fp;
         fp = fopen( argv[2], "w+");
 	fprintf(fp, "#This is a test\n");
 	fprintf(fp, "#This is a test\n");
 	fprintf(fp, "# Nodes: %d Edges: %d\n", (n*n), kanter);
 	fprintf(fp, "# FromNodeId	ToNodeId\n");
+
+	printf("test2\n");
 
 	for( i=0; i<n; i++){
 		for( j=0; j<n; j++){

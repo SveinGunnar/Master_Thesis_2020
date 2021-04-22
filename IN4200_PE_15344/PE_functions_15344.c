@@ -105,11 +105,13 @@ void read_graph_from_file(char filename[]){
 	free(CCS_values);
 	free(row_nodes_occurrence);
 
-	printf("Nodes: %d\n", nodes );
-	printf("edges: %d\n", edges );
+	//printf("Nodes: %d\n", nodes );
+	//printf("edges: %d\n", edges );
 }
 
-void PageRank_iterations(double d, double e){
+void PageRank_iterations(){
+	double d=0.99;
+	double e=0.0000000000000000021413;
 	int testVariable=0;
 	int num_threads;
 
@@ -151,7 +153,7 @@ void PageRank_iterations(double d, double e){
 
 		//Adds values to x^0.
 		#pragma omp for
-		for( i=0; i<nodes; i++){ // F: 325,729 W: 651,458
+		for( i=0; i<nodes; i++){ 
 			xk_1[i] = iN;
 			x[i] = iN;
 		}
@@ -162,45 +164,38 @@ void PageRank_iterations(double d, double e){
                         iteration_time = mysecond();
                 }
 
-
-		while( n<1 ){ //F: 1,950,645,706,000+7
+		double double_temp;
+		while( n<5000 ){ 
 			#pragma omp barrier
 			#pragma omp single
 			{
-				n++; // F: 1 W:2
-				diff=0.0;
+				n++;
+				diff=0.0;	
 				//Sum of all dangling websites. W^k-1
 				//dwp_size=187,788
-				Wk_1=0; //W:1
+				Wk_1=0;
+			       	//completes the first part of the formula.
+                                Wk_1_product = (omd + (d*Wk_1))*iN;
 			}
 			
 			//#pragma omp for reduction( + : Wk_1 )
-			//for( i=0; i<dwp_size; i++) // F: 187,788*2=375,576, W: 187,788*3=563,364
-			//	Wk_1 += xk_1[ dwp[i] ]; //F: 1 W: 3
+			//for( i=0; i<dwp_size; i++) 
+			//	Wk_1 += xk_1[ dwp[i] ];
 			
-			#pragma omp single
-			{
-				//completes the first part of the formula.
-				Wk_1_product = (omd + (d*Wk_1))*iN; //F: 3 w: 5
-			}
-
 			//Computing the x^k formula
-			//Nodes 325 729
 			//double diff=0.0;
 			#pragma omp for reduction(max:diff) reduction(+:testVariable)
-			for( i=0; i<nodes; i++){ // F: 325,729*(2+5,988,552)=1,950,645,706,000
-				// F: 1
+			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
-				x[i] = 0;
-				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ // F: 4*1,497,138=5,988,552
-					x[i] += CRS_values[j] * xk_1[CRS_col_idx[j]]; // F:2
+				double_temp = 0;
+				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ 
+					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
 					//testVariable++;
 				}
-				testVariable++;
 				//d*Ax^k-1
-				x[i] *= d; // F:1
+				double_temp *= d;
 				//Adding the first part and second part together.
-				x[i] += Wk_1_product; // F:1
+				double_temp += Wk_1_product;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
@@ -214,7 +209,7 @@ void PageRank_iterations(double d, double e){
 				temp_time = mysecond();
 				if( n % iteration_size == 0 ) 
 					omp_set_lock(&lock_a);
-				iteration_idle_time += mysecond() - temp_time; // F:1
+				iteration_idle_time += mysecond() - temp_time;
 
 				//tt = mysecond();
 				temp_x = xk_1;
@@ -241,7 +236,7 @@ void PageRank_iterations(double d, double e){
 	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
 	//printf("%d\n", dwp_size);
 	//printf("%d\n", n);
-	printf("testVariable %d\n", testVariable);
+	//printf("testVariable %d\n", testVariable);
 }
 
 //TOID(double) *nvm_values;
@@ -301,7 +296,7 @@ void transfer_DRAM_to_NVM(){
                         for(i=0;i<nodes;i++){ // 1
                                 //temp_value=D_RO(nvm_values)[i];
                                 average += D_RO(nvm_values)[i]; // 1
-                                sumSquare += temp_value*temp_value; // 2
+                                //sumSquare += temp_value*temp_value; // 2
                         }
 			
 			//Second time.

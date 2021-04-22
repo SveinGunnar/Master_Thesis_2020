@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O2
 
-all: Stream_c_s.out Stream_c_m.out Stream_pmemobj_s.out Stream_pmemobj_m.out Stream_average.out
+all: Stream_c_s.out Stream_c_m.out Stream_pmemobj_s.out Stream_pmemobj_m.out Stream_sum.out Stream_sum_pmemobj.out
 #Stream_nvdimm.out Stream_nvdimm2.out Stream_c_malloc.out
 
 Stream_c_s.out: stream.c
@@ -16,8 +16,11 @@ Stream_pmemobj_s.out: stream_pmemobj.c
 Stream_pmemobj_m.out: stream_pmemobj.c
 	$(CC) $(CFLAGS) stream_pmemobj.c -o Stream_pmemobj_m.out -lpmemobj -lpmem -fopenmp
 
-Stream_average.out: stream_average.c
-	$(CC) $(CFLAGS) stream_average.c -o Stream_average.out -fopenmp
+Stream_sum.out: stream_sum.c
+	$(CC) $(CFLAGS) stream_sum.c -o Stream_sum.out -fopenmp
+
+Stream_sum_pmemobj.out: stream_sum_pmemobj.c
+	$(CC) $(CFLAGS) stream_sum_pmemobj.c -o Stream_sum_pmemobj.out -lpmemobj -lpmem -fopenmp
 
 #Stream_c_malloc.out: stream_malloc.c
 #	$(CC) $(CFLAGS) stream_malloc.c -o Stream_c_malloc.out

@@ -2,6 +2,7 @@
 *.swp
 neighbours_24.txt
 neighbours_8.txt
+neighbours_8_16M.txt
 forTesting.txt
 
 # Prerequisites
