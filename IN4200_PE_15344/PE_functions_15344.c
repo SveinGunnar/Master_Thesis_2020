@@ -178,10 +178,6 @@ void PageRank_iterations(){
                                 Wk_1_product = (omd + (d*Wk_1))*iN;
 			}
 			
-			//#pragma omp for reduction( + : Wk_1 )
-			//for( i=0; i<dwp_size; i++) 
-			//	Wk_1 += xk_1[ dwp[i] ];
-			
 			//Computing the x^k formula
 			//double diff=0.0;
 			#pragma omp for reduction(max:diff) reduction(+:testVariable)
@@ -217,10 +213,6 @@ void PageRank_iterations(){
                                 x = temp_x;
 			}
 			
-			//stopping criterion.
-			//if( diff < e){
-			//	break;
-			//}
 			#pragma omp single
                         {
 				//tt = mysecond()-tt;

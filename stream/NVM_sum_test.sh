@@ -6,7 +6,7 @@ file1="temp.txt"
 file2="NVM_sum_test_16.txt"
 CPUs=""
 #program="Stream_.out"
-program="Stream_sum.out"
+program="Stream_sum_pmemobj.out"
 cores=0
 
 if [ -f $file1 ]; then

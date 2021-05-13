@@ -6,7 +6,7 @@ export OMP_NESTED=TRUE
 file1="neighbours_8.txt"
 file2="neighbours_8_16M.txt"
 
-output_file="Result/result_n5000_01to16threads_16M-n_2104_2021.txt"
+output_file="Result/result_n5000_01to16threads_16M-n_0605_2021.txt"
 
 threads=16
 
@@ -23,3 +23,4 @@ do
 	numactl --physcpubind=0-$i ./Page_rank.out $file2 $j >> $output_file
 	((j=j+1))
 done
+#numactl --physcpubind=0-15 ./Page_rank.out neighbours_8.txt 16
