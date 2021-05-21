@@ -112,6 +112,8 @@ void PageRank_iterations(){
 
 	int num_threads;
 
+	int testVariable=0;
+
 	double Wk_1; //W^k-1 This is the scalar value for dangling webpages.
 	double Wk_1_product; //part one of x^k formula.
 	double *temp_x; //Will be using this when swapping x and x^k-1
@@ -203,17 +205,13 @@ void PageRank_iterations(){
 
 			//Computing the x^k formula
 			//diffX[thread_id]=0;
-			#pragma omp for reduction(max:diff)
+			#pragma omp for reduction(max:diff) reduction(+:testVariable)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
 				double_temp = 0;
-				
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){
 					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
-					//printf("%d\n", CRS_col_idx[j]);
 				}
-				
-				//printf("\n");
 				//d*Ax^k-1
 				double_temp *= d;
 				//Adding the first part and second part together.
@@ -291,6 +289,7 @@ void PageRank_iterations(){
 	//printf("%f, %f, %f %f\n", average, sumSquare, test1, test2);
 	//printf("temp_counter_double: %f\n", temp_counter_double);
 	//printf("temp_counter_int: %f\n", temp_counter_ana);
+	//printf("testVariable %d\n", testVariable);
 }
 
 double mysecond(){

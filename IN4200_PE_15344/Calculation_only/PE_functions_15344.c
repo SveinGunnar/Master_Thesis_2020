@@ -4,7 +4,7 @@ void read_graph_from_file(char filename[]){
 	int i, j, k, temp;
 	FILE *fp = fopen( filename, "r" );
 	char str[100];
-	
+
 	//First and second line in file are thrown away
 	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
 	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
@@ -24,7 +24,7 @@ void read_graph_from_file(char filename[]){
 	}
 	//Throws away the forth line.
 	if( fgets(str, 100, fp) == NULL ) printf("ERROR\n");
-	
+printf("test\n");	
 	//Loads the rest of the files.
 	int *row_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
 	int *column_nodes_occurrence = (int*)calloc(nodes, sizeof(int));
@@ -180,19 +180,18 @@ void PageRank_iterations(){
 			
 			//Computing the x^k formula
 			//double diff=0.0;
-			//reduction(+:testVariable)
-			#pragma omp for reduction(max:diff)
+			#pragma omp for reduction(max:diff) reduction(+:testVariable)
 			for( i=0; i<nodes; i++){
 				//This is A*x^k-1
 				double_temp = 0;
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ 
 					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					//testVariable++;
 				}
 				//d*Ax^k-1
 				double_temp *= d;
 				//Adding the first part and second part together.
 				double_temp += Wk_1_product;
-				x[i] = double_temp;
 
 				//Comuting the difference between x^k and x^k-1
 				//and adds the biggest diff to diffX[thread_id]
@@ -203,24 +202,10 @@ void PageRank_iterations(){
 			//
 			#pragma omp single
 			{
-				temp_time = mysecond();
-				//if( n % iteration_size == 0 ) 
-				omp_set_lock(&lock_a);
-				iteration_idle_time += mysecond() - temp_time;
-
-				//tt = mysecond();
 				temp_x = xk_1;
                                 xk_1 = x;
                                 x = temp_x;
 			}
-			
-			#pragma omp single
-                        {
-				//tt = mysecond()-tt;
-				//if( n % iteration_size == 0 )
-                                omp_unset_lock(&lock_b);
-                        }
-			//printf("testing222\n");
 		}//end of while-loop
 	}//End parallel
 	iteration_ongoing=0;
