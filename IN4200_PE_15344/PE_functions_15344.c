@@ -187,6 +187,8 @@ void PageRank_iterations(){
 				double_temp = 0;
 				for( j=CRS_row_ptr[i]; j<CRS_row_ptr[i+1]; j++){ 
 					double_temp += CRS_values[j] * xk_1[CRS_col_idx[j]];
+					//x[i] = CRS_values[j] * xk_1[CRS_col_idx[j]];
+					//testVariable++;
 				}
 				//d*Ax^k-1
 				double_temp *= d;
