@@ -3,8 +3,10 @@
 #include <string.h>
 #include <sys/time.h>
 #include <omp.h>
-//#include <iacaMarks.h>
-//#include "papi.h"
+
+#include "/usr/include/papi.h"
+
+#define event_count (1)
 
 double mysecond(){ //fpo 2
 	struct timeval tp;
@@ -33,6 +35,14 @@ int main(int argc, char *argv[]) {
 			A[i][j] = (double) rand();
 		}
 	}
+
+	//Counter
+	int events[event_count] = {PAPI_L3_DCR}; // L3 Data Cache Read
+	int ret;
+	long long int values[event_count]; // result
+	/* start counters */
+	ret = PAPI_start_counters(events, event_count);
+	CHECK_EQ(ret, PAPI_OK);
 	
 	double time = mysecond();
 	//Copying Data from array A to array B.
@@ -61,6 +71,12 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	time = mysecond()-time;
+
+	/* read counters */
+	ret = PAPI_read_counters(values, event_count);
+	CHECK_EQ(ret, PAPI_OK);
+
+
 	printf("%d,%f\n", num_threads, time);
 
 	//Freeing up memory.
