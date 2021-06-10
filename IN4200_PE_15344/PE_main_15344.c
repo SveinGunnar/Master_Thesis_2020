@@ -31,7 +31,8 @@ int main(int argc, char **argv){
                 return 1;
         }
 	
-	read_graph_from_file(argv[1]);
+	//read_graph_from_file(argv[1]);
+	read_graph_from_file("DRAM_only/neighbours_8_16M.txt");
         //printf("Nodes: %d, Edges: %d\n", nodes, edges);
 	//printf("seg fault test");
 	int i,j;
@@ -52,9 +53,11 @@ int main(int argc, char **argv){
 	iteration_ongoing = 1;
 	transfer_ongoing = 1;
 
-	iter_threads = atof(argv[2]);
-	transfer_threads = atof(argv[3]);
-	//max_threads = atof(argv[4]);
+	iter_threads = 2;
+        transfer_threads = 14;
+	//iter_threads = atof(argv[2]);
+	//transfer_threads = atof(argv[3]);
+	max_threads = atof(argv[4]);
 	//printf("test 1\n");
 	double test_time = mysecond();
 	#pragma omp parallel num_threads(2)

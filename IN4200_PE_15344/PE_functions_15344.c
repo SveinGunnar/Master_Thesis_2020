@@ -214,14 +214,16 @@ void PageRank_iterations(){
 				temp_x = xk_1;
                                 xk_1 = x;
                                 x = temp_x;
+
+				omp_unset_lock(&lock_b);
 			}
 			
-			#pragma omp single
-                        {
+			//#pragma omp single
+                        //{
 				//tt = mysecond()-tt;
 				//if( n % iteration_size == 0 )
-                                omp_unset_lock(&lock_b);
-                        }
+                                //omp_unset_lock(&lock_b);
+                        //}
 			//printf("testing222\n");
 		}//end of while-loop
 	}//End parallel

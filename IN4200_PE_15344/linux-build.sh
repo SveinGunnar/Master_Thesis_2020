@@ -23,5 +23,10 @@ echo Total threads,DataGen Threads,Analyze threads,DataGen time,DataGen idle tim
 #numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 5 11 16
 #numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 4 12 16
 #numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 3 13 16
-numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 2 14 16
+#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 2 14 16
 #numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 1 15 16
+
+#PageRank_iterations
+#perf probe --exec=Page_rank.out --funcs --no-demangle --filter='*'
+#perf probe --exec=Page_rank.out --add='PageRank_iterations'
+#perf stat -e cpu-clock,faults ./Page_rank.out
