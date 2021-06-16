@@ -53,10 +53,10 @@ int main(int argc, char **argv){
 	iteration_ongoing = 1;
 	transfer_ongoing = 1;
 
-	iter_threads = 2;
-        transfer_threads = 14;
-	//iter_threads = atof(argv[2]);
-	//transfer_threads = atof(argv[3]);
+//	iter_threads = 2;
+//	transfer_threads = 14;
+	iter_threads = atof(argv[2]);
+	transfer_threads = atof(argv[3]);
 	max_threads = atof(argv[4]);
 	//printf("test 1\n");
 	double test_time = mysecond();

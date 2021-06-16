@@ -135,12 +135,18 @@ void PageRank_iterations(){
 	iteration_idle_time=0.0;
 	double temp_time;
 	iteration_time = mysecond();
-	
-	//printf("testing\n");
-
 	double diff=0.0;
+
+	//Counter
+	int events[event_count] = {PAPI_LST_INS};
+	int ret;
+	long long int values[event_count]; // result
+        /* start counters */
+	ret = PAPI_start_counters(events, event_count);
+
 	#pragma omp parallel num_threads(iter_threads)
 	{
+		double double_temp;
 		#pragma omp single
 		{
 			num_threads = omp_get_num_threads();
@@ -164,7 +170,13 @@ void PageRank_iterations(){
                         iteration_time = mysecond();
                 }
 
-		double double_temp;
+		//Counter
+        	//int events[event_count] = {PAPI_LST_INS};
+        	//int ret;
+        	//long long int values[event_count]; // result
+        	/* start counters */
+        	//ret = PAPI_start_counters(events, event_count);
+
 		while( n<5000 ){ 
 			#pragma omp barrier
 			#pragma omp single
@@ -226,10 +238,21 @@ void PageRank_iterations(){
                         //}
 			//printf("testing222\n");
 		}//end of while-loop
+
+		/* read counters */
+		//ret = PAPI_read_counters(values, event_count);
+		//printf("%d,%d,%lli\n",iter_threads, thread_id, values[0]);
 	}//End parallel
+	
+	/* read counters */
+	ret = PAPI_read_counters(values, event_count);
+	printf("%d,%lli\n",iter_threads, values[0]);
+
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);
 	iteration_time = mysecond() - iteration_time;
+
+	//printf("PAPI_L3_DCR: %lli\n", values[0]);
 	//printf("%d, %.15lf, %.15lf\n", n, e, diff);
 	//printf("%d\n", dwp_size);
 	//printf("%d\n", n);
@@ -239,6 +262,7 @@ void PageRank_iterations(){
 //TOID(double) *nvm_values;
 void transfer_DRAM_to_NVM(){
         int i;
+	int n=0;
 	int size;
 	int maximum_index=0, minimum_index=0;
 	double iN = 1.0/nodes;
@@ -253,6 +277,13 @@ void transfer_DRAM_to_NVM(){
         double temp_time;
         transfer_time = mysecond();
         
+	//Counter
+//	int events[event_count] = {PAPI_LST_INS};
+//	int ret;
+//	long long int values[event_count]; // result
+        /* start counters */
+//	ret = PAPI_start_counters(events, event_count);
+
 	#pragma omp parallel num_threads(transfer_threads)
         {
 		double temp_value=0.0;
@@ -269,6 +300,7 @@ void transfer_DRAM_to_NVM(){
                                 omp_set_lock(&lock_b);
 				transfer_idle_time += mysecond() - temp_time; // 1
 				temp_time = mysecond();
+				n++;
 
 				average=0.0;
                         }
@@ -329,7 +361,7 @@ void transfer_DRAM_to_NVM(){
                         }
 
 			if(iteration_ongoing==0){
-                                break;
+				break;
 			}
 			#pragma omp barrier
                         #pragma omp single
@@ -340,6 +372,10 @@ void transfer_DRAM_to_NVM(){
                         }
                 }
         }//end of parallel
+	/* read counters */
+//	ret = PAPI_read_counters(values, event_count);
+//	printf("%d,%lli\n",transfer_threads, values[0]);
+
 	Analyse_time += mysecond() - temp_time; // 1
 
 	transfer_time = mysecond() - transfer_time;
