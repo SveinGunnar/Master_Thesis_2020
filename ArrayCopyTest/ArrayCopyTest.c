@@ -35,15 +35,14 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	//Counter
-	int events[event_count] = {PAPI_L3_DCR}; // L3 Data Cache Read
-	int ret;
-	long long int values[event_count]; // result
+	//Counters
+	//int events[event_count] = {PAPI_L3_DCR}; // L3 Data Cache Read
+	//int ret;
+	//long long int values[event_count]; // result
 	/* start counters */
-	ret = PAPI_start_counters(events, event_count);
-//	CHECK_EQ(ret, PAPI_OK);
-	printf("PAPI_L3_DCR: %lli\n", values[0]);
-
+	//ret = PAPI_start_counters(events, event_count);
+	//CHECK_EQ(ret, PAPI_OK);
+	
 	double time = mysecond();
 	//Copying Data from array A to array B.
 	#pragma omp parallel
@@ -73,9 +72,8 @@ int main(int argc, char *argv[]) {
 	time = mysecond()-time;
 
 	/* read counters */
-	ret = PAPI_read_counters(values, event_count);
-//	CHECK_EQ(ret, PAPI_OK);//
-	printf("PAPI_L3_DCR: %lli\n", values[0]);
+	//ret = PAPI_read_counters(values, event_count);
+	//CHECK_EQ(ret, PAPI_OK);
 
 	printf("%d,%f\n", num_threads, time);
 
