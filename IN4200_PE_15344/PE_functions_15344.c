@@ -375,7 +375,7 @@ void transfer_DRAM_to_NVM(){
 	/* read counters */
 //	ret = PAPI_read_counters(values, event_count);
 //	printf("%d,%lli\n",transfer_threads, values[0]);
-
+	printf("n: %d\n", n);
 	Analyse_time += mysecond() - temp_time; // 1
 
 	transfer_time = mysecond() - transfer_time;
