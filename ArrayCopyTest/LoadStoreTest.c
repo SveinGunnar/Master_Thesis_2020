@@ -5,7 +5,7 @@
 #include <omp.h>
 #include <papi.h>
 
-#define event_count (1)
+#define event_count (3)
 
 double mysecond(){ //fpo 2
 	struct timeval tp;
@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
 	}
 
 	//Counter
-	int events[event_count] = {PAPI_LST_INS}; // L3 Data Cache Read
+	int events[event_count] = {PAPI_L1_TCM, PAPI_L2_DCH, PAPI_L3_DCH}; // L3 Data Cache Read
 	int ret;
 	long long int values[event_count]; // result
 	/* start counters */
 //	ret = PAPI_start_counters(events, event_count);
 //	CHECK_EQ(ret, PAPI_OK);
-	printf("PAPI_L3_DCR: %lli\n", values[0]);
+//	printf("PAPI_L3_DCR: %lli\n", values[0]);
 
 	double time = mysecond();
 
@@ -63,7 +63,10 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	ret = PAPI_read_counters(values, event_count);
-	printf("PAPI_L3_DCR: %lli\n", values[0]);
+	printf("%lli, %lli, %lli.\n", values[0], values[1], values[2]);
+	printf("READS: %lli stk.\n", values[0]-(values[1]+values[2]));
+//	printf("PAPI_L3_TCM: %lli cache misses.\n", values[0]);
+//	printf("PAPI_L3_TCW: %lli total cache writes.\n", values[1]);
 	time = mysecond()-time;
 
 	/* read counters */

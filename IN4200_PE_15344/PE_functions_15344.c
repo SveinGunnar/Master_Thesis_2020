@@ -138,7 +138,7 @@ void PageRank_iterations(){
 	double diff=0.0;
 
 	//Counter
-	int events[event_count] = {PAPI_LST_INS};
+	int events[event_count] = {PAPI_L3_TCM, PAPI_L3_TCW};
 	int ret;
 	long long int values[event_count]; // result
         /* start counters */
@@ -246,7 +246,8 @@ void PageRank_iterations(){
 	
 	/* read counters */
 	ret = PAPI_read_counters(values, event_count);
-	printf("%d,%lli\n",iter_threads, values[0]);
+	printf("PAPI_L3_TCM: %lli cache misses.\n", values[0]);
+        printf("PAPI_L3_TCW: %lli total cache writes.\n", values[1]);
 
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);

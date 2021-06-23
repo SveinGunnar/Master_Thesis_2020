@@ -12,7 +12,7 @@
 
 //#define iter_threads 10
 //#define transfer_thread 11
-#define event_count (1)
+#define event_count (2)
 
 int nodes, edges;
 int *dwp; //dangling webpages
