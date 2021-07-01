@@ -5,7 +5,7 @@
 #include <omp.h>
 #include <papi.h>
 
-#define event_count (3)
+#define event_count (1)
 
 double mysecond(){ //fpo 2
 	struct timeval tp;
@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	//Counter
-	int events[event_count] = {PAPI_L1_TCM, PAPI_L2_DCH, PAPI_L3_DCH}; // L3 Data Cache Read
-	int ret;
-	long long int values[event_count]; // result
+//	int events[event_count] = {PAPI_L3_TCM}; // L3 Data Cache Read
+//	int ret;
+//	long long int values[event_count]; // result
 	/* start counters */
 //	ret = PAPI_start_counters(events, event_count);
 //	CHECK_EQ(ret, PAPI_OK);
@@ -41,10 +41,15 @@ int main(int argc, char *argv[]) {
 
 	double time = mysecond();
 
-	ret = PAPI_start_counters(events, event_count);
+//	ret = PAPI_start_counters(events, event_count);
 	//Copying Data from array A to array B.
 	#pragma omp parallel
 	{
+		//Counter
+        	int events[event_count] = {PAPI_L3_TCM}; // L3 Data Cache Read
+        	int ret;
+        	long long int values[event_count]; // result
+		ret = PAPI_start_counters(events, event_count);
 		#pragma omp single
 		{
 			num_threads = omp_get_num_threads();
@@ -61,11 +66,14 @@ int main(int argc, char *argv[]) {
 				B[i] = A[i];
 			}
 		}
+		printf("test\n");
+		ret = PAPI_read_counters(values, event_count);
+		printf("PAPI_L3_TCM: %lli load misses.\n", values[0]);
 	}
-	ret = PAPI_read_counters(values, event_count);
-	printf("%lli, %lli, %lli.\n", values[0], values[1], values[2]);
-	printf("READS: %lli stk.\n", values[0]-(values[1]+values[2]));
-//	printf("PAPI_L3_TCM: %lli cache misses.\n", values[0]);
+//	ret = PAPI_read_counters(values, event_count);
+//	printf("%lli, %lli, %lli.\n", values[0], values[1], values[2]);
+//	printf("READS: %lli stk.\n", values[0]-(values[1]+values[2]));
+//	printf("PAPI_L3_LDM: %lli load misses.\n", values[0]);
 //	printf("PAPI_L3_TCW: %lli total cache writes.\n", values[1]);
 	time = mysecond()-time;
 

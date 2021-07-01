@@ -10,20 +10,20 @@ echo Total threads,DataGen Threads,Analyze threads,DataGen time,DataGen idle tim
 
 #numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 2 14 16
 
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 15 1 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 14 2 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 13 3 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 12 4 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 11 5 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 10 6 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 9 7 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 8 8 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 7 9 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 6 10 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 5 11 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 4 12 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 3 13 16
-#numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 2 14 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 15 1 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 14 2 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 13 3 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 12 4 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 11 5 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 10 6 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 9 7 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 8 8 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 7 9 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 6 10 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 5 11 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 4 12 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 3 13 16
+numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 2 14 16
 numactl --physcpubind=0-15 ./Page_rank.out DRAM_only/neighbours_8_16M.txt 1 15 16
 
 #PageRank_iterations

@@ -14,4 +14,4 @@ output_file="Test_results.txt"
 	#numactl --physcpubind=0-$i ./2D_arrayTest.out 10000 10000 >> $output_file
 #done
 
-numactl --physcpubind=0-0 ./LoadStoreTest.out 100000000
+numactl --physcpubind=0-15 ./LoadStoreTest.out 100000000
