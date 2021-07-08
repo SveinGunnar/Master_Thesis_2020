@@ -15,20 +15,23 @@ double** create_DRAM_Array( int m, int n ){
 }
 //Creates NVDIMM arrays.
 void** create_NVDIMM_Array( int m, int n ){
-	int i,j;
+/*	int i,j;
         //double **array = (double**)malloc(m*sizeof(double*));
-	void **array = malloc(sizeof(void *)*m);
-	printf("NVDIMM\n");
+	//void *array;// = malloc(sizeof(void *)*m);
+	TOID(double) array;
+	POBJ_ALLOC(pop, &array, double, sizeof(double)*m*n, NULL, NULL);
+//	printf("NVDIMM\n");
 	//#pragma omp parallel for
         for(i=0;i<m;i++){
-		TOID(double) array[i];
-		POBJ_ALLOC(pop, array[i], double, sizeof(double)*n, NULL, NULL);
-		printf("NVDIMM for\n");
+		//TOID(double) array[i];
+		//POBJ_ALLOC(pop, array[i], double, sizeof(double)*n, NULL, NULL);
+		//printf("NVDIMM for\n");
                 for(j=0;j<n;j++){
-			D_RW(array[m])[n] = ((double)rand()/(double)(RAND_MAX));
+			D_RW(array)[i*m+n] = ((double)rand()/(double)(RAND_MAX));
                 }
         }
 	return array;
+*/
 }
 //POBJ_ALLOC(pop, &nvm_write_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 //
@@ -50,8 +53,21 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int NVDIMM
 	printf("Before Array creation\n");
 	double **B = create_DRAM_Array(dram_part,n);
 	//Creating NVDIMM arrays.
-	void **C = create_NVDIMM_Array(nvdimm_part,n);
-        void **D = create_NVDIMM_Array(nvdimm_part,n);
+//	void **C = create_NVDIMM_Array(nvdimm_part,n);
+//	void **D = create_NVDIMM_Array(nvdimm_part,n);
+//	TOID(double) C;
+//	TOID(double) D;
+	printf("Before Array creation3\n");
+//	POBJ_ALLOC(pop, &C, double, sizeof(double)*nvdimm_part*n, NULL, NULL);
+//	POBJ_ALLOC(pop, &D, double, sizeof(double)*nvdimm_part*n, NULL, NULL);
+	printf("After Array creation\n");
+	int a,b;
+	for(a=0;a<nvdimm_part;a++){
+                for(b=0;b<n;b++){
+                        //D_RW(C)[nvdimm_part*a+b] = ((double)rand()/(double)(RAND_MAX));
+			//D_RW(D)[nvdimm_part*a+b] = ((double)rand()/(double)(RAND_MAX));
+                }
+        }
 	
 	printf("Before parallel region\n");
 
@@ -82,7 +98,8 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int NVDIMM
 		if( thread_id < dram_threads ){
 			//for the thread bordering on nvdimm thread.
 			if( thread_id==(dram_threads-1) ){
-				while(k<5000){
+				while(k<10){
+					k++;
 					for( i=slice_start; i<slice_end-1; i++){
 						for( j=1; j<nMinusOne; j++){
 							temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
@@ -91,17 +108,18 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int NVDIMM
 							B[i][j] = temp*inverseEigth;
 						}
 					}
-					TOID(double) C[0];
+					
 					i = slice_end-1;
 					for( j=1; j<nMinusOne; j++){
                                         	temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
                                 	                 A[i][j-1]        +        A[i][j+1]+
-						 D_RO(C[0])[j-1] + D_RO(C[0])[j] + D_RO(C[0])[j+1];
+						      D_RO(C)[i*n+j] + D_RO(C)[i*n+j] + D_RO(C)[i*n+j];
                                              	B[i][j] = temp*inverseEigth;
               				}
 				}
 			}else{
-				while(k<5000){
+				while(k<10){
+					k++;
                                         for( i=slice_start; i<slice_end; i++){
                                                 for( j=1; j<nMinusOne; j++){
                                                         temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
@@ -114,46 +132,42 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int NVDIMM
 			}
 		}else{
 			if( thread_id==dram_threads ){
-				TOID(double) C[0];
-				while(k<5000){
+				while(k<10){
+					k++;
 					i=0;
                                         for( j=1; j<nMinusOne; j++){
-						TOID(double) C[i+1];
-						TOID(double) D[i];
                                                 temp = A[0][j-1]         +    A[0][j]      +         A[0][j+1]+
-                                                       D_RO(C[i])[j-1]            +            D_RO(C[i])[j+1]+
-                                                       D_RO(C[i+1])[j-1] + D_RO(C[i+1])[j] + D_RO(C[i+1])[j+1];
-                                                D_RW(D[i])[j] = temp*inverseEigth;
+                                                       D_RO(C)[i*n+j]            +            D_RO(C)[i*n+j]+
+                                                       D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+                                                D_RW(D)[i*n+j] = temp*inverseEigth;
                                         }
 					for( i=slice_start+1; i<slice_end-1; i++){
-						TOID(double) C[i+1];
-						TOID(double) D[i];
                                                 for( j=1; j<nMinusOne; j++){
-                                                        temp = D_RO(C[i-1])[j-1] + D_RO(C[i-1])[j] + D_RO(C[i-1])[j+1]+
-                                                               D_RO(C[i])[j-1]            +            D_RO(C[i])[j+1]+
-                                                               D_RO(C[i+1])[j-1] + D_RO(C[i+1])[j] + D_RO(C[i+1])[j+1];
-                                                        D_RW(D[i])[j] = temp*inverseEigth;
+                                                        temp = D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+j]+
+                                                               D_RO(C)[i*n+j]            +            D_RO(C)[i*n+j]+
+                                                               D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+                                                        D_RW(D)[i*n+j] = temp*inverseEigth;
                                                 }
                                         }
 				}
 			}else{
-				TOID(double) C[slice_start-1];
-				while(k<5000){
-					TOID(double) C[slice_start];
+				while(k<10){
+					k++;
                                         for( i=slice_start; i<slice_end; i++){
-						TOID(double) C[i+1];
-						TOID(double) D[i];
                                                 for( j=1; j<nMinusOne; j++){
-                                               		temp = D_RO(C[i-1])[j-1] + D_RO(C[i-1])[j] + D_RO(C[i-1])[j+1]+
-                                                               D_RO(C[i])[j-1]            +            D_RO(C[i])[j+1]+
-                                                               D_RO(C[i+1])[j-1] + D_RO(C[i+1])[j] + D_RO(C[i+1])[j+1];
-                                                        D_RW(D[i])[j] = temp*inverseEigth;
+                                               		temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
+                                                               D_RO(C)[(i+1)*n+j]            +            D_RO(C)[(i+1)*n+j]+
+                                                               D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+                                                        D_RW(D)[i*n+j] = temp*inverseEigth;
                                                 }
                                         }
 				}
 			}
 		}
+		printf("%d\n", thread_id);
 	}//End of parallel
+	//POBJ_FREE(&C);
+	//POBJ_FREE(&D);
 }//End of method
 //pmempool create --layout my_layout --size=10G obj pool.obj
 //End of file.
