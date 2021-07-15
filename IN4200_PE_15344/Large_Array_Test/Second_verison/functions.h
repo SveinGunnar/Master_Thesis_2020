@@ -13,7 +13,7 @@ POBJ_LAYOUT_TOID(array, double);
 POBJ_LAYOUT_END(array);
 #define LAYOUT_NAME "my_layout"
 
-void dram_calculation(int,int,int);
-void nvdimm_calculation(int,int,int,int);
+double * dram_calculation(int,int,int,int);
+double * nvdimm_calculation(int,int,int,int,int);
 void calculation(int,int,int,int,int);
 double mysecond();

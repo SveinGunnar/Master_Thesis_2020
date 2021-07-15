@@ -1,10 +1,12 @@
 #include "functions.h"
 
-void dram_calculation( int m, int n, int threads ){
+double * dram_calculation( int m, int n, int threads, int K ){
 	printf("m: %d, n: %d, threads: %d\n", m, n, threads);
 	double inverseEigth = 1/8;
 	int k=0;
-	double time;
+	int k_length = K;
+	//double time;
+	double *time = (double*)malloc(k_length*sizeof(double));
 
 	//Creating 2d DRAM arrays.
         double **A = (double**)malloc( (m+1)*sizeof(double*));
@@ -25,7 +27,7 @@ void dram_calculation( int m, int n, int threads ){
 				B[i][j] = 0;
 			}
 		}
-		#pragma omp singel
+		#pragma omp single
 		{
 			A[m] = (double*)malloc(n*sizeof(double));
 			B[m] = (double*)malloc(n*sizeof(double));
@@ -35,17 +37,14 @@ void dram_calculation( int m, int n, int threads ){
 		for(i=0;i<n;i++){
 			A[m][i] = i;
 		}
-		#pragma omp singel
-                {
-                        time = mysecond();
-                }
-		while(k<1){
+		while(k<k_length){
 			#pragma omp barrier
-			#pragma omp singel
-			{
-			//	omp_unset_lock(&lock_nvdimm);
-			//	omp_set_lock(&lock_dram);
-				k++;
+			#pragma omp single
+			{	
+			//	printf("dram\n");
+				omp_unset_lock(&lock_nvdimm);
+				omp_set_lock(&lock_dram);
+				time[k] = mysecond();
 			}
 			#pragma omp for
 			for( i=1; i<m; i++){
@@ -56,17 +55,25 @@ void dram_calculation( int m, int n, int threads ){
 					B[i][j] = temp*inverseEigth;
 				}
 			}
+			#pragma omp barrier
+                        #pragma omp single
+                        {
+                                time[k] = mysecond() - time[k];
+                                k++;
+                        }
 		}
+
 	}
-	time = mysecond() - time;
-        printf("Dram time: %lf\n", time);
+	return time;
 }
 
-void nvdimm_calculation( int m, int n, int threads, int dram_start ){
+double * nvdimm_calculation( int m, int n, int threads, int dram_start, int K ){
 	printf("m: %d, n: %d, threads: %d, dram_start: %d\n", m, n, threads, dram_start);
 	double inverseEigth = 1/8;
-	double temp, time;
+	double temp;
 	int k=0;
+	int k_length = K;
+        double *time = (double*)malloc(k_length*sizeof(double));
 
 	//Creating memory pool on NVDIMM.
         static PMEMobjpool *pop;
@@ -83,7 +90,6 @@ void nvdimm_calculation( int m, int n, int threads, int dram_start ){
         POBJ_ALLOC(pop, &C, double, sizeof(double)*(m+1)*n, NULL, NULL);
         POBJ_ALLOC(pop, &D, double, sizeof(double)*(m+1)*n, NULL, NULL);
 
-	printf("test\n");
 	#pragma omp parallel num_threads(threads)
         {
 		int i,j;
@@ -96,27 +102,19 @@ void nvdimm_calculation( int m, int n, int threads, int dram_start ){
 				D_RW(D)[i*n+j] = 0;
 			}
 		}
-		#pragma omp singel
-                {
-                        printf("test3\n");
-                }
 		//Makes ghost array.
 		#pragma omp for
 		for(i=0;i<n;i++){
 			D_RW(C)[i] = (dram_start*n)+i;
 		}
-		#pragma omp singel
-		{
-			printf("test2\n");
-			time = mysecond();
-		}
-		while(k<1){
+		while(k<k_length){
                         #pragma omp barrier
-                        #pragma omp singel
+                        #pragma omp single
                         {
-			//	omp_unset_lock(&lock_dram);
-			//	omp_set_lock(&lock_nvdimm);
-                                k++;
+			//	printf("nvdimm\n");
+				omp_unset_lock(&lock_dram);
+				omp_set_lock(&lock_nvdimm);
+				time[k] = mysecond();
                         }
 			for( i=1; i<m; i++){
 				for( j=1; j<n-1; j++){
@@ -126,12 +124,18 @@ void nvdimm_calculation( int m, int n, int threads, int dram_start ){
 					D_RW(D)[i*n+j] = temp*inverseEigth;
 				}
 			}
+			#pragma omp barrier
+                        #pragma omp single
+                        {
+                                time[k] = mysecond() - time[k];
+                                k++;
+                        }
 		}
 	}
-	time = mysecond() - time;
-	printf("Nvdimm time: %lf\n", time);
+	//printf("Nvdimm time: %lf\n", time[k_length/2]);
 	POBJ_FREE(&C);
 	POBJ_FREE(&D);
+	return time;
 }
 
 void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm_array_length ){
