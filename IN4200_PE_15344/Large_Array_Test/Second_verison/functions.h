@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
 #include <omp.h>
 #include <libpmemobj.h>
 
-//static PMEMobjpool *pop;
-//double nvm_values
+omp_lock_t lock_dram, lock_nvdimm;
+omp_nest_lock_t nested_lock;
+
 POBJ_LAYOUT_BEGIN(array);
 POBJ_LAYOUT_TOID(array, double);
 POBJ_LAYOUT_END(array);
 #define LAYOUT_NAME "my_layout"
-//TOID(double) C;
-//TOID(double) D;
 
-//double** create_DRAM_Array(int,int,int);
-//void** create_NVDIMM_Array(int,int);
+void dram_calculation(int,int,int);
+void nvdimm_calculation(int,int,int,int);
 void calculation(int,int,int,int,int);
-
+double mysecond();

@@ -6,13 +6,13 @@
 #include "functions.h"
 
 #define LAYOUT_NAME "my_layout"
-static PMEMobjpool *pop;
+//static PMEMobjpool *pop;
 
 //argv[1] = Length of 2d array.
 //argv[2] = Length of 2d array.
-//argv[3] = Number of DRAM threads.
-//argv[4] = Number of NVDIMM threads.
-//argv[5] = NVDIMM array size.
+//argv[3] = NVDIMM array size.
+//argv[4] = Number of DRAM threads.
+//argv[5] = Number of NVDIMM threads.
 
 
 
@@ -20,23 +20,38 @@ int main(int argc, char *argv[]) {
 	int i,j,k;
 	int m = atof(argv[1]);
 	int n = atof(argv[2]);
-	int dram_threads = atof(argv[3]);
-	int nvdimm_threads = atof(argv[4]);
-	int nvdimm_array_length = atof(argv[5]);
+	int nvdimm_array_length = atof(argv[3]);
+	int dram_threads = atof(argv[4]);
+	int nvdimm_threads = atof(argv[5]);
 
-//	const char path[] = "/mnt/pmem0-xfs/pool.obj";
-//	//PMEMobjpool *pop;
-//	pop = pmemobj_open(path, LAYOUT_NAME);
-//	if (pop == NULL) {
-//		perror(path);
-//		return 1;
-///	}
-//	POBJ_ALLOC(pop, &C, double, sizeof(double)*percents*n, NULL, NULL);
-//	POBJ_ALLOC(pop, &D, double, sizeof(double)*percents*n, NULL, NULL);
-
-	calculation(m,n, dram_threads, nvdimm_threads, nvdimm_array_length);
+	//Initiate and set locks.
+	omp_init_lock(&lock_dram);
+	omp_init_lock(&lock_nvdimm);
+	omp_set_lock(&lock_dram);
+	omp_set_lock(&lock_nvdimm);
 	
-//	POBJ_FREE(&C);
-//	POBJ_FREE(&D);
+	printf("Main parallel.\n");
+	printf("m: %d\n", m);
+	printf("n: %d\n", n);
+	printf("nvdimm_array_length: %d\n", nvdimm_array_length);
+	printf("dram_threads: %d\n", dram_threads);
+	printf("nvdimm_threads: %d\n", nvdimm_threads);
+
+	#pragma omp parallel num_threads(2)
+	{
+		int thread_id = omp_get_thread_num();
+		if( thread_id == 0 ){
+		//	dram_calculation( m-nvdimm_array_length, n, dram_threads);
+		//	printf("thread_id: %d\n", thread_id);
+		//	dram_calculation( 70000, 100000, 6);
+		}else if( thread_id == 1 ){
+		//	nvdimm_calculation( nvdimm_array_length, n, nvdimm_threads, m-nvdimm_array_length);
+			printf("thread_id: %d\n", thread_id);
+			nvdimm_calculation( 20000, 50000, 1, 70000);
+		}
+	}
+
+//	calculation(m,n, dram_threads, nvdimm_threads, nvdimm_array_length);
+	
 	printf("End of program\n");
 }

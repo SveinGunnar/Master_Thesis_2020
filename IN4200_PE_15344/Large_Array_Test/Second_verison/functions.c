@@ -1,5 +1,139 @@
 #include "functions.h"
 
+void dram_calculation( int m, int n, int threads ){
+	printf("m: %d, n: %d, threads: %d\n", m, n, threads);
+	double inverseEigth = 1/8;
+	int k=0;
+	double time;
+
+	//Creating 2d DRAM arrays.
+        double **A = (double**)malloc( (m+1)*sizeof(double*));
+        double **B = (double**)malloc( (m+1)*sizeof(double*));
+
+	#pragma omp parallel num_threads(threads)
+        {
+		int i,j;
+		double temp;
+		int thread_id = omp_get_thread_num();
+		//Add values to 2d array elements.
+		#pragma omp for
+		for(i=0;i<m;i++){
+			A[i] = (double*)malloc(n*sizeof(double));
+			B[i] = (double*)malloc(n*sizeof(double));
+			for(j=0;j<n;j++){
+				A[i][j] = i+j;
+				B[i][j] = 0;
+			}
+		}
+		#pragma omp singel
+		{
+			A[m] = (double*)malloc(n*sizeof(double));
+			B[m] = (double*)malloc(n*sizeof(double));
+		}
+		//Makes ghost array.
+		#pragma omp for
+		for(i=0;i<n;i++){
+			A[m][i] = i;
+		}
+		#pragma omp singel
+                {
+                        time = mysecond();
+                }
+		while(k<1){
+			#pragma omp barrier
+			#pragma omp singel
+			{
+			//	omp_unset_lock(&lock_nvdimm);
+			//	omp_set_lock(&lock_dram);
+				k++;
+			}
+			#pragma omp for
+			for( i=1; i<m; i++){
+				for( j=1; j<n-1; j++){
+					temp =  A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
+						A[i][j-1]        +        A[i][j+1]+
+						A[i+1][j-1] + A[i+1][j] + A[i+1][j+1];
+					B[i][j] = temp*inverseEigth;
+				}
+			}
+		}
+	}
+	time = mysecond() - time;
+        printf("Dram time: %lf\n", time);
+}
+
+void nvdimm_calculation( int m, int n, int threads, int dram_start ){
+	printf("m: %d, n: %d, threads: %d, dram_start: %d\n", m, n, threads, dram_start);
+	double inverseEigth = 1/8;
+	double temp, time;
+	int k=0;
+
+	//Creating memory pool on NVDIMM.
+        static PMEMobjpool *pop;
+        const char path[] = "/mnt/pmem0-xfs/pool.obj";
+        //PMEMobjpool *pop;
+        pop = pmemobj_open(path, LAYOUT_NAME);
+        if (pop == NULL) {
+                perror(path);
+                //return 1;
+        }
+	//Creating NVDIMM arrays.
+        TOID(double) C;
+        TOID(double) D;
+        POBJ_ALLOC(pop, &C, double, sizeof(double)*(m+1)*n, NULL, NULL);
+        POBJ_ALLOC(pop, &D, double, sizeof(double)*(m+1)*n, NULL, NULL);
+
+	printf("test\n");
+	#pragma omp parallel num_threads(threads)
+        {
+		int i,j;
+		int thread_id = omp_get_thread_num();
+		#pragma omp for
+		for(i=1;i<m;i++){
+			for(j=0;j<n;j++){
+			//	printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
+				D_RW(C)[i*n+j] = i+j;
+				D_RW(D)[i*n+j] = 0;
+			}
+		}
+		#pragma omp singel
+                {
+                        printf("test3\n");
+                }
+		//Makes ghost array.
+		#pragma omp for
+		for(i=0;i<n;i++){
+			D_RW(C)[i] = (dram_start*n)+i;
+		}
+		#pragma omp singel
+		{
+			printf("test2\n");
+			time = mysecond();
+		}
+		while(k<1){
+                        #pragma omp barrier
+                        #pragma omp singel
+                        {
+			//	omp_unset_lock(&lock_dram);
+			//	omp_set_lock(&lock_nvdimm);
+                                k++;
+                        }
+			for( i=1; i<m; i++){
+				for( j=1; j<n-1; j++){
+					temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
+						D_RO(C)[(i+1)*n+j]            +            D_RO(C)[(i+1)*n+j]+
+						D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+					D_RW(D)[i*n+j] = temp*inverseEigth;
+				}
+			}
+		}
+	}
+	time = mysecond() - time;
+	printf("Nvdimm time: %lf\n", time);
+	POBJ_FREE(&C);
+	POBJ_FREE(&D);
+}
+
 void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm_array_length ){
 	int k=0;
 	int num_threads;
@@ -33,7 +167,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 
 	printf("Before parallel region\n");
 	
-	#pragma omp parallel
+	#pragma omp parallel num_threads(dram_threads+nvdimm_threads)
 	{
 		int thread_id = omp_get_thread_num();
 		int slice_start, slice_end;
@@ -49,6 +183,11 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 				A[i][j] = i+j;
 				B[i][j] = 0;
 			}
+		}
+		#pragma omp singel
+		{
+			A[dram_part-1] = (double*)malloc(n*sizeof(double));
+                        B[dram_part-1] = (double*)malloc(n*sizeof(double));
 		}
 		//Add values to nvdimm array.
 		#pragma omp for
@@ -119,4 +258,12 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	POBJ_FREE(&D);
 }//End of method
 //pmempool create --layout my_layout --size=10G obj pool.obj
+double mysecond(){ //fpo 2
+        struct timeval tp;
+        struct timezone tzp;
+        int i;
+
+        i = gettimeofday(&tp,&tzp);
+        return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+}
 //End of file.
