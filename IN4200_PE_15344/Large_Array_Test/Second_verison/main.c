@@ -46,28 +46,39 @@ int main(int argc, char *argv[]) {
 	{
 		int thread_id = omp_get_thread_num();
 		if( thread_id == 0 ){
-		//	printf("thread_id: %d\n", thread_id);
 			dram_time = dram_calculation( m-nvdimm_array_length, n, dram_threads, K_length);
-		//	printf("thread_id: %d\n", thread_id);
-		//	dram_calculation( 20000, 50000, 6, 1);
 		}else if( thread_id == 1 ){
-		//	printf("thread_id: %d\n", thread_id);
 			nvdimm_time = nvdimm_calculation( nvdimm_array_length, n, nvdimm_threads, m-nvdimm_array_length, K_length);
-		//	printf("thread_id: %d\n", thread_id);
-		//	nvdimm_calculation( 20000, 50000, 1, 70000);
 		}
 	}
-//	calculation(m,n, dram_threads, nvdimm_threads, nvdimm_array_length);
-	printf("DRAM_time: %lf", dram_time[0]);
+	
+	//printf("%d,%d,%lf,%lf\n", dram_threads, nvdimm_threads, dram_time[2], nvdimm_time[2] );
+
+	/*
+	printf("m: %d, n: %d, threads: %d, K: %d\n", m-nvdimm_array_length, n, dram_threads, K_length);
+	printf("DRAM_time:,%lf", dram_time[0]);
 	for(i=1; i<K_length; i++){
 		printf(",%lf", dram_time[i]);
 	}
 	printf("\n");
-
-	printf("NVDIMM_time: %lf", nvdimm_time[0]);
+	
+	printf("m: %d, n: %d, threads: %d, dram_start: %d, K: %d\n", nvdimm_array_length, n, nvdimm_threads, m-nvdimm_array_length, K_length);
+	printf("NVDIMM_time:,%lf", nvdimm_time[0]);
         for(i=1; i<K_length; i++){
                 printf(",%lf", nvdimm_time[i]);
         }
         printf("\n");
+	*/
+	double dram_average=0;
+	double nvdimm_average=0;
+	for(i=0;i<K_length;i++){
+		dram_average += dram_time[i];
+		nvdimm_average += nvdimm_time[i];
+	}
+	dram_average = dram_average/K_length;
+	nvdimm_average = nvdimm_average/K_length;
+
+	printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
+
 	//printf("End of program\n");
 }

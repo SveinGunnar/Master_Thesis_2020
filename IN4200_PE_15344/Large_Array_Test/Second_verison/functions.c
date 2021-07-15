@@ -1,7 +1,6 @@
 #include "functions.h"
 
 double * dram_calculation( int m, int n, int threads, int K ){
-	printf("m: %d, n: %d, threads: %d\n", m, n, threads);
 	double inverseEigth = 1/8;
 	int k=0;
 	int k_length = K;
@@ -44,6 +43,7 @@ double * dram_calculation( int m, int n, int threads, int K ){
 			//	printf("dram\n");
 				omp_unset_lock(&lock_nvdimm);
 				omp_set_lock(&lock_dram);
+			//	printf("%d\n", k);
 				time[k] = mysecond();
 			}
 			#pragma omp for
@@ -68,7 +68,6 @@ double * dram_calculation( int m, int n, int threads, int K ){
 }
 
 double * nvdimm_calculation( int m, int n, int threads, int dram_start, int K ){
-	printf("m: %d, n: %d, threads: %d, dram_start: %d\n", m, n, threads, dram_start);
 	double inverseEigth = 1/8;
 	double temp;
 	int k=0;

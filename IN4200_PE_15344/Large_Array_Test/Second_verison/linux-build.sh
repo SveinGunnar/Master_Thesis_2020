@@ -1,7 +1,28 @@
 #!/bin/bash
 
 export OMP_NESTED=TRUE
-file3="DRAM_only/neighbours_8_16M.t100"
 
-numactl --physcpubind=0-8 ./LargeArrayTest.out 100000 50000 15000 1 1 5
+m=100000
+n=100000
+nvdimm=1000
+k=10
+
+echo m:$m,n:$n,nvdimm_size:$nvdimm
+echo dram_threads,nvdimm_threads,dram_time,nvdimm_time
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 2 14 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 3 13 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 4 12 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 5 11 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 6 10 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 7 9 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 8 8 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 9 7 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 10 6 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 11 5 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 12 4 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 13 3 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
+
 #numactl --physcpubind=0-8 ./LargeArrayTest.out 10000 10000 5000 2 2 10
