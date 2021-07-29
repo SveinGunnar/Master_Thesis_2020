@@ -2,9 +2,9 @@
 
 export OMP_NESTED=TRUE
 
-m=100000
-n=100000
-nvdimm=1000
+m=100
+n=100
+nvdimm=15
 k=10
 
 echo m:$m,n:$n,nvdimm_size:$nvdimm

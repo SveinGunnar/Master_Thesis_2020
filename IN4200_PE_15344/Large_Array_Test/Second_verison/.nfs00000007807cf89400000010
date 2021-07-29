@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export OMP_NESTED=TRUE
-
-numactl --physcpubind=0-15 ./LargeArrayTest.out 100000 100000 15000 8 8 10
-#numactl --physcpubind=0-8 ./LargeArrayTest.out 10000 10000 5000 2 2 10
