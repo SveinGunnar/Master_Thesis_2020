@@ -27,5 +27,5 @@ int main(int argc, char *argv[]) {
 
 	calculation(m,n, dram_threads, nvdimm_threads, nvdimm_array_length, K_length);
 	
-	printf("End of program\n");
+//	printf("End of program\n");
 }

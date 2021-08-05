@@ -2,6 +2,8 @@
 
 double * nvdimm_calculation( int m, int n, int threads, int K ){
 	double inverseEigth = 1/8;
+	int nMinusOne=n-1;
+	int mMinusOne=m-1;
 	double temp;
 	int k=0;
 	int k_length = K;
@@ -39,8 +41,8 @@ double * nvdimm_calculation( int m, int n, int threads, int K ){
                         {
 				time[k] = mysecond();
                         }
-			for( i=1; i<m; i++){
-				for( j=1; j<n-1; j++){
+			for( i=1; i<mMinusOne; i++){
+				for( j=1; j<nMinusOne; j++){
 					temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
 						D_RO(C)[(i+1)*n+j]            +            D_RO(C)[(i+1)*n+j]+
 						D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];

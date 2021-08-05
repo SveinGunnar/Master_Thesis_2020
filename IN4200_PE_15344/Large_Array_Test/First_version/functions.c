@@ -24,11 +24,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	int mMinusOne = m-1;
 	int nMinusOne = n-1;
 	double inverseEigth = 1/8;
-	double *nvdimm_time = (double*)malloc(K_length*sizeof(double));
-	double *dram_time = (double*)malloc(K_length*sizeof(double));
-
-	//int nvdimm_part = NVDIMM_size;
 	int dram_part = m-nvdimm_array_length;
+	double *nvdimm_time = (double*)malloc(K_length*sizeof(double));
+	double *individual_time = (double*)malloc((dram_threads+nvdimm_threads)*sizeof(double));
+	double *dram_time = (double*)malloc(K_length*sizeof(double));
 
 //	printf("Before Array creation\n");
 
@@ -100,13 +99,13 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			#pragma omp single
 			{
 //				printf("k: %d\n", k);
-				k++;
+				//k++;
 			}
 			#pragma omp barrier
 			if( thread_id < dram_threads ){
 				//for the thread bordering on nvdimm thread.
 				if( thread_id==(dram_threads-1) ){
-					dram_time[k] = mysecond();
+					individual_time[thread_id] = mysecond();
 					//printf("%d\n", thread_id);
 					for( i=slice_start; i<slice_end-1; i++){
 						for( j=1; j<nMinusOne; j++){
@@ -124,9 +123,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 						      D_RO(C)[i*n+j] + D_RO(C)[i*n+j] + D_RO(C)[i*n+j];
                                              	B[i][j] = temp*inverseEigth;
               				}
-					dram_time[k] = mysecond() - dram_time[k];
+					individual_time[thread_id] = mysecond() - individual_time[thread_id];
 				}else{
 					//printf("%d\n", thread_id);
+					individual_time[thread_id] = mysecond();
                                         for( i=slice_start; i<slice_end; i++){
                                                 for( j=1; j<nMinusOne; j++){
                                                         temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
@@ -135,14 +135,16 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                                         B[i][j] = temp*inverseEigth;
                                                 }
                                         }
+					individual_time[thread_id] = mysecond() - individual_time[thread_id];
 				}
 			}else{
 				if( thread_id==dram_threads ){
 					//printf("%d\n", thread_id);
-					nvdimm_time[k] = mysecond();
+					//nvdimm_time[k] = mysecond();
+					individual_time[thread_id] = mysecond();
 					i=0;
                                         for( j=1; j<nMinusOne; j++){
-                                                temp = A[0][j-1]         +    A[0][j]      +         A[0][j+1]+
+                                                temp = A[dram_part-1][j-1]+A[dram_part-1][j]+A[dram_part-1][j+1]+
                                                        D_RO(C)[i*n+j]            +            D_RO(C)[i*n+j]+
                                                        D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
                                                 D_RW(D)[i*n+j] = temp*inverseEigth;
@@ -155,8 +157,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                                         D_RW(D)[i*n+j] = temp*inverseEigth;
                                                 }
                                         }
-					nvdimm_time[k] = mysecond() - nvdimm_time[k];
+					individual_time[thread_id] = mysecond() - individual_time[thread_id];
+					//nvdimm_time[k] = mysecond() - nvdimm_time[k];
 				}else{
+					individual_time[thread_id] = mysecond();
                                         for( i=slice_start; i<slice_end; i++){
                                                 for( j=1; j<nMinusOne; j++){
                                                		temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
@@ -165,9 +169,24 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                                         D_RW(D)[i*n+j] = temp*inverseEigth;
                                                 }
                                         }
+					individual_time[thread_id] = mysecond() - individual_time[thread_id];
 				}
 			}
-//			printf("Thread id: %d\n", thread_id);
+			#pragma omp barrier
+			#pragma omp single
+			{
+				dram_time[k]=individual_time[0];
+				for(i=1;i<dram_threads;i++){
+					if(dram_time[k]<individual_time[i])
+						dram_time[k]=individual_time[i];
+				}
+				nvdimm_time[k]=individual_time[dram_threads];
+				for(i=dram_threads+1;i<dram_threads+nvdimm_threads;i++){
+                                        if(nvdimm_time[k]<individual_time[i])
+                                                nvdimm_time[k]=individual_time[i];
+                                }
+				k++;
+			}
 			#pragma omp barrier
 		}
 //		printf("End of thread id: %d\n", thread_id);
