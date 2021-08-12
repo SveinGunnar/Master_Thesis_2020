@@ -44,9 +44,9 @@ double * nvdimm_calculation( int m, int n, int threads, int K ){
 			#pragma omp for
 			for( i=1; i<mMinusOne; i++){
 				for( j=1; j<nMinusOne; j++){
-					temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
-						D_RO(C)[(i+1)*n+j]            +            D_RO(C)[(i+1)*n+j]+
-						D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+					temp = D_RO(C)[(i-1)*n+(j-1)] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+(j+1)]+
+						D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
+						D_RO(C)[(i+1)*n+(j-1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
 					D_RW(D)[i*n+j] = temp*inverseEigth;
 				}
 			}

@@ -7,7 +7,7 @@ n=1000000
 k=10
 
 echo m:$m,n:$n,k:$k
-echo dram_threads,nvdimm_threads,dram_time,nvdimm_time
+echo m,n,nvdimm_threads,nvdimm_average,nvdimm_min,nvdimm_max
 numactl --physcpubind=0-0 ./LargeArrayTest.out $m $n 1 $k
 numactl --physcpubind=0-1 ./LargeArrayTest.out $m $n 2 $k
 numactl --physcpubind=0-2 ./LargeArrayTest.out $m $n 3 $k

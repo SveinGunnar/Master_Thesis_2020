@@ -77,8 +77,23 @@ int main(int argc, char *argv[]) {
 	}
 	dram_average = dram_average/K_length;
 	nvdimm_average = nvdimm_average/K_length;
+	
+	double dram_min = dram_time[0], dram_max = dram_time[0];
+	double nvdimm_min = nvdimm_time[0], nvdimm_max = nvdimm_time[0];
 
-	printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
+//	printf("k,dram_time, nvdimm");
+	for(i=1;i<K_length;i++){
+		if( dram_time[i]<dram_min )
+			dram_min = dram_time[i];
+		if( dram_time[i]>dram_max )
+                        dram_max = dram_time[i];
+		if( nvdimm_time[i]<nvdimm_min )
+                        nvdimm_min = nvdimm_time[i];
+                if( nvdimm_time[i]>nvdimm_max )
+                        nvdimm_max = nvdimm_time[i];
+	}
+
+	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, dram_min, dram_max, nvdimm_average, nvdimm_min, nvdimm_max );
 
 	//printf("End of program\n");
 }

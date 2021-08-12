@@ -8,7 +8,7 @@ nvdimm=200
 k=10
 
 echo m:$m,n:$n,nvdimm_size:$nvdimm
-echo dram_threads,nvdimm_threads,dram_time,nvdimm_time
+echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,dram_max,nvdimm_average,nvdimm_min,nvdimm_max
 numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
 numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 2 14 $k
 numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 3 13 $k

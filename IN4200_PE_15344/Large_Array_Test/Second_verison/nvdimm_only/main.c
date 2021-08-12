@@ -41,7 +41,15 @@ int main(int argc, char *argv[]) {
 	}
 	nvdimm_average = nvdimm_average/K_length;
 
-	printf("%d,%d,%d,%lf\n", m, n, nvdimm_threads, nvdimm_average );
+        double nvdimm_min = nvdimm_time[0], nvdimm_max = nvdimm_time[0];
+        for(i=1;i<K_length;i++){
+                if( nvdimm_time[i]<nvdimm_min )
+                        nvdimm_min = nvdimm_time[i];
+                if( nvdimm_time[i]>nvdimm_max )
+                        nvdimm_max = nvdimm_time[i];
+        }
+
+	printf("%d,%d,%d,%lf,%lf,%lf\n", m, n, nvdimm_threads, nvdimm_average, nvdimm_min, nvdimm_max );
 
 	//printf("End of program\n");
 }

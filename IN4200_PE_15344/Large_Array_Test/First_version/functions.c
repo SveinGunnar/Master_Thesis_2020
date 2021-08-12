@@ -163,9 +163,9 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 					individual_time[thread_id] = mysecond();
                                         for( i=slice_start; i<slice_end; i++){
                                                 for( j=1; j<nMinusOne; j++){
-                                               		temp = D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j]+
-                                                               D_RO(C)[(i+1)*n+j]            +            D_RO(C)[(i+1)*n+j]+
-                                                               D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+j];
+                                               		temp = D_RO(C)[(i-1)*n+(j-1)] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+(j+1)]+
+                                                               D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
+                                                               D_RO(C)[(i+1)*n+(j-1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
                                                         D_RW(D)[i*n+j] = temp*inverseEigth;
                                                 }
                                         }
@@ -202,7 +202,22 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
         }
         dram_average = dram_average/K_length;
         nvdimm_average = nvdimm_average/K_length;
-	printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
+
+	double dram_min = dram_time[0], dram_max = dram_time[0];
+        double nvdimm_min = nvdimm_time[0], nvdimm_max = nvdimm_time[0];
+
+        for(i=1;i<K_length;i++){
+                if( dram_time[i]<dram_min )
+                        dram_min = dram_time[i];
+                if( dram_time[i]>dram_max )
+                        dram_max = dram_time[i];
+                if( nvdimm_time[i]<nvdimm_min )
+                        nvdimm_min = nvdimm_time[i];
+                if( nvdimm_time[i]>nvdimm_max )
+                        nvdimm_max = nvdimm_time[i];
+        }
+
+	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, dram_min, dram_max, nvdimm_average, nvdimm_min, nvdimm_max );
 }//End of method
 //pmempool create --layout my_layout --size=10G obj pool.obj
 double mysecond(){ //fpo 2
