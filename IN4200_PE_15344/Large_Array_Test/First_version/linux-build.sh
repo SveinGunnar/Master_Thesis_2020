@@ -12,14 +12,14 @@ file3="DRAM_only/neighbours_8_16M.txt"
 
 m=1000
 n=1000000
-nvdimm=200
+nvdimm=300
 k=10
 
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
 echo m:$m,n:$n,nvdimm_size:$nvdimm
 #echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,nvdimm_average
-echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,dram_max,nvdimm_average,nvdimm_min,nvdimm_max
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
+echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,dram_max,nvdimm_average,nvdimm_min,nvdimm_max,total_average,total_min,total_max
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 2 14 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 3 13 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 4 12 $k
@@ -28,12 +28,12 @@ numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 7 9 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 8 8 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 9 7 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 10 6 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 11 5 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 12 4 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 13 3 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 10 6 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 11 5 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 12 4 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 13 3 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
 
 #numactl --physcpubind=0-2 ./LargeArrayTest.out 200 200 50 2 1 2
 
