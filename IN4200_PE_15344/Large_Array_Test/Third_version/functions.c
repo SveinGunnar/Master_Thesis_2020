@@ -33,8 +33,8 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 //	printf("Before Array creation\n");
 
 	//Creating DRAM arrays.
-	double **A = create_DRAM_Array(dram_part,n);
-	double **B = create_DRAM_Array(dram_part,n);
+	double **A = create_DRAM_Array(dram_part+1,n);
+	double **B = create_DRAM_Array(dram_part+1,n);
 
 	//Creating memory pool on NVDIMM.
         static PMEMobjpool *pop;
@@ -47,8 +47,8 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	//Creating NVDIMM arrays.
 	TOID(double) C;
         TOID(double) D;
-	POBJ_ALLOC(pop, &C, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
-	POBJ_ALLOC(pop, &D, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
+	POBJ_ALLOC(pop, &C, double, sizeof(double)*(nvdimm_array_length+1)*n, NULL, NULL);
+	POBJ_ALLOC(pop, &D, double, sizeof(double)*(nvdimm_array_length+1)*n, NULL, NULL);
 	
 //	printf("Before parallel region\n");
 
@@ -61,7 +61,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 
 		//Add values to nvdimm 2d array
 		#pragma omp for
-		for(i=0;i<nvdimm_array_length;i++){
+		for(i=1;i<nvdimm_array_length;i++){
 			for(j=0;j<n;j++){
 			//	printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
 				D_RW(C)[i*nvdimm_array_length+j] = i+j;
@@ -70,13 +70,20 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		}
 		//Add values to dram 2d array
 		#pragma omp for
-                for(i=0;i<m-nvdimm_array_length;i++){
+                for(i=0;i<dram_part-1;i++){
                         for(j=0;j<n;j++){
                         //      printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
 				A[i][j] = i+j;
                                 B[i][j] = 0;
                         }
                 }
+
+		#pragma omp for
+                for(i=0; i<n; i++){
+			A[dram_part-1][i] = D_RO(C)[n+i];
+			D_RW(C)[i] = A[dram_part-2][i];
+                }
+
 
 		//Creates slices for dram and nvdimm.
 		if( thread_id < dram_threads ){
@@ -91,77 +98,42 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 				slice_end--;
 		}
 //		printf("thread id: %d, slice start: %d, slice end: %d\n", thread_id, slice_start, slice_end);
+//		#pragma omp single
+//		{
+//			printf("Before calculation.\n");
+//		}
 		while(k<K_length){
 			#pragma omp barrier
 			#pragma omp single
 			{
+//				printf("k: %d\n", k);
+				//k++;
 				total_time[k] = mysecond();
 			}
-			//#pragma omp barrier
+			#pragma omp barrier
 			if( thread_id < dram_threads ){
-				//for the thread bordering on nvdimm thread.
-				if( thread_id==(dram_threads-1) ){
-					individual_time[thread_id] = mysecond();
-					for( i=slice_start; i<slice_end-1; i++){
-						for( j=1; j<nMinusOne; j++){
-							temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
-								 A[i][j-1]        +        A[i][j+1]+
-							       A[i+1][j-1] + A[i+1][j] + A[i+1][j+1];
-							B[i][j] = temp*inverseEigth;
-						}
-					}
-					
-					i = slice_end-1;
-					for( j=1; j<nMinusOne; j++){
-                                        	temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
-                                	                 A[i][j-1]        +        A[i][j+1]+
-						      D_RO(C)[i*n+j] + D_RO(C)[i*n+j] + D_RO(C)[i*n+j];
-                                             	B[i][j] = temp*inverseEigth;
-              				}
-					individual_time[thread_id] = mysecond() - individual_time[thread_id];
-				}else{
-					individual_time[thread_id] = mysecond();
-                                        for( i=slice_start; i<slice_end; i++){
-                                                for( j=1; j<nMinusOne; j++){
-                                                        temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
-                                                                 A[i][j-1]        +        A[i][j+1]+
-                                                               A[i+1][j-1] + A[i+1][j] + A[i+1][j+1];
-                                                        B[i][j] = temp*inverseEigth;
-                                                }
-                                        }
-					individual_time[thread_id] = mysecond() - individual_time[thread_id];
-				}
+				//printf("%d\n", thread_id);
+				individual_time[thread_id] = mysecond();
+                                for( i=slice_start; i<slice_end; i++){
+                                	for( j=1; j<nMinusOne; j++){
+                                		temp = A[i-1][j-1] + A[i-1][j] + A[i-1][j+1]+
+                                		         A[i][j-1]       +       A[i][j+1]+
+                                		       A[i+1][j-1] + A[i+1][j] + A[i+1][j+1];
+                                		B[i][j] = temp*inverseEigth;
+                                	}
+                              	}
+				individual_time[thread_id] = mysecond() - individual_time[thread_id];
 			}else{
-				if( thread_id==dram_threads ){
-					individual_time[thread_id] = mysecond();
-					i=0;
-                                        for( j=1; j<nMinusOne; j++){
-                                                temp = A[dram_part-1][j-1]+A[dram_part-1][j]+A[dram_part-1][j+1]+
-                                                       D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
-                                                       D_RO(C)[(i+1)*n+(j-1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
-                                                D_RW(D)[i*n+j] = temp*inverseEigth;
-                                        }
-					for( i=slice_start+1; i<slice_end-1; i++){
-                                                for( j=1; j<nMinusOne; j++){
-                                                        temp = D_RO(C)[(i-1)*n+(j-1)] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+(j+1)]+
-                                                               D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
-                                                               D_RO(C)[(i+1)*n+(j+1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
-                                                        D_RW(D)[i*n+j] = temp*inverseEigth;
-                                                }
-                                        }
-					individual_time[thread_id] = mysecond() - individual_time[thread_id];
-				}else{
-					individual_time[thread_id] = mysecond();
-                                        for( i=slice_start; i<slice_end; i++){
-                                                for( j=1; j<nMinusOne; j++){
-                                               		temp = D_RO(C)[(i-1)*n+(j-1)] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+(j+1)]+
-                                                               D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
-                                                               D_RO(C)[(i+1)*n+(j-1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
-                                                        D_RW(D)[i*n+j] = temp*inverseEigth;
-                                                }
-                                        }
-					individual_time[thread_id] = mysecond() - individual_time[thread_id];
-				}
+				individual_time[thread_id] = mysecond();
+                                for( i=slice_start; i<slice_end; i++){
+                                	for( j=1; j<nMinusOne; j++){
+                                		temp = D_RO(C)[(i-1)*n+(j-1)] + D_RO(C)[(i-1)*n+j] + D_RO(C)[(i-1)*n+(j+1)]+
+                                		          D_RO(C)[i*n+(j-1)]            +            D_RO(C)[i*n+(j+1)]+
+                                			D_RO(C)[(i+1)*n+(j-1)] + D_RO(C)[(i+1)*n+j] + D_RO(C)[(i+1)*n+(j+1)];
+                                		D_RW(D)[i*n+j] = temp*inverseEigth;
+                                	}
+                                }
+				individual_time[thread_id] = mysecond() - individual_time[thread_id];
 			}
 			#pragma omp barrier
 			#pragma omp single
