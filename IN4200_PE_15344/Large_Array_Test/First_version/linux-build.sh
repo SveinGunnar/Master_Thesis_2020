@@ -12,7 +12,7 @@ file3="DRAM_only/neighbours_8_16M.txt"
 
 m=1000
 n=1000000
-nvdimm=400
+nvdimm=48
 k=10
 
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
@@ -28,12 +28,19 @@ echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,d
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 7 9 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 8 8 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 9 7 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 10 6 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 11 5 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 12 4 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 13 3 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 10 6 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 11 5 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 12 4 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 13 3 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
+
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 296 10 6 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 246 11 5 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 195 12 4 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 146 13 3 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 95 14 2 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 48 15 1 $k
 
 #numactl --physcpubind=0-2 ./LargeArrayTest.out 200 200 50 2 1 2
 

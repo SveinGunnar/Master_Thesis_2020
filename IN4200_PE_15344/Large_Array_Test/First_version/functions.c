@@ -29,6 +29,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	double *individual_time = (double*)malloc((dram_threads+nvdimm_threads)*sizeof(double));
 	double *dram_time = (double*)malloc(K_length*sizeof(double));
 	double *total_time = (double*)malloc(K_length*sizeof(double));
+//	double *total_time;
 
 //	printf("Before Array creation\n");
 
@@ -54,6 +55,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 
 	#pragma omp parallel num_threads(num_threads) 
 	{
+//		double *individual_total_time = (double*)malloc(K_length*sizeof(double));
 		int thread_id = omp_get_thread_num();
 		int slice_start, slice_end;
 		int i,j;
@@ -163,9 +165,11 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 					individual_time[thread_id] = mysecond() - individual_time[thread_id];
 				}
 			}
+			//individual_total_time[k] = mysecond() - individual_total_time[k];
 			#pragma omp barrier
 			#pragma omp single
 			{
+				//individual_total_time[k] = mysecond() - individual_total_time[k];
 				total_time[k] = mysecond() - total_time[k];
 				dram_time[k]=individual_time[0];
 				for(i=1;i<dram_threads;i++){
@@ -177,10 +181,16 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                         if(nvdimm_time[k]<individual_time[i])
                                                 nvdimm_time[k]=individual_time[i];
                                 }
+				printf("%lf",individual_time[0]);
+				for(i=1;i<dram_threads+nvdimm_threads;i++)
+					printf(",%lf",individual_time[i]);
+				printf("\n");
 				k++;
 			}
 			#pragma omp barrier
 		}//End of while
+//		if(thread_id==0)
+//			total_time = individual_total_time;
 //		printf("End of thread id: %d\n", thread_id);
 	}//End of parallel
 	POBJ_FREE(&C);
@@ -216,6 +226,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                         total_min = total_time[i];
                 if( total_time[i]>total_max )
                         total_max = total_time[i];
+		//printf("%d\n",i);
         }
 
 	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min,dram_max, nvdimm_average,nvdimm_min,nvdimm_max, total_average,total_min,total_max );

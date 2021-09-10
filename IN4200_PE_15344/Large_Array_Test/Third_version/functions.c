@@ -106,13 +106,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			#pragma omp barrier
 			#pragma omp single
 			{
-//				printf("k: %d\n", k);
-				//k++;
 				total_time[k] = mysecond();
 			}
 			#pragma omp barrier
 			if( thread_id < dram_threads ){
-				//printf("%d\n", thread_id);
 				individual_time[thread_id] = mysecond();
                                 for( i=slice_start; i<slice_end; i++){
                                 	for( j=1; j<nMinusOne; j++){
@@ -153,7 +150,6 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			}
 			#pragma omp barrier
 		}//End of while
-//		printf("End of thread id: %d\n", thread_id);
 	}//End of parallel
 	POBJ_FREE(&C);
 	POBJ_FREE(&D);
