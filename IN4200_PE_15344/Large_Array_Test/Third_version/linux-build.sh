@@ -36,11 +36,11 @@ echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,d
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
 
 numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 296 10 6 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 246 11 5 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 195 12 4 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 146 13 3 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 95 14 2 $k
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 48 15 1 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 246 11 5 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 195 12 4 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 146 13 3 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 95 14 2 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 48 15 1 $k
 
 #numactl --physcpubind=0-2 ./LargeArrayTest.out 200 200 50 2 1 2
 

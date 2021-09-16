@@ -16,5 +16,5 @@ POBJ_LAYOUT_END(array);
 
 double** create_DRAM_Array(int,int);
 void** create_NVDIMM_Array(int,int);
-void calculation(int,int,int,int,int,int);
+void calculation(int,int,int,int);
 double mysecond();

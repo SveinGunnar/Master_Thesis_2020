@@ -20,12 +20,10 @@ int main(int argc, char *argv[]) {
 	int i,j,k;
 	int m = atof(argv[1]);
 	int n = atof(argv[2]);
-	int nvdimm_array_length = atof(argv[3]);
-	int dram_threads = atof(argv[4]);
-	int nvdimm_threads = atof(argv[5]);
-	int K_length = atof(argv[6]);
+	int dram_threads = atof(argv[3]);
+	int K_length = atof(argv[4]);
 
-	calculation(m,n, dram_threads, nvdimm_threads, nvdimm_array_length, K_length);
+	calculation(m,n, dram_threads, K_length);
 	
 //	printf("End of program\n");
 }
