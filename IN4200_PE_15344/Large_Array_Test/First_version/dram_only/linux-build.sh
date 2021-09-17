@@ -34,12 +34,12 @@ echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,nvdimm_ave
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
 
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 10 $k >> temp.txt
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 11 $k >> temp.txt
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 12 $k >> temp.txt
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 13 $k >> temp.txt
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 14 $k >> temp.txt
-numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 15 $k >> temp.txt
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 10 $k >> temp.txt
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 11 $k >> temp.txt
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 12 $k >> temp.txt
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 13 $k >> temp.txt
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 14 $k >> temp.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 16 $k >> temp.txt
 
 #numactl --physcpubind=0-2 ./LargeArrayTest.out 200 200 50 2 1 2
 
