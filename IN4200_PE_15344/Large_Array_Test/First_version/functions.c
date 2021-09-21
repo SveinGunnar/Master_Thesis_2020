@@ -66,6 +66,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	//Creating NVDIMM arrays.
 	TOID(double) C;
         TOID(double) D;
+	TOID(double) temp_nvdimm;
 	POBJ_ALLOC(pop, &C, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
 	POBJ_ALLOC(pop, &D, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
 	printf("%d\n", nvdimm_array_length*n);
@@ -85,12 +86,14 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		}
 		//Add values to nvdimm 2d array
 		#pragma omp for
-		for(i=0;i<nvdimm_array_length;i++){
-			for(j=0;j<n;j++){
+		for(i=0;i<nvdimm_array_length*n;i++){
+			//for(j=0;j<n;j++){
 			//	printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
-				D_RW(C)[i*nvdimm_array_length+j] = i+j;
-				D_RW(D)[i*nvdimm_array_length+j] = 0;
-			}
+			//	D_RW(C)[i*nvdimm_array_length+j] = i+j;
+			//	D_RW(D)[i*nvdimm_array_length+j] = 0;
+			//}
+			D_RW(C)[i] = i;
+			D_RW(D)[i] = 0;
 		}
 		#pragma omp single
                 {
@@ -205,6 +208,11 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                 B=A;
                                 A=tempArray;
                                 total_time[k] = mysecond() - total_time[k];
+
+				temp_nvdimm = C;
+				C = D;
+				D = temp_nvdimm;
+
 				k++;
 			}
 			#pragma omp barrier
@@ -225,13 +233,13 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                 		dram_average += individual_time[i][j];
 			else
                 		nvdimm_average += individual_time[i][j];
-			total_average += individual_time[i][j];
 		}
+		total_average += total_time[i];
         }
 
         dram_average = dram_average/(dram_threads*(K_length-1));
         nvdimm_average = nvdimm_average/(nvdimm_threads*(K_length-1));
-	total_average = total_average/((dram_threads+nvdimm_threads)*(K_length-1));
+	total_average = total_average/(K_length-1);
 
 	int start = 1;
 	double dram_min = individual_time[start][0], dram_max = individual_time[start][0];
