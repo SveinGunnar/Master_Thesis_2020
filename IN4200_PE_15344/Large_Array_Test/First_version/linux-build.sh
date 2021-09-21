@@ -10,8 +10,8 @@ file3="DRAM_only/neighbours_8_16M.txt"
 #argv[5] = Number of NVDIMM threads.
 #argv[6] = K_length
 
-m=2000
-n=500000
+m=1000
+n=1000000
 nvdimm=48
 k=10
 
@@ -35,12 +35,12 @@ echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,d
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 14 2 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 15 1 $k
 
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 296 10 6 $k
+#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 296 10 6 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 246 11 5 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 195 12 4 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 146 13 3 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 95 14 2 $k
-#numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 48 15 1 $k
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 30 15 1 $k
 
 echo 1
 #numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 296 10 6 $k >> temp.txt

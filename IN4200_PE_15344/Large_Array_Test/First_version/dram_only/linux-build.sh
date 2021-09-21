@@ -18,6 +18,7 @@ k=10
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
 echo m:$m,n:$n,nvdimm_size:$nvdimm
 echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,nvdimm_average
+echo start > temp.txt
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 2 14 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 3 13 $k

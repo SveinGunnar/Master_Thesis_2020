@@ -33,15 +33,17 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		for(b=0;b<dram_threads+nvdimm_threads;b++)
 			individual_time[a][b] = 0.0;
 	}
+	/*
 	double **total_time = (double**)malloc((K_length)*sizeof(double*));
 	for(a=0;a<K_length;a++){
                 total_time[a] = (double*)malloc((dram_threads+nvdimm_threads)*sizeof(double));
 		for(b=0;b<dram_threads+nvdimm_threads;b++)
                         total_time[a][b] = 0.0;
         }
+	*/
 //	double *individual_time = (double*)malloc((dram_threads+nvdimm_threads)*sizeof(double));
 //	double *dram_time = (double*)malloc(K_length*sizeof(double));
-	//double *total_time = (double*)malloc(K_length*sizeof(double));
+	double *total_time = (double*)malloc(K_length*sizeof(double));
 //	double *total_time;
 
 //	printf("Before Array creation\n");
@@ -49,6 +51,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	//Creating DRAM arrays.
 	double **A = create_DRAM_Array(dram_part,n);
 	double **B = create_DRAM_Array(dram_part,n);
+	double ** tempArray;
 
 	///mnt/pmem1-ext4/pool.obj
 	//Creating memory pool on NVDIMM.
@@ -65,7 +68,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
         TOID(double) D;
 	POBJ_ALLOC(pop, &C, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
 	POBJ_ALLOC(pop, &D, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
-	
+	printf("%d\n", nvdimm_array_length*n);
 	//printf("Before parallel region\n");
 
 	#pragma omp parallel num_threads(num_threads) 
@@ -76,7 +79,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		int i,j;
 		double temp;
 
-		
+		#pragma omp single
+		{
+			printf("Before addaing values\n");
+		}
 		//Add values to nvdimm 2d array
 		#pragma omp for
 		for(i=0;i<nvdimm_array_length;i++){
@@ -86,6 +92,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 				D_RW(D)[i*nvdimm_array_length+j] = 0;
 			}
 		}
+		#pragma omp single
+                {
+                        printf("After addaing values\n");
+                }
 		//printf("test\n");
 		//Add values to dram 2d array
 		#pragma omp for
@@ -112,10 +122,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		//printf("thread id: %d, slice start: %d, slice end: %d\n", thread_id, slice_start, slice_end);
 		while(k<K_length){
 			#pragma omp barrier
-			//#pragma omp single
-			//{
-			total_time[k][thread_id] = mysecond();
-			//}
+			#pragma omp single
+			{
+				total_time[k] = mysecond();
+			}
 			//#pragma omp barrier
 			if( thread_id < dram_threads ){
 
@@ -187,10 +197,14 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 				/**/
 			}
 			//individual_total_time[k] = mysecond() - individual_total_time[k];
-			total_time[k][thread_id] = mysecond() - total_time[k][thread_id];
+			//total_time[k][thread_id] = mysecond() - total_time[k][thread_id];
 			#pragma omp barrier
 			#pragma omp single
 			{
+				tempArray = B;
+                                B=A;
+                                A=tempArray;
+                                total_time[k] = mysecond() - total_time[k];
 				k++;
 			}
 			#pragma omp barrier
@@ -217,12 +231,12 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 
         dram_average = dram_average/(dram_threads*(K_length-1));
         nvdimm_average = nvdimm_average/(nvdimm_threads*(K_length-1));
-	total_average = total_average/((dram_threads+nvdimm_threads)*K_length-1);
+	total_average = total_average/((dram_threads+nvdimm_threads)*(K_length-1));
 
 	int start = 1;
 	double dram_min = individual_time[start][0], dram_max = individual_time[start][0];
         double nvdimm_min = individual_time[start][dram_threads], nvdimm_max = individual_time[start][dram_threads];
-	double total_min = total_time[start][0], total_max = total_time[start][0];
+	double total_min = total_time[start], total_max = total_time[start];
 
 	for(i=1;i<K_length;i++){
                 for(j=0;j<dram_threads;j++){
@@ -237,12 +251,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                         if( individual_time[i][j] > nvdimm_max )
                                 nvdimm_max = individual_time[i][j];
                 }
-		for(j=0;j<dram_threads+nvdimm_threads;j++){
-                        if( total_time[i][j] < total_min )
-                                total_min = total_time[i][j];
-                        if( total_time[i][j] > total_max )
-                                total_max = total_time[i][j];
-                }
+              	if( total_time[i] < total_min )
+                    	total_min = total_time[i];
+            	if( total_time[i] > total_max )
+                 	total_max = total_time[i];
 	}
 
 	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min,dram_max, nvdimm_average,nvdimm_min,nvdimm_max, total_average,total_min,total_max );
@@ -255,11 +267,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	}
 	printf("\n");
 	for(i=0;i<K_length;i++){
-                printf("%lf", total_time[i][0]);
-                for(j=1;j<dram_threads+nvdimm_threads;j++){
-                        printf(",%lf", total_time[i][j]);
-                }
-                printf("\n");
+                printf("%lf\n", total_time[i]);
         }
 //	printf("Iteration,Dram_time,Nvdimm_time\n");
 //	for(i=0;i<K_length;i++){
