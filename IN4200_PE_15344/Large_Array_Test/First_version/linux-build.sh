@@ -18,7 +18,7 @@ k=10
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
 echo m:$m,n:$n,nvdimm_size:$nvdimm
 #echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,nvdimm_average
-echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,dram_max,nvdimm_average,nvdimm_min,nvdimm_max,total_average,total_min,total_max > temp.txt
+echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,dram_max,nvdimm_average,nvdimm_min,nvdimm_max,total_average,total_min,total_max > temp_0-16.txt
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 1 15 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 2 14 $k
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n $nvdimm 3 13 $k
@@ -43,23 +43,23 @@ echo m,n,nvdimm_array_length,dram_threads,nvdimm_threads,dram_average,dram_min,d
 #numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 30 15 1 $k
 
 echo 1
-echo 1 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 296 10 6 $k >> temp.txt
+echo 1 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 296 10 6 $k >> temp_0-16.txt
 echo 2
-echo 2 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 249 11 5 $k >> temp.txt
+echo 2 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 249 11 5 $k >> temp_0-16.txt
 echo 3
-echo 3 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 195 12 4 $k >> temp.txt
+echo 3 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 195 12 4 $k >> temp_0-16.txt
 echo 4
-echo 4 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 146 13 3 $k >> temp.txt
+echo 4 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 146 13 3 $k >> temp_0-16.txt
 echo 5
-echo 5 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 95 14 2 $k >> temp.txt
+echo 5 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 95 14 2 $k >> temp_0-16.txt
 echo 6
-echo 6 >> temp.txt
-numactl --physcpubind=16-31 ./LargeArrayTest.out $m $n 48 15 1 $k >> temp.txt
+echo 6 >> temp_0-16.txt
+numactl --physcpubind=0-15 ./LargeArrayTest.out $m $n 48 15 1 $k >> temp_0-16.txt
 
 #numactl --physcpubind=0-2 ./LargeArrayTest.out 200 200 50 2 1 2
 #numactl --physcpubind=0-15 ./LargeArrayTest.out 4000 500000  10 6 $k
