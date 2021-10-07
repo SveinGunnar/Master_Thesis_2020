@@ -69,7 +69,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	TOID(double) temp_nvdimm;
 	POBJ_ALLOC(pop, &C, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
 	POBJ_ALLOC(pop, &D, double, sizeof(double)*nvdimm_array_length*n, NULL, NULL);
-	printf("%d\n", nvdimm_array_length*n);
+//	printf("%d\n", nvdimm_array_length*n);
 	//printf("Before parallel region\n");
 
 	#pragma omp parallel num_threads(num_threads) 
@@ -80,10 +80,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		int i,j;
 		double temp;
 
-		#pragma omp single
-		{
-			printf("Before addaing values\n");
-		}
+//		#pragma omp single
+//		{
+//			printf("Before addaing values\n");
+//		}
 		//Add values to nvdimm 2d array
 		#pragma omp for
 		for(i=0;i<nvdimm_array_length*n;i++){
@@ -95,10 +95,10 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			D_RW(C)[i] = i;
 			D_RW(D)[i] = 0;
 		}
-		#pragma omp single
-                {
-                        printf("After addaing values\n");
-                }
+//		#pragma omp single
+//                {
+//                        printf("After addaing values\n");
+//                }
 		//printf("test\n");
 		//Add values to dram 2d array
 		#pragma omp for
@@ -207,12 +207,12 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 				tempArray = B;
                                 B=A;
                                 A=tempArray;
-                                total_time[k] = mysecond() - total_time[k];
 
 				temp_nvdimm = C;
 				C = D;
 				D = temp_nvdimm;
 
+				total_time[k] = mysecond() - total_time[k];
 				k++;
 			}
 			#pragma omp barrier
@@ -242,30 +242,54 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	total_average = total_average/(K_length-1);
 
 	int start = 1;
-	double dram_min = individual_time[start][0], dram_max = individual_time[start][0];
-        double nvdimm_min = individual_time[start][dram_threads], nvdimm_max = individual_time[start][dram_threads];
-	double total_min = total_time[start], total_max = total_time[start];
+	double *dram_min = (double*)malloc(K_length*sizeof(double)); //individual_time[start][0];
+	double *dram_max = (double*)malloc(K_length*sizeof(double)); //individual_time[start][0];
+        double *nvdimm_min = (double*)malloc(K_length*sizeof(double)); //individual_time[start][dram_threads];
+	double *nvdimm_max = (double*)malloc(K_length*sizeof(double)); //individual_time[start][dram_threads];
+	double total_min = total_time[start];
+	double total_max = total_time[start];
 
 	for(i=1;i<K_length;i++){
+		dram_min[i] = individual_time[start][0];
+		dram_max[i] = individual_time[start][0];
+		nvdimm_min[i] = individual_time[start][dram_threads];
+		nvdimm_max[i] = individual_time[start][dram_threads];
                 for(j=0;j<dram_threads;j++){
-			if( individual_time[i][j] < dram_min )
-				dram_min = individual_time[i][j];
-			if( individual_time[i][j] > dram_max )
-                                dram_max = individual_time[i][j];
+			if( individual_time[i][j] < dram_min[i] )
+				dram_min[i] = individual_time[i][j];
+			if( individual_time[i][j] > dram_max[i] )
+                                dram_max[i] = individual_time[i][j];
 		}
 		for(j=dram_threads;j<dram_threads+nvdimm_threads;j++){
-                        if( individual_time[i][j] < nvdimm_min )
-                                nvdimm_min = individual_time[i][j];
-                        if( individual_time[i][j] > nvdimm_max )
-                                nvdimm_max = individual_time[i][j];
+                        if( individual_time[i][j] < nvdimm_min[i] )
+                                nvdimm_min[i] = individual_time[i][j];
+                        if( individual_time[i][j] > nvdimm_max[i] )
+                                nvdimm_max[i] = individual_time[i][j];
                 }
               	if( total_time[i] < total_min )
                     	total_min = total_time[i];
             	if( total_time[i] > total_max )
                  	total_max = total_time[i];
 	}
+	double dram_min_average=0.0;
+	double dram_max_average=0.0;
+	double nvdimm_min_average=0.0;
+	double nvdimm_max_average=0.0;
+	for(i=1;i<K_length;i++){
+		dram_min_average += dram_min[i];
+		dram_max_average += dram_max[i];
+		nvdimm_min_average += nvdimm_min[i];
+		nvdimm_max_average += nvdimm_max[i];
+	}
+	dram_min_average = dram_min_average/(K_length-1);
+	dram_max_average = dram_max_average/(K_length-1);
+	nvdimm_min_average = nvdimm_min_average/(K_length-1);
+	nvdimm_max_average = nvdimm_max_average/(K_length-1);
 
-	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min,dram_max, nvdimm_average,nvdimm_min,nvdimm_max, total_average,total_min,total_max );
+	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min_average,dram_max_average, nvdimm_average,nvdimm_min_average,nvdimm_max_average, total_average,total_min,total_max );
+	
+	//Printing individual thread
+	/*
 	for(i=0;i<K_length;i++){
 		printf("%lf", individual_time[i][0]);
                 for(j=1;j<dram_threads+nvdimm_threads;j++){
@@ -277,12 +301,15 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	for(i=0;i<K_length;i++){
                 printf("%lf\n", total_time[i]);
         }
+	*/
+
 //	printf("Iteration,Dram_time,Nvdimm_time\n");
 //	for(i=0;i<K_length;i++){
 //		printf("%d,%lf,%lf\n", i, dram_time[i], nvdimm_time[i]);
 //	}
 }//End of method
 //pmempool create --layout my_layout --size=10G obj pool.obj
+//
 double mysecond(){ //fpo 2
         struct timeval tp;
         struct timezone tzp;
