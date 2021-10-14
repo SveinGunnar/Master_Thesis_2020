@@ -80,48 +80,46 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		int i,j;
 		double temp;
 
-//		#pragma omp single
-//		{
-//			printf("Before addaing values\n");
-//		}
-		//Add values to nvdimm 2d array
-		#pragma omp for
-		for(i=0;i<nvdimm_array_length*n;i++){
-			//for(j=0;j<n;j++){
-			//	printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
-			//	D_RW(C)[i*nvdimm_array_length+j] = i+j;
-			//	D_RW(D)[i*nvdimm_array_length+j] = 0;
-			//}
-			D_RW(C)[i] = i;
-			D_RW(D)[i] = 0;
-		}
-//		#pragma omp single
-//                {
-//                        printf("After addaing values\n");
-//                }
-		//printf("test\n");
-		//Add values to dram 2d array
-		#pragma omp for
-                for(i=0;i<m-nvdimm_array_length;i++){
-                        for(j=0;j<n;j++){
-                        //      printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
-				A[i][j] = i+j;
-                                B[i][j] = 0;
-                        }
+		//Creates slices for dram and nvdimm.
+                if( thread_id < dram_threads ){
+                        slice_start = thread_id*(dram_part/dram_threads);
+                        slice_end = (thread_id+1)*(dram_part/dram_threads);
+                        if(thread_id==0)
+                                slice_start++;
+                }else{
+                        slice_start = (thread_id-dram_threads)*(nvdimm_array_length/nvdimm_threads);
+                        slice_end = (thread_id-dram_threads+1)*(nvdimm_array_length/nvdimm_threads);
+                        if(thread_id==(dram_threads+nvdimm_threads-1))
+                                slice_end--;
                 }
 
-		//Creates slices for dram and nvdimm.
 		if( thread_id < dram_threads ){
-			slice_start = thread_id*(dram_part/dram_threads);
-			slice_end = (thread_id+1)*(dram_part/dram_threads);
-			if(thread_id==0)
-				slice_start++;
+			//Add values to nvdimm 2d array
+			if( thread_id == 0 )
+				i = 0;
+			else
+				i = slice_start;
+			//Add values to dram 2d array
+                        for(;i<slice_end;i++){
+                                for(j=0;j<n;j++){
+                                        A[i][j] = i+j;
+                                        B[i][j] = 0;
+                                }
+                        }
 		}else{
-			slice_start = (thread_id-dram_threads)*(nvdimm_array_length/nvdimm_threads);
-			slice_end = (thread_id-dram_threads+1)*(nvdimm_array_length/nvdimm_threads);
+			int end;
 			if(thread_id==(dram_threads+nvdimm_threads-1))
-				slice_end--;
+				end = slice_end++;
+			else
+				end = slice_end;
+			for( i=slice_start; i<end; i++){
+          			for( j=1; j<n; j++){
+					D_RW(C)[i*n+j] = i+j;
+					D_RW(D)[i*n+j] = 0;
+				}
+                        }
 		}
+
 		//printf("thread id: %d, slice start: %d, slice end: %d\n", thread_id, slice_start, slice_end);
 		while(k<K_length){
 			#pragma omp barrier
@@ -131,7 +129,6 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			}
 			//#pragma omp barrier
 			if( thread_id < dram_threads ){
-
 				//for the thread bordering on nvdimm thread.
 				if( thread_id==(dram_threads-1) ){
 					individual_time[k][thread_id] = mysecond();
@@ -289,7 +286,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min_average,dram_max_average, nvdimm_average,nvdimm_min_average,nvdimm_max_average, total_average,total_min,total_max );
 	
 	//Printing individual thread
-	/*
+	/**/
 	for(i=0;i<K_length;i++){
 		printf("%lf", individual_time[i][0]);
                 for(j=1;j<dram_threads+nvdimm_threads;j++){
@@ -301,7 +298,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	for(i=0;i<K_length;i++){
                 printf("%lf\n", total_time[i]);
         }
-	*/
+	/**/
 
 //	printf("Iteration,Dram_time,Nvdimm_time\n");
 //	for(i=0;i<K_length;i++){

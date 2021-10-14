@@ -76,17 +76,46 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 		int i,j;
 		double temp;
 
-		//Add values to nvdimm 2d array
-		#pragma omp for
-		for(i=1;i<nvdimm_array_length*n;i++){
-			//for(j=0;j<n;j++){
-			//	printf("T: %d, i: %d, j: %d, i*n+j: %d\n", thread_id, i, j, i*n+j);
-			//	D_RW(C)[i*nvdimm_array_length+j] = i+j;
-			//	D_RW(D)[i*nvdimm_array_length+j] = 0;
-			//}
-			D_RW(C)[i] = i;
-                        D_RW(D)[i] = 0;
+		//Creates slices for dram and nvdimm.
+                if( thread_id < dram_threads ){
+                        slice_start = thread_id*(dram_part/dram_threads);
+                        slice_end = (thread_id+1)*(dram_part/dram_threads);
+                        if(thread_id==0)
+                                slice_start++;
+                }else{
+                        slice_start = (thread_id-dram_threads)*(nvdimm_array_length/nvdimm_threads);
+                        slice_end = (thread_id-dram_threads+1)*(nvdimm_array_length/nvdimm_threads);
+                        if(thread_id==(dram_threads+nvdimm_threads-1))
+                                slice_end--;
+                }
+		
+		if( thread_id < dram_threads ){
+			//Add values to nvdimm 2d array
+                        if( thread_id == 0 )
+                                i = 0;
+                        else
+                                i = slice_start;
+                        //Add values to dram 2d array
+                        for(;i<slice_end;i++){
+                                for(j=0;j<n;j++){
+                                        A[i][j] = i+j;
+                                        B[i][j] = 0;
+                                }
+                        }
+		}else{
+			int end;
+                        if(thread_id==(dram_threads+nvdimm_threads-1))
+                                end = slice_end++;
+                        else
+                                end = slice_end;
+                        for( i=slice_start; i<end; i++){
+                                for( j=1; j<n; j++){
+                                        D_RW(C)[i*n+j] = i+j;
+                                        D_RW(D)[i*n+j] = 0;
+                                }
+                        }
 		}
+
 		//Add values to dram 2d array
 		#pragma omp for
                 for(i=0;i<dram_part-1;i++){
@@ -96,27 +125,12 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
                                 B[i][j] = 0;
                         }
                 }
-
 		
 		#pragma omp for
                 for(a=0; a<n; a++){
 			A[dram_part-1][a] = D_RO(C)[n+a];
 			D_RW(C)[a] = A[dram_part-2][a];
                 }
-		
-
-		//Creates slices for dram and nvdimm.
-		if( thread_id < dram_threads ){
-			slice_start = thread_id*(dram_part/dram_threads);
-			slice_end = (thread_id+1)*(dram_part/dram_threads);
-			if(thread_id==0)
-				slice_start++;
-		}else{
-			slice_start = (thread_id-dram_threads)*(nvdimm_array_length/nvdimm_threads);
-			slice_end = (thread_id-dram_threads+1)*(nvdimm_array_length/nvdimm_threads);
-			if(thread_id==(dram_threads+nvdimm_threads-1))
-				slice_end--;
-		}
 
 		while(k<K_length){
 			#pragma omp barrier
@@ -250,7 +264,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 
 	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min_average,dram_max_average, nvdimm_average,nvdimm_min_average,nvdimm_max_average, total_average,total_min,total_max );
 
-	/*
+	/**/
 	for(i=0;i<K_length;i++){
                 printf("%lf", individual_time[i][0]);
                 for(j=1;j<dram_threads+nvdimm_threads;j++){
@@ -262,7 +276,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
         for(i=0;i<K_length;i++){
                 printf("%lf\n", total_time[i]);
         }
-	*/
+	/**/
 
 //	printf("Iteration,Dram_time,Nvdimm_time\n");
 //	for(i=0;i<K_length;i++){
