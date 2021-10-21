@@ -1,6 +1,7 @@
 #!/bin/bash
 #Pmemobj_openMP_singelSocket.sh
 file1="Result/Raws/NVM-NVM_16t_5000i_v3.txt"
+file1="Result/Raws/NVM-NVM_16t_5000i_Large_array.txt"
 file2="Result/Raws/DRAM-NVM_16t_5000i_v3.txt"
 file3="Result/Raws/NVM-DRAM_16t_5000i_v3.txt"
 
@@ -23,7 +24,7 @@ total_threads=16
 #NVM-NVM
 echo NVM-NVM
 #truncate -s 0 $file1
-for (( n=1; n<16; n++ ))
+for (( n=1; n<7; n++ ))
 do
 	echo $n
 	numactl --physcpubind=0-15 ./Pmemobj_openMP_NVM-NVM.out $n $total_threads $iterations >> $file1
@@ -33,24 +34,24 @@ done
 
 
 #DRAM-NVM
-echo DRAM-NVM
-truncate -s 0 $file2
-for (( n=1; n<16; n++ ))
-do
-	echo $n
-	numactl --physcpubind=0-15 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
-	echo "" >> $file2
-done
+#echo DRAM-NVM
+#truncate -s 0 $file2
+#for (( n=1; n<16; n++ ))
+#do
+#	echo $n
+#	numactl --physcpubind=0-15 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
+#	echo "" >> $file2
+#done
 
 #NVM-DRAM
-echo NVM-DRAM
+#echo NVM-DRAM
 #truncate -s 0 $file3
-for (( n=1; n<16; n++ ))
-do
-	echo $n
-	numactl --physcpubind=0-15 ./Pmemobj_openMP_NVM-DRAM.out $n $total_threads $iterations >> $file3
-	echo "" >> $file3
-done
+#for (( n=1; n<16; n++ ))
+#do
+#	echo $n
+#	numactl --physcpubind=0-15 ./Pmemobj_openMP_NVM-DRAM.out $n $total_threads $iterations >> $file3
+#	echo "" >> $file3
+#done
 
 
 

@@ -1,10 +1,10 @@
 #!/bin/bash
 
-input="input.txt"
+input="input2.txt"
 column=14
 row=""
 
-echo "\begin{center}"
+echo "\begin{table}"
 echo "\begin{tabular}{ |c|c|c|c|c|c| } "
 
 
@@ -22,4 +22,4 @@ done < "$input"
 echo \\hline
 
 echo "\end{tabular}"
-echo "\end{center}"
+echo "\end{table}"
