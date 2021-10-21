@@ -286,7 +286,7 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	printf("%d,%d,%d,%d,%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",m,n,nvdimm_array_length,dram_threads,nvdimm_threads, dram_average,dram_min_average,dram_max_average, nvdimm_average,nvdimm_min_average,nvdimm_max_average, total_average,total_min,total_max );
 	
 	//Printing individual thread
-	/**/
+	/*
 	for(i=0;i<K_length;i++){
 		printf("%lf", individual_time[i][0]);
                 for(j=1;j<dram_threads+nvdimm_threads;j++){

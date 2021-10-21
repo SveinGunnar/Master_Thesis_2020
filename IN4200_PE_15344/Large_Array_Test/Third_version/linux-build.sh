@@ -23,17 +23,17 @@ echo m:$m,n:$n,nvdimm_size:$nvdimm
 
 echo start > $file_name
 echo 1
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 2146 15 1 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 2056 15 1 $k >> $file_name
 echo 2
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 4252 14 2 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 4067 14 2 $k >> $file_name
 echo 3
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 6525 13 3 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 5579 13 3 $k >> $file_name
 echo 4
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 8724 12 4 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 7242 12 4 $k >> $file_name
 echo 5
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 10994 11 5 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 8656 11 5 $k >> $file_name
 echo 6
-numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 13230 10 6 $k >> $file_name
+numactl --physcpubind=0-15 --membind=0 ./LargeArrayTest.out $m $n 11560 10 6 $k >> $file_name
 
 
 #m=1000
