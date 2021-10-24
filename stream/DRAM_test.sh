@@ -3,7 +3,7 @@ socket1=0
 socket2=16
 num_threads=1
 file1="temp.txt"
-file2="DRAM_test_dual_socket_32.txt"
+file2="DRAM_test_single_socket_32t.txt"
 CPUs=""
 #program="Stream_.out"
 program="Stream_c_m.out"
@@ -19,20 +19,20 @@ fi
 
 echo DRAM test cpu 0-32 > $file2
 
-for (( n=0; n<32; n++ ))
+for (( n=0; n<16; n++ ))
 do
 	echo $(($n+1))
 	echo $(($n+1)) >> $file1
 	numactl --physcpubind=0-$n ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
 done
 
-#for (( n=17; n<33; n++ ))
-#do
+for (( n=32; n<48; n++ ))
+do
 #	export OMP_NUM_THREADS=$n
-#	echo $n
-#	echo $n >> $file1
-#	numactl --physcpubind=0-15 ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
-#done
+	echo $(($n-16+1))
+	echo $(($n-16+1)) >> $file1
+	numactl --physcpubind=0-15,32-$n ./$program | grep -E 'Copy:|Scale:|Add:|Triad:' | awk '{print $2}' >> $file1
+done
 
 m=0
 templine=""

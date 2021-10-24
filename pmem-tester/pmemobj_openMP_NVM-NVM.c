@@ -37,7 +37,8 @@ POBJ_LAYOUT_END(array);
 #define BILLION 1E9
 //#define ARRAY_SIZE (1073741824)// 1GB * a_number
 //                   100000000
-#define ARRAY_LENGTH 100000000
+#define ARRAY_LENGTH 125000000
+//625'000'000
 //#define ARRAY_LENGTH 1000
 # define MIN(x,y) ((x)<(y)?(x):(y))
 # define MAX(x,y) ((x)>(y)?(x):(y))
