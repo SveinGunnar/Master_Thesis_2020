@@ -110,7 +110,6 @@ int main(int argc, char *argv[])
 					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
 					drm_write_array[i] = ((double)rand()/(double)(RAND_MAX));
 				}
-                       		//printf("DRAM thread_id: %d, %f\n", thread_id, drm_read_array[11235]);
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
@@ -122,7 +121,6 @@ int main(int argc, char *argv[])
 					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
 					D_RW(nvm_write_array)[i] = ((double)rand()/(double)(RAND_MAX));
 				}
-                        	//printf("NVM thread_id: %d, %f\n", thread_id, D_RO(nvm_read_array)[11235]);
 			}
 		}
 		

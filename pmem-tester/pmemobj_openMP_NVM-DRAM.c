@@ -103,9 +103,10 @@ int main(int argc, char *argv[])
         		drm_write_array = (double*)malloc(ARRAY_LENGTH*sizeof(double));
 			#pragma omp critical
 			{
-				for(i=0;i<ARRAY_LENGTH;i++)
+				for(i=0;i<ARRAY_LENGTH;i++){
 					drm_read_array[i] = ((double)rand()/(double)(RAND_MAX));
 					drm_write_array[i] = ((double)rand()/(double)(RAND_MAX));
+				}
 			}
 		}
 		else if(thread_id >= totalThreads-nvmThreads){
@@ -113,9 +114,10 @@ int main(int argc, char *argv[])
         		POBJ_ALLOC(pop, &nvm_read_array, double, sizeof(double) * ARRAY_LENGTH, NULL, NULL);
 			#pragma omp critical
 			{
-				for(i=0;i<ARRAY_LENGTH;i++)
+				for(i=0;i<ARRAY_LENGTH;i++){
 					D_RW(nvm_read_array)[i] = ((double)rand()/(double)(RAND_MAX));
 					drm_write_array[i] = ((double)rand()/(double)(RAND_MAX));
+				}
 			}
 		}
 		
