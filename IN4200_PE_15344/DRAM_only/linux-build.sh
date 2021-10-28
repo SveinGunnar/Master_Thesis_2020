@@ -6,7 +6,7 @@ export OMP_NESTED=TRUE
 file1="neighbours_8.txt"
 file2="neighbours_8_16M.txt"
 
-output_file="Result/result_n5000_01to16threads_16M-n_0605_2021.txt"
+output_file="Result/result_n5000_01to16threads_16M-n_2810_2021.txt"
 
 threads=16
 
