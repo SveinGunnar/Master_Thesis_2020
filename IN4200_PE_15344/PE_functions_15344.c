@@ -138,11 +138,11 @@ void PageRank_iterations(){
 	double diff=0.0;
 
 	//Counter
-	int events[event_count] = {PAPI_L3_TCM, PAPI_L3_LDM};
-	int ret;
-	long long int values[event_count]; // result
+//	int events[event_count] = {PAPI_L3_TCM, PAPI_L3_LDM};
+//	int ret;
+//	long long int values[event_count]; // result
         /* start counters */
-	ret = PAPI_start_counters(events, event_count);
+//	ret = PAPI_start_counters(events, event_count);
 
 	#pragma omp parallel num_threads(iter_threads)
 	{
@@ -245,10 +245,10 @@ void PageRank_iterations(){
 	}//End parallel
 	
 	/* read counters */
-	ret = PAPI_read_counters(values, event_count);
+//	ret = PAPI_read_counters(values, event_count);
 //	printf("PAPI_L3_TCM: %lli cache misses.\n", values[0]);
 //        printf("PAPI_L3_TCW: %lli load cache misses.\n", values[1]);
-	printf("%d,%lli,%lli\n",iter_threads,values[0],values[1]);
+//	printf("%d,%lli,%lli\n",iter_threads,values[0],values[1]);
 
 	iteration_ongoing=0;
 	omp_unset_lock(&lock_b);

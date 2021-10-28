@@ -8,7 +8,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <libpmemobj.h>
-#include <papi.h>
+//#include <papi.h>
 
 //#define iter_threads 10
 //#define transfer_thread 11

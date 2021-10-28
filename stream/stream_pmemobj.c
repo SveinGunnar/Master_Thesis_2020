@@ -268,7 +268,7 @@ int main()
 
         /* create the pmemobj pool or open it if it already exists */
         //pop = pmemobj_create(path, LAYOUT_NAME, POOL_SIZE*10, 0666);
-        pop = pmemobj_create(path, LAYOUT_NAME, 10737418240, 0666);
+        pop = pmemobj_open(path, LAYOUT_NAME);
 	//pop = pmemobj_create(path, LAYOUT_NAME, 0, 0664);
 
         if (pop == NULL)

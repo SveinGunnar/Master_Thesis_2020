@@ -173,6 +173,11 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 			#pragma omp for
                         for(a=0; a<n; a++){
                                 A[dram_part_Minus_One][a] = D_RO(C)[n+a];
+                                //D_RW(C)[a] = A[dram_part_Minus_Two][a];
+                        }
+			#pragma omp for
+                        for(a=0; a<n; a++){
+                                //A[dram_part_Minus_One][a] = D_RO(C)[n+a];
                                 D_RW(C)[a] = A[dram_part_Minus_Two][a];
                         }
 			#pragma omp single
