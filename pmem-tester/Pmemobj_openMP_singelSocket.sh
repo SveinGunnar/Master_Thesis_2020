@@ -1,7 +1,7 @@
 #!/bin/bash
 #Pmemobj_openMP_singelSocket.sh
 #file1="Result/Raws/NVM-NVM_16t_5000i_v3.txt"
-file1="Result/Raws/Test_001/NVM-NVM_16t_100i_80GB.txt"
+file1="Result/Raws/Test_001/NVM-NVM_16t_200i_80GB.txt"
 #file2="Result/Raws/Test_001/DRAM-NVM_16t_300i_16GB.txt"
 #file3="Result/Raws/Test_001/NVM-DRAM_16t_300i_16GB.txt"
 
@@ -9,7 +9,7 @@ file1="Result/Raws/Test_001/NVM-NVM_16t_100i_80GB.txt"
 #file2_average="Result/DRAM-NVM_16t_average"
 #file3_average="Result/NVM-DRAM_16t_average"
 
-iterations=100
+iterations=200
 total_threads=16
 #socket1=0
 #socket2=16
