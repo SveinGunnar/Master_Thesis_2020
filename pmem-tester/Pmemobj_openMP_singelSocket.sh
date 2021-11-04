@@ -1,9 +1,9 @@
 #!/bin/bash
 #Pmemobj_openMP_singelSocket.sh
 #file1="Result/Raws/NVM-NVM_16t_5000i_v3.txt"
-file1="Result/Raws/Test_001/NVM-NVM_16t_500i_80GB.txt"
-#file2="Result/Raws/Test_001/DRAM-NVM_16t_300i_16GB.txt"
-#file3="Result/Raws/Test_001/NVM-DRAM_16t_300i_16GB.txt"
+file1="Result/Raws/Test_002/NVM-NVM_16t_500i_16GB.txt"
+file2="Result/Raws/Test_002/DRAM-NVM_16t_500i_16GB.txt"
+file3="Result/Raws/Test_002/NVM-DRAM_16t_500i_16GB.txt"
 
 #file1_average="Result/NVM-NVM_16t_average"
 #file2_average="Result/DRAM-NVM_16t_average"
@@ -29,35 +29,37 @@ echo "" >> $file1
 for (( n=1; n<16; n++ ))
 do
 	echo $n
-	numactl --physcpubind=0-15 --membind=0 ./Pmemobj_openMP_NVM-NVM.out $n $total_threads $iterations >> $file1
+	numactl --physcpubind=16-31 --membind=1 ./Pmemobj_openMP_NVM-NVM.out $n $total_threads $iterations >> $file1
 	echo "" >> $file1
 	echo "" >> $file1
 done
 
+#iterations=400
+
 #DRAM-NVM
 #echo DRAM-NVM
 #truncate -s 0 $file2
-#echo "" > $file2
-#echo "" >> $file2
-#for (( n=1; n<16; n++ ))
-#do
-#	echo $n
-#	numactl --physcpubind=0-15 --membind=0 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
-#	echo "" >> $file2
-#	echo "" >> $file2
-#done
+echo "" > $file2
+echo "" >> $file2
+for (( n=1; n<16; n++ ))
+do
+	echo $n
+	numactl --physcpubind=16-31 --membind=1 ./Pmemobj_openMP_DRAM-NVM.out $n $total_threads $iterations >> $file2
+	echo "" >> $file2
+	echo "" >> $file2
+done
 
 #NVM-DRAM
-#echo NVM-DRAM
+echo NVM-DRAM
 #truncate -s 0 $file3
-#echo "" > $file3
-#echo "" >> $file3
-#for (( n=1; n<16; n++ ))
-#do
-#	echo $n
-#	numactl --physcpubind=0-15 --membind=0 ./Pmemobj_openMP_NVM-DRAM.out $n $total_threads $iterations >> $file3
-#	echo "" >> $file3
-#	echo "" >> $file3
-#done
+echo "" > $file3
+echo "" >> $file3
+for (( n=1; n<16; n++ ))
+do
+	echo $n
+	numactl --physcpubind=16-31 --membind=1 ./Pmemobj_openMP_NVM-DRAM.out $n $total_threads $iterations >> $file3
+	echo "" >> $file3
+	echo "" >> $file3
+done
 
 #END

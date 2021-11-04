@@ -46,7 +46,8 @@ int main(int argc, char *argv[])
 {
 	//printf("%lu\n", sizeof(double));
         //const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
-	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+//	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path[] = "/mnt/pmem1-ext4/pool.obj";
         PMEMobjpool *pop;
         /* create the pmemobj pool or open it if it already exists */
         //pop = pmemobj_create(path, LAYOUT_NAME, POOL_SIZE, 0666);

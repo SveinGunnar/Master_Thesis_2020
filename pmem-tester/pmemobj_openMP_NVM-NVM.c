@@ -37,7 +37,7 @@ POBJ_LAYOUT_END(array);
 #define BILLION 1E9
 //#define ARRAY_SIZE (1073741824)// 1GB * a_number
 //                   100000000
-#define ARRAY_LENGTH 625000000
+#define ARRAY_LENGTH 125000000
 //625'000'000
 //#define ARRAY_LENGTH 1000
 # define MIN(x,y) ((x)<(y)?(x):(y))
@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
 {
 	//printf("%lu\n", sizeof(double));
         //const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
-	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+//	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path[] = "/mnt/pmem1-ext4/pool.obj";
         PMEMobjpool *pop;
         /* create the pmemobj pool or open it if it already exists */
         //pop = pmemobj_create(path, LAYOUT_NAME, POOL_SIZE, 0666);
