@@ -22,7 +22,8 @@ static PMEMobjpool *pop;
 */
 int main(int argc, char **argv){
 	//printf("seg fault test");
-        const char path[] = "/mnt/pmem0-xfs/pool.obj";
+//	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path[] = "/mnt/pmem1-ext4/pool.obj";
         //PMEMobjpool *pop;
 	pop = pmemobj_open(path, LAYOUT_NAME);
 
