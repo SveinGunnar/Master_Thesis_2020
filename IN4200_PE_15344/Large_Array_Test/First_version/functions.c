@@ -56,8 +56,8 @@ void calculation( int m, int n, int dram_threads, int nvdimm_threads, int nvdimm
 	///mnt/pmem1-ext4/pool.obj
 	//Creating memory pool on NVDIMM.
         static PMEMobjpool *pop;
-        const char path[] = "/mnt/pmem0-xfs/pool.obj";
-	//const char path[] = "/mnt/pmem1-ext4/pool.obj";
+        //const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path[] = "/mnt/pmem1-ext4/pool.obj";
         pop = pmemobj_open(path, LAYOUT_NAME);
         if (pop == NULL) {
                 perror(path);

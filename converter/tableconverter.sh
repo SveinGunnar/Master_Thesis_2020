@@ -1,17 +1,17 @@
 #!/bin/bash
 
-input="input2.txt"
+input="nvm_table.txt"
 column=14
 row=""
 
-echo "\begin{table}"
+echo "\begin{table}[!hbtp]"
 echo "\begin{tabular}{ |c|c|c|c|c|c| } "
 
 
 while IFS=',' read -r -a line
 do
 	row=""
-	for (( n=0; n<6; n++ ))
+	for (( n=0; n<4; n++ ))
 	do
 		row="$row ${line[$n]} &"
 #		echo hline
