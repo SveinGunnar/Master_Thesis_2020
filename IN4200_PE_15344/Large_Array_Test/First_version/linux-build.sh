@@ -14,7 +14,7 @@ m=44720
 n=44720
 nvdimm=48
 k=10
-file_name=Last_test_ever2.txt
+file_name=Last_test_ever4.txt
 
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
 m=31623
@@ -33,6 +33,20 @@ n=31623
 #numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 3817 11 5 $k >> $file_name
 #echo 6
 #numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 4746 10 6 $k >> $file_name
+
+#TESTING
+#echo start > $file_name
+#echo 1
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 1499 15 1 $k >> $file_name
+#echo 2
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 2988 14 2 $k >> $file_name
+#echo 3
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 4630 13 3 $k >> $file_name
+#echo 4
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 6252 12 4 $k >> $file_name
+#echo 5
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 7634 11 5 $k >> $file_name
+
 
 #m=44720
 #n=44720
@@ -99,5 +113,19 @@ n=100000
 #numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 9885 12 4 $k >> $file_name
 #echo 5
 #numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 12071 11 5 $k >> $file_name
-echo 6
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 15007 10 6 $k >> $file_name
+#echo 6
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 15007 10 6 $k >> $file_name
+
+#TESTING
+echo 1
+numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 4741 15 1 $k >> $file_name
+echo 2
+numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 9449 14 2 $k >> $file_name
+echo 3
+numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 14643 13 3 $k >> $file_name
+echo 4
+numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 19700 12 4 $k >> $file_name
+echo 5
+numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 24141 11 5 $k >> $file_name
+#echo 6
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 15007 10 6 $k >> $file_name

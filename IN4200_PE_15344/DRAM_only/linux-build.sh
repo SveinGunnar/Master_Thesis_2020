@@ -6,7 +6,7 @@ export OMP_NESTED=TRUE
 file1="neighbours_8.txt"
 file2="neighbours_8_16M.txt"
 
-output_file="Result/result_n5000_01to16threads_16M-n_0411_2021.txt"
+output_file="Result/result_n5000_01to16threads_16M-n_1011_2021.txt"
 
 threads=16
 
@@ -16,7 +16,7 @@ threads=16
 j=1
 #truncate -s 0 $output_file
 echo Threads, Total time, Iteration time, Calculation time
-echo Threads, Total time, Iteration time, Calculation time > $output_file
+echo Threads, Total_time, Iteration_time, Calculation_time > $output_file
 for (( i=16; i<32; i++ ))
 do
 	echo $j

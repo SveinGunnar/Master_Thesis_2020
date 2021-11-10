@@ -14,7 +14,7 @@ m=89450
 n=89450
 nvdimm=48
 k=10
-file_name=Last_test_ever.txt
+file_name=Last_test_ever2.txt
 
 #printf("%d,%d,%d,%d,%d,%lf,%lf\n", m, n, nvdimm_array_length, dram_threads, nvdimm_threads, dram_average, nvdimm_average );
 echo m:$m,n:$n,nvdimm_size:$nvdimm
@@ -93,16 +93,16 @@ m=100000
 n=100000
 #echo "" >> $file_name
 
-echo 1
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 2371 15 1 $k >> $file_name
-echo 2
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 4724 14 2 $k >> $file_name
-echo 3
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 7321 13 3 $k >> $file_name
-echo 4
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 9885 12 4 $k >> $file_name
-echo 5
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 12071 11 5 $k >> $file_name
-echo 6
-numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 15007 10 6 $k >> $file_name
+#echo 1
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 2371 15 1 $k >> $file_name
+#echo 2
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 4724 14 2 $k >> $file_name
+#echo 3
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 7321 13 3 $k >> $file_name
+#echo 4
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 9885 12 4 $k >> $file_name
+#echo 5
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 12071 11 5 $k >> $file_name
+#echo 6
+#numactl --physcpubind=16-31 --membind=1 ./LargeArrayTest.out $m $n 15007 10 6 $k >> $file_name
 

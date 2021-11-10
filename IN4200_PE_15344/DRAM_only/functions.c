@@ -270,6 +270,7 @@ void PageRank_iterations(){
 				analyze_time+=mysecond()-temp_calc;
 			}
 		}//end of while-loop
+		#pragma omp barrier
 		#pragma omp single
         	{
 			data_generation_time = mysecond() - data_generation_time;
