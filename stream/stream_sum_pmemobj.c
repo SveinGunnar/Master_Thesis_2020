@@ -263,7 +263,8 @@ int main()
 	//double poolSize = (1 << 30)*10;
 	//const char path[] = "/mnt/pmem0/sveingf/pmem_objects";
 	//const char path[] = "/mnt/pmem1/sveingf/pmem_objects";
-	const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	//const char path[] = "/mnt/pmem0-xfs/pool.obj";
+	const char path[] = "/mnt/pmem1-ext4/pool.obj";
 	//const char path[] = "myobjpool.set";
         //PMEMobjpool *pop;
 

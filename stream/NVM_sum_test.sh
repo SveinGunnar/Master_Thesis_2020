@@ -3,7 +3,7 @@ socket1=0
 socket2=16
 num_threads=1
 file1="temp.txt"
-file2="NVM_sum_test_16_100621.txt"
+file2="NVM_sum_test_16_111121.txt"
 CPUs=""
 #program="Stream_.out"
 program="Stream_sum_pmemobj.out"
@@ -19,13 +19,13 @@ fi
 
 #touch $file1
 
-echo NVM sum test cpu 0-15 > $file2
+echo NVM sum test cpu 16-32 > $file2
 
-for (( n=0; n<16; n++ ))
+for (( n=16; n<32; n++ ))
 do
-	echo $(($n+1))
-	echo $(($n+1)) >> $file1
-	numactl --physcpubind=0-$n ./$program | grep -E 'Copy:|Scale:|Add:|Triad:|Average:' | awk '{print $2}' >> $file1
+	echo $(($n+1-16))
+	echo $(($n+1-16)) >> $file1
+	numactl --physcpubind=16-$n ./$program | grep -E 'Copy:|Scale:|Add:|Triad:|Average:' | awk '{print $2}' >> $file1
 done
 
 #for (( n=17; n<33; n++ ))
