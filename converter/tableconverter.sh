@@ -11,7 +11,7 @@ echo "\begin{tabular}{ |c|c|c|c|c|c| } "
 while IFS=',' read -r -a line
 do
 	row=""
-	for (( n=0; n<7; n++ ))
+	for (( n=0; n<8; n++ ))
 	do
 		row="$row ${line[$n]} &"
 #		echo hline
