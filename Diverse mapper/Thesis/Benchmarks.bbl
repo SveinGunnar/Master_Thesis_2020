@@ -1,0 +1,56 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{STREAM-c}{online}{}
+      \name{author}{1}{}{%
+        {{hash=bc60a5a08e5558c79a4a8ae2c6970cbd}{%
+           family={McCalpin},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{fullhash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{bibnamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authorbibnamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authornamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authorfullhash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{STREAM source code}
+      \field{urlday}{20}
+      \field{urlmonth}{12}
+      \field{urlyear}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      \endverb
+      \verb{url}
+      \verb https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      \endverb
+    \endentry
+  \enddatalist
+  \missing{Breaklines}
+\endrefsection
+\endinput
+

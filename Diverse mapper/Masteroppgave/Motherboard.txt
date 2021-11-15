@@ -1,0 +1,82 @@
+# dmidecode 3.1
+Getting SMBIOS data from sysfs.
+SMBIOS 3.2.1 present.
+# SMBIOS implementations newer than version 3.1.1 are not
+# fully supported by this version of dmidecode.
+
+Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: Supermicro
+	Product Name: X11DPU-Z+
+	Version: 1.01
+	Serial Number: VM17AS016810
+	Asset Tag: To be filled by O.E.M.
+	Features:
+		Board is a hosting board
+		Board is replaceable
+	Location In Chassis: To be filled by O.E.M.
+	Chassis Handle: 0x0003
+	Type: Motherboard
+	Contained Object Handles: 0
+
+# dmidecode 3.1
+Getting SMBIOS data from sysfs.
+SMBIOS 3.2.1 present.
+# SMBIOS implementations newer than version 3.1.1 are not
+# fully supported by this version of dmidecode.
+
+Handle 0x0002, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: Supermicro
+	Product Name: X11DPU-Z+
+	Version: 1.01
+	Serial Number: VM17AS016810
+	Asset Tag: To be filled by O.E.M.
+	Features:
+		Board is a hosting board
+		Board is replaceable
+	Location In Chassis: To be filled by O.E.M.
+	Chassis Handle: 0x0003
+	Type: Motherboard
+	Contained Object Handles: 0
+
+Handle 0x000E, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: ASPEED Video AST2500
+	Type: Video
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:03:00.0
+
+Handle 0x0064, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Intel Ethernet I350 #1
+	Type: Ethernet
+	Status: Enabled
+	Type Instance: 1
+	Bus Address: 0000:18:00.0
+
+Handle 0x0065, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Intel Ethernet I350 #2
+	Type: Ethernet
+	Status: Enabled
+	Type Instance: 2
+	Bus Address: 0000:18:00.1
+
+Handle 0x0066, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Intel Ethernet I350 #3
+	Type: Ethernet
+	Status: Enabled
+	Type Instance: 3
+	Bus Address: 0000:18:00.2
+
+Handle 0x0067, DMI type 41, 11 bytes
+Onboard Device
+	Reference Designation: Intel Ethernet I350 #4
+	Type: Ethernet
+	Status: Enabled
+	Type Instance: 4
+	Bus Address: 0000:18:00.3
+

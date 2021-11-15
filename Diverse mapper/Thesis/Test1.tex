@@ -1,0 +1,29 @@
+% !TeX spellcheck = en_US
+\documentclass[11pt,a4paper]{article}      % Specifies the document class
+
+                             % The preamble begins here.
+\title{Test 1}  % Declares the document's title.
+\author{Svein Gunnar Fagerheim}      % Declares the author's name.
+%\date{January 21, 1994}      % Deleting this command produces today's date.
+
+\newcommand{\ip}[2]{(#1, #2)}
+                             % Defines \ip{arg1}{arg2} to mean
+                             % (arg1, arg2).
+\begin{document}             % End of preamble and beginning of text.
+
+
+%\maketitle                   % Produces the title.
+
+\section{Test of code}
+\subsection{The Code}
+The code start in the main function by creating two thread that launch their own function. The first function are running a while loop that are multiplying two matrixes together and uses the result in the next iteration of the loop. 
+
+The second function transfer the data that are generated in the first function
+from DRAM to NVM. Then it will analyze the data that have been generated. This process will repeat itself every time the first function have generated data.
+
+The function are being synchronized by using the openMP functions omp\_set\_lock and omp\_unset\_lock. When the first function have finished generating data in one 
+
+
+%\subsection{Result}
+%\subsection{Discussion}
+\end{document}               % End of document.

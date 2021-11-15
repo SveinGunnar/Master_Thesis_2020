@@ -1,0 +1,982 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.4)  24 OCT 2021 19:23
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Benchmarks_old.tex
+(./Benchmarks_old.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-04-06>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2020/03/22 3.42 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2020/03/22 3.42 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/USenglish.ldf
+Language: USenglish 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2020/03/22 3.42 Babel common definitions
+\babel@savecnt=\count175
+\U@D=\dimen135
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count176
+)
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for ukenglish
+(babel)             (\language27) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for ukenglish
+(babel)             (\language27) on input line 108.
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count177
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+\csq@reset=\count178
+\csq@gtype=\count179
+\csq@glevel=\count180
+\csq@qlevel=\count181
+\csq@maxlvl=\count182
+\csq@tshold=\count183
+\csq@ltx@everypar=\toks18
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2019-12-06 v5.2j csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/newcent.sty
+Package: newcent 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count184
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count185
+\c@listtotal=\count186
+\c@listcount=\count187
+\c@liststart=\count188
+\c@liststop=\count189
+\c@citecount=\count190
+\c@citetotal=\count191
+\c@multicitecount=\count192
+\c@multicitetotal=\count193
+\c@instcount=\count194
+\c@maxnames=\count195
+\c@minnames=\count196
+\c@maxitems=\count197
+\c@minitems=\count198
+\c@citecounter=\count199
+\c@maxcitecounter=\count266
+\c@savedcitecounter=\count267
+\c@uniquelist=\count268
+\c@uniquename=\count269
+\c@refsection=\count270
+\c@refsegment=\count271
+\c@maxextratitle=\count272
+\c@maxextratitleyear=\count273
+\c@maxextraname=\count274
+\c@maxextradate=\count275
+\c@maxextraalpha=\count276
+\c@abbrvpenalty=\count277
+\c@highnamepenalty=\count278
+\c@lownamepenalty=\count279
+\c@maxparens=\count280
+\c@parenlevel=\count281
+\blx@tempcnta=\count282
+\blx@tempcntb=\count283
+\blx@tempcntc=\count284
+\blx@maxsection=\count285
+\blx@maxsegment@0=\count286
+\blx@notetype=\count287
+\blx@parenlevel@text=\count288
+\blx@parenlevel@foot=\count289
+\blx@sectionciteorder@0=\count290
+\blx@entrysetcounter=\count291
+\labelnumberwidth=\skip49
+\labelalphawidth=\skip50
+\biblabelsep=\skip51
+\bibitemsep=\skip52
+\bibnamesep=\skip53
+\bibinitsep=\skip54
+\bibparsep=\skip55
+\bibhang=\skip56
+\blx@bcfin=\read3
+\blx@bcfout=\write3
+\blx@langwohyphens=\language84
+\c@mincomprange=\count292
+\c@maxcomprange=\count293
+\c@mincompwidth=\count294
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2019/12/01 v3.14 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count295
+\c@savedafterword=\count296
+\c@annotator=\count297
+\c@savedannotator=\count298
+\c@author=\count299
+\c@savedauthor=\count300
+\c@bookauthor=\count301
+\c@savedbookauthor=\count302
+\c@commentator=\count303
+\c@savedcommentator=\count304
+\c@editor=\count305
+\c@savededitor=\count306
+\c@editora=\count307
+\c@savededitora=\count308
+\c@editorb=\count309
+\c@savededitorb=\count310
+\c@editorc=\count311
+\c@savededitorc=\count312
+\c@foreword=\count313
+\c@savedforeword=\count314
+\c@holder=\count315
+\c@savedholder=\count316
+\c@introduction=\count317
+\c@savedintroduction=\count318
+\c@namea=\count319
+\c@savednamea=\count320
+\c@nameb=\count321
+\c@savednameb=\count322
+\c@namec=\count323
+\c@savednamec=\count324
+\c@translator=\count325
+\c@savedtranslator=\count326
+\c@shortauthor=\count327
+\c@savedshortauthor=\count328
+\c@shorteditor=\count329
+\c@savedshorteditor=\count330
+\c@labelname=\count331
+\c@savedlabelname=\count332
+\c@institution=\count333
+\c@savedinstitution=\count334
+\c@lista=\count335
+\c@savedlista=\count336
+\c@listb=\count337
+\c@savedlistb=\count338
+\c@listc=\count339
+\c@savedlistc=\count340
+\c@listd=\count341
+\c@savedlistd=\count342
+\c@liste=\count343
+\c@savedliste=\count344
+\c@listf=\count345
+\c@savedlistf=\count346
+\c@location=\count347
+\c@savedlocation=\count348
+\c@organization=\count349
+\c@savedorganization=\count350
+\c@origlocation=\count351
+\c@savedoriglocation=\count352
+\c@origpublisher=\count353
+\c@savedorigpublisher=\count354
+\c@publisher=\count355
+\c@savedpublisher=\count356
+\c@language=\count357
+\c@savedlanguage=\count358
+\c@origlanguage=\count359
+\c@savedoriglanguage=\count360
+\c@pageref=\count361
+\c@savedpageref=\count362
+\shorthandwidth=\skip57
+\shortjournalwidth=\skip58
+\shortserieswidth=\skip59
+\shorttitlewidth=\skip60
+\shortauthorwidth=\skip61
+\shorteditorwidth=\skip62
+\locallabelnumberwidth=\skip63
+\locallabelalphawidth=\skip64
+\localshorthandwidth=\skip65
+\localshortjournalwidth=\skip66
+\localshortserieswidth=\skip67
+\localshorttitlewidth=\skip68
+\localshortauthorwidth=\skip69
+\localshorteditorwidth=\skip70
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+\c@textcitecount=\count363
+\c@textcitetotal=\count364
+\c@textcitemaxnames=\count365
+\c@biburlbigbreakpenalty=\count366
+\c@biburlbreakpenalty=\count367
+\c@biburlnumpenalty=\count368
+\c@biburlucpenalty=\count369
+\c@biburllcpenalty=\count370
+\biburlbigskip=\muskip17
+\biburlnumskip=\muskip18
+\biburlucskip=\muskip19
+\biburllcskip=\muskip20
+\c@smartand=\count371
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count372
+\c@bbx:relatedtotal=\count373
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2019/12/01 v3.14 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen136
+\Gin@req@width=\dimen137
+)
+(/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write4
+
+Excluding comment 'comment')
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count374
+\lst@gtempboxa=\box45
+\lst@token=\toks19
+\lst@length=\count375
+\lst@currlwidth=\dimen138
+\lst@column=\count376
+\lst@pos=\count377
+\lst@lostspace=\dimen139
+\lst@width=\dimen140
+\lst@newlines=\count378
+\lst@lineno=\count379
+\lst@maxwidth=\dimen141
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count380
+\lst@skipnumbers=\count381
+\lst@framebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'USenglish'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count382
+\l__pdf_internal_box=\box47
+)
+No file Benchmarks_old.aux.
+\openout1 = `Benchmarks_old.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Trying to load font information for T1+pnc on input line 43
+.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pnc.fd
+File: t1pnc.fd 2001/06/04 font definitions for T1/pnc.
+)
+Package biblatex Info: Trying to load language 'USenglish'...
+Package biblatex Info: ... file 'USenglish.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/USenglish.lbx
+File: USenglish.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/american.lbx
+File: american.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+))
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/american.lbx
+File: american.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+)))
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout3 = `Benchmarks_old.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'Benchmarks_old.bbl' not found.
+
+No file Benchmarks_old.bbl.
+Package biblatex Info: Reference section=0 on input line 43.
+Package biblatex Info: Reference segment=0 on input line 43.
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count383
+\scratchdimen=\dimen142
+\scratchbox=\box48
+\nofMPsegments=\count384
+\nofMParguments=\count385
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count386
+\MPscratchDim=\dimen143
+\MPnumerator=\count387
+\makeMPintoPDFobject=\count388
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count389
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--60
+
+ []
+
+
+LaTeX Warning: Citation 'STREAM-c' on page 1 undefined on input line 64.
+
+Excluding 'comment' comment.
+Overfull \hbox (3.28448pt too wide) in paragraph at lines 64--76
+\T1/pnc/m/n/12 The STREAM[[]] bench-mark is a syn-thetic and sim-ple bench-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--76
+
+ []
+
+[1
+
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+<./images/DRAM_stream2.png, id=8, 565.11125pt x 314.17375pt>
+File: ./images/DRAM_stream2.png Graphic file (type png)
+<use ./images/DRAM_stream2.png>
+Package pdftex.def Info: ./images/DRAM_stream2.png  used on input line 78.
+(pdftex.def)             Requested size: 395.57516pt x 219.92012pt.
+
+Overfull \hbox (5.57516pt too wide) in paragraph at lines 78--79
+[][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 85
+.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [2 <./images/DRAM_stream2.png>]
+<./images/NVDIMM_stream2.png, id=15, 563.10374pt x 313.17pt>
+File: ./images/NVDIMM_stream2.png Graphic file (type png)
+<use ./images/NVDIMM_stream2.png>
+Package pdftex.def Info: ./images/NVDIMM_stream2.png  used on input line 120.
+(pdftex.def)             Requested size: 394.16994pt x 219.21748pt.
+
+Overfull \hbox (21.79475pt too wide) in paragraph at lines 120--123
+[][] 
+ []
+
+[3]
+Overfull \hbox (8.98431pt too wide) in paragraph at lines 125--128
+\T1/pnc/m/n/12 Graphs and ta-bles be-low show the speed of a cer-tain amount of
+ NVDIMM
+ []
+
+[4 <./images/NVDIMM_stream2.png>] [5] [6]
+Overfull \hbox (5.16795pt too wide) in paragraph at lines 196--197
+\T1/pnc/m/n/12 threads trans-fer from DRAM-DRAM and an-other group from NVDIMM-
+
+ []
+
+
+Overfull \hbox (9.63235pt too wide) in paragraph at lines 196--197
+\T1/pnc/m/n/12 bined speed of all the threads that are copy-ing from NVDIMM-NVD
+IMM. 
+ []
+
+<./images/NVM-NVM_table_p1_1-100_v3.png, id=29, 426.59375pt x 616.3025pt>
+File: ./images/NVM-NVM_table_p1_1-100_v3.png Graphic file (type png)
+<use ./images/NVM-NVM_table_p1_1-100_v3.png>
+Package pdftex.def Info: ./images/NVM-NVM_table_p1_1-100_v3.png  used on input 
+line 206.
+(pdftex.def)             Requested size: 298.61357pt x 431.40881pt.
+<./images/NVM-NVM_table_p2_1-100_v3.png, id=30, 426.59375pt x 292.09125pt>
+File: ./images/NVM-NVM_table_p2_1-100_v3.png Graphic file (type png)
+<use ./images/NVM-NVM_table_p2_1-100_v3.png>
+Package pdftex.def Info: ./images/NVM-NVM_table_p2_1-100_v3.png  used on input 
+line 211.
+(pdftex.def)             Requested size: 298.61357pt x 204.46246pt.
+<./images/NVM-NVM_Graph_1-20_v3.png, id=31, 568.1225pt x 313.17pt>
+File: ./images/NVM-NVM_Graph_1-20_v3.png Graphic file (type png)
+<use ./images/NVM-NVM_Graph_1-20_v3.png>
+Package pdftex.def Info: ./images/NVM-NVM_Graph_1-20_v3.png  used on input line
+ 216.
+(pdftex.def)             Requested size: 397.68303pt x 219.21748pt.
+
+Overfull \hbox (7.68303pt too wide) in paragraph at lines 216--217
+[][] 
+ []
+
+[7] [8 <./images/NVM-NVM_table_p1_1-100_v3.png>] [9 <./images/NVM-NVM_table_p2_
+1-100_v3.png> <./images/NVM-NVM_Graph_1-20_v3.png>]
+<./images/NVM-DRAM_table_p1_1-100_v3.png, id=45, 425.59pt x 615.29875pt>
+File: ./images/NVM-DRAM_table_p1_1-100_v3.png Graphic file (type png)
+<use ./images/NVM-DRAM_table_p1_1-100_v3.png>
+Package pdftex.def Info: ./images/NVM-DRAM_table_p1_1-100_v3.png  used on input
+ line 224.
+(pdftex.def)             Requested size: 297.91095pt x 430.70618pt.
+<./images/NVM-DRAM_table_p2_1-100_v3.png, id=46, 425.59pt x 292.09125pt>
+File: ./images/NVM-DRAM_table_p2_1-100_v3.png Graphic file (type png)
+<use ./images/NVM-DRAM_table_p2_1-100_v3.png>
+Package pdftex.def Info: ./images/NVM-DRAM_table_p2_1-100_v3.png  used on input
+ line 229.
+(pdftex.def)             Requested size: 297.91095pt x 204.46246pt.
+<./images/NVM-DRAM_Graph_1-20_v3.png, id=47, 562.1pt x 316.18124pt>
+File: ./images/NVM-DRAM_Graph_1-20_v3.png Graphic file (type png)
+<use ./images/NVM-DRAM_Graph_1-20_v3.png>
+Package pdftex.def Info: ./images/NVM-DRAM_Graph_1-20_v3.png  used on input lin
+e 234.
+(pdftex.def)             Requested size: 393.46732pt x 221.32535pt.
+
+Overfull \hbox (3.46732pt too wide) in paragraph at lines 234--235
+[][] 
+ []
+
+[10
+
+ <./images/NVM-DRAM_table_p1_1-100_v3.png>] [11 <./images/NVM-DRAM_table_p2_1-1
+00_v3.png> <./images/NVM-DRAM_Graph_1-20_v3.png>]
+<./images/DRAM-NVM_table_p1_1-100_v3.png, id=57, 425.59pt x 616.3025pt>
+File: ./images/DRAM-NVM_table_p1_1-100_v3.png Graphic file (type png)
+<use ./images/DRAM-NVM_table_p1_1-100_v3.png>
+Package pdftex.def Info: ./images/DRAM-NVM_table_p1_1-100_v3.png  used on input
+ line 242.
+(pdftex.def)             Requested size: 297.91095pt x 431.40881pt.
+<./images/DRAM-NVM_table_p2_1-100_v3.png, id=58, 425.59pt x 291.0875pt>
+File: ./images/DRAM-NVM_table_p2_1-100_v3.png Graphic file (type png)
+<use ./images/DRAM-NVM_table_p2_1-100_v3.png>
+Package pdftex.def Info: ./images/DRAM-NVM_table_p2_1-100_v3.png  used on input
+ line 247.
+(pdftex.def)             Requested size: 297.91095pt x 203.75984pt.
+<./images/DRAM-NVM_Graph_1-20_v3.png, id=59, 572.1375pt x 316.18124pt>
+File: ./images/DRAM-NVM_Graph_1-20_v3.png Graphic file (type png)
+<use ./images/DRAM-NVM_Graph_1-20_v3.png>
+Package pdftex.def Info: ./images/DRAM-NVM_Graph_1-20_v3.png  used on input lin
+e 252.
+(pdftex.def)             Requested size: 400.49352pt x 221.32535pt.
+
+Overfull \hbox (10.49352pt too wide) in paragraph at lines 252--253
+[][] 
+ []
+
+[12
+
+ <./images/DRAM-NVM_table_p1_1-100_v3.png>] [13 <./images/DRAM-NVM_table_p2_1-1
+00_v3.png> <./images/DRAM-NVM_Graph_1-20_v3.png>]
+<./images/DRAM_only_16M.png, id=70, 351.3125pt x 293.095pt>
+File: ./images/DRAM_only_16M.png Graphic file (type png)
+<use ./images/DRAM_only_16M.png>
+Package pdftex.def Info: ./images/DRAM_only_16M.png  used on input line 264.
+(pdftex.def)             Requested size: 245.91707pt x 205.16508pt.
+ [14
+
+ <./images/DRAM_only_16M.png>] [15]
+Overfull \hbox (9.2245pt too wide) in paragraph at lines 322--324
+\T1/pnc/m/n/12 The ar-rays x and xk_1 are dou-ble ar-rays that have the length 
+of 4'000'000
+ []
+
+
+Overfull \hbox (31.25519pt too wide) in paragraph at lines 322--324
+\T1/pnc/m/n/12 once. The for-mula for cal-cu-lat-ing mem-ory traf-fic is 3*4'00
+0'000+2*31'976'004
+ []
+
+<./images/DRAM_only_DataGeneration_16M.png, id=78, 530.98375pt x 412.54124pt>
+File: ./images/DRAM_only_DataGeneration_16M.png Graphic file (type png)
+<use ./images/DRAM_only_DataGeneration_16M.png>
+Package pdftex.def Info: ./images/DRAM_only_DataGeneration_16M.png  used on inp
+ut line 343.
+(pdftex.def)             Requested size: 371.68608pt x 288.7769pt.
+[16] [17 <./images/DRAM_only_DataGeneration_16M.png>]
+<./images/DRAM_only_Analyze_16M.png, id=86, 531.9875pt x 396.48125pt>
+File: ./images/DRAM_only_Analyze_16M.png Graphic file (type png)
+<use ./images/DRAM_only_Analyze_16M.png>
+Package pdftex.def Info: ./images/DRAM_only_Analyze_16M.png  used on input line
+ 375.
+(pdftex.def)             Requested size: 372.38872pt x 277.53497pt.
+ [18
+
+] [19 <./images/DRAM_only_Analyze_16M.png>]
+<./images/Stream_benchmark.png, id=95, 443.6575pt x 291.0875pt>
+File: ./images/Stream_benchmark.png Graphic file (type png)
+<use ./images/Stream_benchmark.png>
+Package pdftex.def Info: ./images/Stream_benchmark.png  used on input line 385.
+
+(pdftex.def)             Requested size: 310.55812pt x 203.75984pt.
+<./images/Stream_NVM_sum.png, id=96, 494.84875pt x 307.1475pt>
+File: ./images/Stream_NVM_sum.png Graphic file (type png)
+<use ./images/Stream_NVM_sum.png>
+Package pdftex.def Info: ./images/Stream_NVM_sum.png  used on input line 390.
+(pdftex.def)             Requested size: 346.39177pt x 215.00177pt.
+ [20
+
+ <./images/Stream_benchmark.png>] [21 <./images/Stream_NVM_sum.png>]
+<./images/Benchmark_only_prediction.png, id=105, 531.9875pt x 410.53375pt>
+File: ./images/Benchmark_only_prediction.png Graphic file (type png)
+<use ./images/Benchmark_only_prediction.png>
+Package pdftex.def Info: ./images/Benchmark_only_prediction.png  used on input 
+line 397.
+(pdftex.def)             Requested size: 372.38872pt x 287.37166pt.
+ [22
+
+ <./images/Benchmark_only_prediction.png>]
+<./images/NVDIMM_analyze_only.png, id=110, 114.4275pt x 275.0275pt>
+File: ./images/NVDIMM_analyze_only.png Graphic file (type png)
+<use ./images/NVDIMM_analyze_only.png>
+Package pdftex.def Info: ./images/NVDIMM_analyze_only.png  used on input line 4
+04.
+(pdftex.def)             Requested size: 80.0987pt x 192.51793pt.
+ [23
+
+ <./images/NVDIMM_analyze_only.png>]
+<./images/lock_overview.png, id=115, 287.57437pt x 158.09062pt>
+File: ./images/lock_overview.png Graphic file (type png)
+<use ./images/lock_overview.png>
+Package pdftex.def Info: ./images/lock_overview.png  used on input line 419.
+(pdftex.def)             Requested size: 287.57367pt x 158.09023pt.
+ [24
+
+ <./images/lock_overview.png>] [25]
+<./images/Simulation_NVM_2.png, id=123, 539.01375pt x 290.08376pt>
+File: ./images/Simulation_NVM_2.png Graphic file (type png)
+<use ./images/Simulation_NVM_2.png>
+Package pdftex.def Info: ./images/Simulation_NVM_2.png  used on input line 480.
+
+(pdftex.def)             Requested size: 377.30704pt x 203.05724pt.
+<./images/Predicted_calculation.png, id=124, 489.83pt x 289.08pt>
+File: ./images/Predicted_calculation.png Graphic file (type png)
+<use ./images/Predicted_calculation.png>
+Package pdftex.def Info: ./images/Predicted_calculation.png  used on input line
+ 487.
+(pdftex.def)             Requested size: 342.87866pt x 202.35461pt.
+<./images/Predicted_calculation_3.png, id=125, 464.73625pt x 292.09125pt>
+File: ./images/Predicted_calculation_3.png Graphic file (type png)
+<use ./images/Predicted_calculation_3.png>
+Package pdftex.def Info: ./images/Predicted_calculation_3.png  used on input li
+ne 492.
+(pdftex.def)             Requested size: 325.31316pt x 204.46246pt.
+<./images/Array-counting.png, id=126, 457.71pt x 88.33pt>
+File: ./images/Array-counting.png Graphic file (type png)
+<use ./images/Array-counting.png>
+Package pdftex.def Info: ./images/Array-counting.png  used on input line 497.
+(pdftex.def)             Requested size: 320.39482pt x 61.83057pt.
+<./images/Predicted_calculation_2.png, id=127, 409.53pt x 90.3375pt>
+File: ./images/Predicted_calculation_2.png Graphic file (type png)
+<use ./images/Predicted_calculation_2.png>
+Package pdftex.def Info: ./images/Predicted_calculation_2.png  used on input li
+ne 502.
+(pdftex.def)             Requested size: 286.66904pt x 63.23581pt.
+<./images/Datagen_prediction_NVM.png, id=128, 542.025pt x 396.48125pt>
+File: ./images/Datagen_prediction_NVM.png Graphic file (type png)
+<use ./images/Datagen_prediction_NVM.png>
+Package pdftex.def Info: ./images/Datagen_prediction_NVM.png  used on input lin
+e 507.
+(pdftex.def)             Requested size: 379.4149pt x 277.53497pt.
+<./images/Analyze_prediction_NVM.png, id=129, 626.34pt x 377.41pt>
+File: ./images/Analyze_prediction_NVM.png Graphic file (type png)
+<use ./images/Analyze_prediction_NVM.png>
+Package pdftex.def Info: ./images/Analyze_prediction_NVM.png  used on input lin
+e 512.
+(pdftex.def)             Requested size: 438.435pt x 264.1852pt.
+
+Overfull \hbox (48.435pt too wide) in paragraph at lines 512--513
+[][] 
+ []
+
+[26 <./images/Simulation_NVM_2.png>] [27 <./images/Predicted_calculation.png> <
+./images/Predicted_calculation_3.png> <./images/Array-counting.png>] [28 <./ima
+ges/Predicted_calculation_2.png> <./images/Datagen_prediction_NVM.png>]
+[29 <./images/Analyze_prediction_NVM.png>]
+Overfull \hbox (102.7494pt too wide) in paragraph at lines 519--520
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][]  
+ []
+
+<./images/2D_array_test.png, id=149, 244.915pt x 631.35875pt>
+File: ./images/2D_array_test.png Graphic file (type png)
+<use ./images/2D_array_test.png>
+Package pdftex.def Info: ./images/2D_array_test.png  used on input line 522.
+(pdftex.def)             Requested size: 171.43932pt x 441.9481pt.
+[30
+
+ <./images/2D_array_test.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 528--533
+
+ []
+
+[31
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 535.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 535.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 535.
+<./images/Formula_calculation.png, id=158, 389.455pt x 122.4575pt>
+File: ./images/Formula_calculation.png Graphic file (type png)
+<use ./images/Formula_calculation.png>
+Package pdftex.def Info: ./images/Formula_calculation.png  used on input line 5
+44.
+(pdftex.def)             Requested size: 272.61664pt x 85.71965pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 540--547
+
+ []
+
+<./images/Formula_First_version.png, id=159, 662.475pt x 140.525pt>
+File: ./images/Formula_First_version.png Graphic file (type png)
+<use ./images/Formula_First_version.png>
+Package pdftex.def Info: ./images/Formula_First_version.png  used on input line
+ 549.
+(pdftex.def)             Requested size: 463.72934pt x 98.3668pt.
+
+Overfull \hbox (73.72934pt too wide) in paragraph at lines 549--550
+[][] 
+ []
+
+<./images/Formula_Second_version.png, id=160, 658.46pt x 138.5175pt>
+File: ./images/Formula_Second_version.png Graphic file (type png)
+<use ./images/Formula_Second_version.png>
+Package pdftex.def Info: ./images/Formula_Second_version.png  used on input lin
+e 554.
+(pdftex.def)             Requested size: 460.91887pt x 96.96158pt.
+
+Overfull \hbox (70.91887pt too wide) in paragraph at lines 554--555
+[][] 
+ []
+
+[32
+
+ <./images/Formula_calculation.png> <./images/Formula_First_version.png> <./ima
+ges/Formula_Second_version.png>] [33]
+Overfull \hbox (55.40668pt too wide) in paragraph at lines 607--608
+[][][][][][][][][][][][][][][][][][][]  
+ []
+
+[34]
+Overfull \hbox (7.48431pt too wide) in paragraph at lines 644--645
+[][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[35]
+Overfull \hbox (7.48431pt too wide) in paragraph at lines 696--697
+[][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[36]
+<./images/First_version_DRAM_only_17_9_21.png, id=182, 820.06375pt x 411.5375pt
+>
+File: ./images/First_version_DRAM_only_17_9_21.png Graphic file (type png)
+<use ./images/First_version_DRAM_only_17_9_21.png>
+Package pdftex.def Info: ./images/First_version_DRAM_only_17_9_21.png  used on 
+input line 707.
+(pdftex.def)             Requested size: 492.04205pt x 246.92441pt.
+
+Overfull \hbox (102.04205pt too wide) in paragraph at lines 707--708
+[][] 
+ []
+
+<./images/first_version_more_detailed_1.png, id=183, 808.01875pt x 716.6775pt>
+File: ./images/first_version_more_detailed_1.png Graphic file (type png)
+<use ./images/first_version_more_detailed_1.png>
+Package pdftex.def Info: ./images/first_version_more_detailed_1.png  used on in
+put line 712.
+(pdftex.def)             Requested size: 484.815pt x 430.00983pt.
+
+Overfull \hbox (94.815pt too wide) in paragraph at lines 712--713
+[][] 
+ []
+
+<./images/first_version_more_detailed_2.png, id=184, 805.0075pt x 700.6175pt>
+File: ./images/first_version_more_detailed_2.png Graphic file (type png)
+<use ./images/first_version_more_detailed_2.png>
+Package pdftex.def Info: ./images/first_version_more_detailed_2.png  used on in
+put line 717.
+(pdftex.def)             Requested size: 483.00824pt x 420.37373pt.
+
+Overfull \hbox (93.00824pt too wide) in paragraph at lines 717--718
+[][] 
+ []
+
+<./images/Large_array_test_first_version_v5.png, id=185, 662.475pt x 600.2425pt
+>
+File: ./images/Large_array_test_first_version_v5.png Graphic file (type png)
+<use ./images/Large_array_test_first_version_v5.png>
+Package pdftex.def Info: ./images/Large_array_test_first_version_v5.png  used o
+n input line 722.
+(pdftex.def)             Requested size: 463.72934pt x 420.16689pt.
+
+Overfull \hbox (73.72934pt too wide) in paragraph at lines 722--723
+[][] 
+ []
+
+<./images/Large_array_test_second_version_v3.png, id=186, 659.46375pt x 598.235
+pt>
+File: ./images/Large_array_test_second_version_v3.png Graphic file (type png)
+<use ./images/Large_array_test_second_version_v3.png>
+Package pdftex.def Info: ./images/Large_array_test_second_version_v3.png  used 
+on input line 727.
+(pdftex.def)             Requested size: 461.62148pt x 418.76164pt.
+
+Overfull \hbox (71.62148pt too wide) in paragraph at lines 727--728
+[][] 
+ []
+
+<./images/Large_array_test_first_version_v2.png, id=187, 555.07375pt x 292.0912
+5pt>
+File: ./images/Large_array_test_first_version_v2.png Graphic file (type png)
+<use ./images/Large_array_test_first_version_v2.png>
+Package pdftex.def Info: ./images/Large_array_test_first_version_v2.png  used o
+n input line 732.
+(pdftex.def)             Requested size: 388.54897pt x 204.46246pt.
+<./images/Large_array_test_first_version_v3.png, id=188, 554.07pt x 289.08pt>
+File: ./images/Large_array_test_first_version_v3.png Graphic file (type png)
+<use ./images/Large_array_test_first_version_v3.png>
+Package pdftex.def Info: ./images/Large_array_test_first_version_v3.png  used o
+n input line 737.
+(pdftex.def)             Requested size: 387.84636pt x 202.35461pt.
+<./images/Large_array_test_second_version_v2.png, id=189, 572.1375pt x 293.095p
+t>
+File: ./images/Large_array_test_second_version_v2.png Graphic file (type png)
+<use ./images/Large_array_test_second_version_v2.png>
+Package pdftex.def Info: ./images/Large_array_test_second_version_v2.png  used 
+on input line 742.
+(pdftex.def)             Requested size: 400.49352pt x 205.16508pt.
+
+Overfull \hbox (10.49352pt too wide) in paragraph at lines 742--743
+[][] 
+ []
+
+<./images/Large_array_test_second_version_NVDIMM_only_v2.png, id=190, 316.18124
+pt x 308.15125pt>
+File: ./images/Large_array_test_second_version_NVDIMM_only_v2.png Graphic file 
+(type png)
+<use ./images/Large_array_test_second_version_NVDIMM_only_v2.png>
+Package pdftex.def Info: ./images/Large_array_test_second_version_NVDIMM_only_v
+2.png  used on input line 747.
+(pdftex.def)             Requested size: 221.32535pt x 215.70439pt.
+<./images/DRAM_only_on_n50.png, id=191, 382.42876pt x 346.29375pt>
+File: ./images/DRAM_only_on_n50.png Graphic file (type png)
+<use ./images/DRAM_only_on_n50.png>
+Package pdftex.def Info: ./images/DRAM_only_on_n50.png  used on input line 752.
+
+(pdftex.def)             Requested size: 267.69829pt x 242.40396pt.
+[37 <./images/First_version_DRAM_only_17_9_21.png>] [38 <./images/first_version
+_more_detailed_1.png>] [39 <./images/first_version_more_detailed_2.png>]
+[40 <./images/Large_array_test_first_version_v5.png>] [41 <./images/Large_array
+_test_second_version_v3.png>] [42 <./images/Large_array_test_first_version_v2.p
+ng> <./images/Large_array_test_first_version_v3.png>] [43 <./images/Large_array
+_test_second_version_v2.png> <./images/Large_array_test_second_version_NVDIMM_o
+nly_v2.png>] [44 <./images/DRAM_only_on_n50.png>]
+
+LaTeX Warning: Empty bibliography on input line 761.
+
+(./Benchmarks_old.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                Benchmarks_old
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'Benchmarks_old.run.xml'.
+\openout1 = `Benchmarks_old.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 12171 strings out of 480623
+ 213656 string characters out of 5906693
+ 877472 words of memory out of 5000000
+ 27910 multiletter control sequences out of 15000+600000
+ 550915 words of font info for 49 fonts, out of 8000000 for 9000
+ 1137 hyphenation exceptions out of 8191
+ 35i,8n,40p,872b,1705s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncn
+trsbk/uncb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a
+.pfb>
+Output written on Benchmarks_old.pdf (44 pages, 1041240 bytes).
+PDF statistics:
+ 253 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+

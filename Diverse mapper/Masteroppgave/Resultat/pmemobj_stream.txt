@@ -1,0 +1,57 @@
+pmemobj copy
+From DRAM to DRAM
+Time: 0.145580
+MB/S: 10990.52
+From DRAM to NVM
+Time: 0.169558
+MB/S: 9436.31
+From NVM to DRAM
+Time: 0.183656
+MB/S: 8711.94
+From NVM to NVM
+Time: 0.236664
+MB/S: 6760.64
+
+pmemobj scale
+From DRAM to DRAM
+Time: 0.142467
+MB/S: 11230.67
+From DRAM to NVM
+Time: 0.177467
+MB/S: 9015.77
+From NVM to DRAM
+Time: 0.208540
+MB/S: 7672.39
+From NVM to NVM
+Time: 0.264040
+MB/S: 6059.69
+
+
+pmemobj add
+From DRAM to DRAM
+Time: 0.200758
+MB/S: 11954.69
+From DRAM to NVM
+Time: 0.213526
+MB/S: 11239.85
+From NVM to DRAM
+Time: 0.266773
+MB/S: 8996.41
+From NVM to NVM
+Time: 0.388663
+MB/S: 6175.01
+
+pmemobj triad
+From DRAM to DRAM
+Time: 0.216484
+MB/S: 11086.27
+From DRAM to NVM
+Time: 0.221217
+MB/S: 10849.08
+From NVM to DRAM
+Time: 0.294632
+MB/S: 8145.76
+From NVM to NVM
+Time: 0.413037
+MB/S: 5810.62
+

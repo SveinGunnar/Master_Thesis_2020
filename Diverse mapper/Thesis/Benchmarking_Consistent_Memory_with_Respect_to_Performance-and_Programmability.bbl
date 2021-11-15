@@ -1,0 +1,522 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Badam}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9d244388af17598f32d561a4f802fe60}{%
+           family={Badam},
+           familyi={B\bibinitperiod},
+           given={Anirudh},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{9d244388af17598f32d561a4f802fe60}
+      \strng{fullhash}{9d244388af17598f32d561a4f802fe60}
+      \strng{bibnamehash}{9d244388af17598f32d561a4f802fe60}
+      \strng{authorbibnamehash}{9d244388af17598f32d561a4f802fe60}
+      \strng{authornamehash}{9d244388af17598f32d561a4f802fe60}
+      \strng{authorfullhash}{9d244388af17598f32d561a4f802fe60}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0018-9162}
+      \field{journaltitle}{Computer}
+      \field{number}{8}
+      \field{title}{How Persistent Memory Will Change Software Systems}
+      \field{volume}{46}
+      \field{year}{2013}
+      \field{pages}{45\bibrangedash 51}
+      \range{pages}{7}
+      \keyw{Random Access Memory ; Storge Systems ; File Systems ; Memory Management ; Hardware ; Nonvolatile Memory ; Persistent Ram ; Nonvolatile Memory ; Storage Systems ; Engineering ; Computer Science ; nocite}
+    \endentry
+    \entry{optane2}{online}{}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labeltitlesource}{title}
+      \field{title}{Big Memory Breakthrough for Your Biggest Data Challenges}
+      \field{urlday}{27}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.intel.com/content/www/us/en/architecture-and-technology/optane-dc-persistent-memory.html
+      \endverb
+      \verb{url}
+      \verb https://www.intel.com/content/www/us/en/architecture-and-technology/optane-dc-persistent-memory.html
+      \endverb
+    \endentry
+    \entry{Swanson}{article}{}
+      \name{author}{7}{}{%
+        {{hash=b61ed866587ca1f000a757151c9e9cf0}{%
+           family={Coburn},
+           familyi={C\bibinitperiod},
+           given={Joel},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5432c87874329072eae0cdaec7c3c564}{%
+           family={Caulfield},
+           familyi={C\bibinitperiod},
+           given={Adrian},
+           giveni={A\bibinitperiod}}}%
+        {{hash=fdb8d9fec16da0572c0033bd5991a0ed}{%
+           family={Akel},
+           familyi={A\bibinitperiod},
+           given={Ameen},
+           giveni={A\bibinitperiod}}}%
+        {{hash=35065dc62be793dd4c85a66bc972692d}{%
+           family={Grupp},
+           familyi={G\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=e8df3c5f9637ed517e6ac49527dae617}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Rajesh},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0b731274f4d045521bac73df419287ea}{%
+           family={Jhala},
+           familyi={J\bibinitperiod},
+           given={Ranjit},
+           giveni={R\bibinitperiod}}}%
+        {{hash=556dc9c4ab42e4f73c58ffd2ca79fab0}{%
+           family={Swanson},
+           familyi={S\bibinitperiod},
+           given={Steven},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{aac29442e662d8cac71dcc3bb3c65c24}
+      \strng{fullhash}{08c711f3fb3efbeb642704fc703aab64}
+      \strng{bibnamehash}{aac29442e662d8cac71dcc3bb3c65c24}
+      \strng{authorbibnamehash}{aac29442e662d8cac71dcc3bb3c65c24}
+      \strng{authornamehash}{aac29442e662d8cac71dcc3bb3c65c24}
+      \strng{authorfullhash}{08c711f3fb3efbeb642704fc703aab64}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1558-1160}
+      \field{journaltitle}{ACM SIGPLAN Notices}
+      \field{number}{3}
+      \field{title}{NV-Heaps: making persistent objects fast and safe with next-generation, non-volatile memories}
+      \field{volume}{46}
+      \field{year}{2011}
+      \field{pages}{105\bibrangedash 118}
+      \range{pages}{14}
+      \keyw{Acid Transactions ; Memory Mangement ; Non-Volatile Heap ; Persistent Objects ; Phase-Change Memory ; Pointer Safety ; Spin-Torque Transfer Memory ; Transactional Memory ; Computer Science ; nocite}
+    \endentry
+    \entry{lerebok}{book}{}
+      \name{author}{2}{}{%
+        {{hash=9e49d522461c2d5d9e44584ac6102f43}{%
+           family={Hager},
+           familyi={H\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=0623d76ccb0e0ac76b02be5a26c96d44}{%
+           family={Wellein},
+           familyi={W\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {CRC Press}%
+      }
+      \strng{namehash}{e44c0571bb2b75487dea9ffb739a0344}
+      \strng{fullhash}{e44c0571bb2b75487dea9ffb739a0344}
+      \strng{bibnamehash}{e44c0571bb2b75487dea9ffb739a0344}
+      \strng{authorbibnamehash}{e44c0571bb2b75487dea9ffb739a0344}
+      \strng{authornamehash}{e44c0571bb2b75487dea9ffb739a0344}
+      \strng{authorfullhash}{e44c0571bb2b75487dea9ffb739a0344}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781439811924}
+      \field{title}{Introduction to High Performance Computing for Scientists and Engineers}
+      \field{year}{2010}
+    \endentry
+    \entry{Mahmut}{article}{}
+      \name{author}{9}{}{%
+        {{hash=7528bcc74c3d0b49bc834156f111fcac}{%
+           family={Jung},
+           familyi={J\bibinitperiod},
+           given={Myoungsoo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f619e5387cffb6f9dfb94d54b102fccd}{%
+           family={Wilson},
+           familyi={W\bibinitperiod},
+           given={Ellis\bibnamedelima H.},
+           giveni={E\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=b7ebf599d992b4c666f21249b4d2b9fd}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Wonil},
+           giveni={W\bibinitperiod}}}%
+        {{hash=8411e32c5282692ec8fb33ae8efc7b3a}{%
+           family={Shalf},
+           familyi={S\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=bdab9808340c84661623c3e921a0904a}{%
+           family={Aktulga},
+           familyi={A\bibinitperiod},
+           given={Hasan\bibnamedelima Metin},
+           giveni={H\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=454ea16c1c785e565fba3d4d6241e59b}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Chao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=97d7640db1038cb73d21235c1278d57a}{%
+           family={Saule},
+           familyi={S\bibinitperiod},
+           given={Erik},
+           giveni={E\bibinitperiod}}}%
+        {{hash=03730290e0326eadd6f762abc5e3c285}{%
+           family={Catalyurek},
+           familyi={C\bibinitperiod},
+           given={Umit\bibnamedelima V.},
+           giveni={U\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=adb15975117da520706189020b8d02e7}{%
+           family={Kandemir},
+           familyi={K\bibinitperiod},
+           given={Mahmut},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{publisher}{1}{%
+        {Hindawi Limited}%
+      }
+      \strng{namehash}{48ffb12835f0b169c852069f8d7d786b}
+      \strng{fullhash}{4c93940c9e4f8b57db088dfceb9f3b60}
+      \strng{bibnamehash}{48ffb12835f0b169c852069f8d7d786b}
+      \strng{authorbibnamehash}{48ffb12835f0b169c852069f8d7d786b}
+      \strng{authornamehash}{48ffb12835f0b169c852069f8d7d786b}
+      \strng{authorfullhash}{4c93940c9e4f8b57db088dfceb9f3b60}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1058-9244}
+      \field{journaltitle}{Scientific Programming}
+      \field{number}{2}
+      \field{title}{Exploring the Future of Out-of-Core Computing with Compute-Local Non-Volatile Memory}
+      \field{volume}{22}
+      \field{year}{2014}
+      \field{pages}{125\bibrangedash 139}
+      \range{pages}{15}
+      \keyw{Computer Science ; nocite}
+    \endentry
+    \entry{STREAM-c}{online}{}
+      \name{author}{1}{}{%
+        {{hash=bc60a5a08e5558c79a4a8ae2c6970cbd}{%
+           family={McCalpin},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{fullhash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{bibnamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authorbibnamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authornamehash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \strng{authorfullhash}{bc60a5a08e5558c79a4a8ae2c6970cbd}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{STREAM source code}
+      \field{urlday}{20}
+      \field{urlmonth}{12}
+      \field{urlyear}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      \endverb
+      \verb{url}
+      \verb https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      \endverb
+    \endentry
+    \entry{Rudoff}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e386509915366b91c9547cf56e7afa42}{%
+           family={Rudoff},
+           familyi={R\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{fullhash}{e386509915366b91c9547cf56e7afa42}
+      \strng{bibnamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authorbibnamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authornamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authorfullhash}{e386509915366b91c9547cf56e7afa42}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Login}
+      \field{number}{2}
+      \field{title}{Persistent Memory Programming}
+      \field{volume}{42}
+      \field{year}{2017}
+      \field{pages}{125\bibrangedash 139}
+      \range{pages}{15}
+      \keyw{nocite}
+    \endentry
+    \entry{Rudoff2}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=e386509915366b91c9547cf56e7afa42}{%
+           family={Rudoff},
+           familyi={R\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{fullhash}{e386509915366b91c9547cf56e7afa42}
+      \strng{bibnamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authorbibnamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authornamehash}{e386509915366b91c9547cf56e7afa42}
+      \strng{authorfullhash}{e386509915366b91c9547cf56e7afa42}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Workshop on memory centric programming for hpc}
+      \field{isbn}{9781450351317}
+      \field{series}{MCHPC'17}
+      \field{title}{Persistent Memory: The Value to HPC and the Challenges}
+      \field{volume}{2017-}
+      \field{year}{2017}
+      \field{pages}{7\bibrangedash 10}
+      \range{pages}{4}
+      \keyw{Nvm Programming ; Persistent Memory ; Storage Class Memory ; nocite}
+    \endentry
+    \entry{optane}{online}{}
+      \name{author}{1}{}{%
+        {{hash=a443a8fd858cad48279f0119f610df60}{%
+           family={Rudoff},
+           familyi={R\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod},
+           prefix={m.},
+           prefixi={m\bibinitperiod}}}%
+      }
+      \strng{namehash}{a443a8fd858cad48279f0119f610df60}
+      \strng{fullhash}{a443a8fd858cad48279f0119f610df60}
+      \strng{bibnamehash}{a443a8fd858cad48279f0119f610df60}
+      \strng{authorbibnamehash}{a443a8fd858cad48279f0119f610df60}
+      \strng{authornamehash}{a443a8fd858cad48279f0119f610df60}
+      \strng{authorfullhash}{a443a8fd858cad48279f0119f610df60}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Intel Optane DC Persistent Memory: A Major Advance in Memory and Storage Architecture}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://software.intel.com/en-us/blogs/2018/10/30/intel-optane-dc-persistent-memory-a-major-advance-in-memory-and-storage-architecture
+      \endverb
+      \verb{url}
+      \verb https://software.intel.com/en-us/blogs/2018/10/30/intel-optane-dc-persistent-memory-a-major-advance-in-memory-and-storage-architecture
+      \endverb
+    \endentry
+    \entry{side1}{online}{}
+      \name{author}{1}{}{%
+        {{hash=4c416fa1fe72b46542ed3d1a64b8a093}{%
+           family={Spelman},
+           familyi={S\bibinitperiod},
+           given={Lisa},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \strng{fullhash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \strng{bibnamehash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \strng{authorbibnamehash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \strng{authornamehash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \strng{authorfullhash}{4c416fa1fe72b46542ed3d1a64b8a093}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Reimagining the Data Center Memory and Storage Hierarchy}
+      \field{urlday}{22}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://newsroom.intel.com/editorials/re-architecting-data-center-memory-storage-hierarchy/#gs.d0rr1r
+      \endverb
+      \verb{url}
+      \verb https://newsroom.intel.com/editorials/re-architecting-data-center-memory-storage-hierarchy/#gs.d0rr1r
+      \endverb
+    \endentry
+    \entry{libpmemblk}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{The libpmemblk library}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://pmem.io/pmdk/libpmemblk/
+      \endverb
+      \verb{url}
+      \verb http://pmem.io/pmdk/libpmemblk/
+      \endverb
+    \endentry
+    \entry{libpmemlog}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{The libpmemlog library}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://pmem.io/pmdk/libpmemlog/
+      \endverb
+      \verb{url}
+      \verb http://pmem.io/pmdk/libpmemlog/
+      \endverb
+    \endentry
+    \entry{libpmemobj}{online}{}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labeltitlesource}{title}
+      \field{title}{The libpmemobj library}
+      \field{urlday}{25}
+      \field{urlmonth}{5}
+      \field{urlyear}{2019}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb http://pmem.io/pmdk/libpmemobj/
+      \endverb
+      \verb{url}
+      \verb http://pmem.io/pmdk/libpmemobj/
+      \endverb
+    \endentry
+    \entry{Volos}{article}{}
+      \name{author}{3}{}{%
+        {{hash=6657cccc96266e6f193290d528291167}{%
+           family={Volos},
+           familyi={V\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod}}}%
+        {{hash=5b907d005b177b969cd4d06cdfbde661}{%
+           family={Tack},
+           familyi={T\bibinitperiod},
+           given={Aj},
+           giveni={A\bibinitperiod}}}%
+        {{hash=72b98130ac82c62610e2f0c014b61803}{%
+           family={Swift},
+           familyi={S\bibinitperiod},
+           given={MM},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {English}%
+      }
+      \list{publisher}{1}{%
+        {ASSOC COMPUTING MACHINERY}%
+      }
+      \strng{namehash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \strng{fullhash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \strng{bibnamehash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \strng{authorbibnamehash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \strng{authornamehash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \strng{authorfullhash}{caf302c87d3f51dbc7f832daa3c3daa7}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0362-1340}
+      \field{journaltitle}{Acm Sigplan Notices}
+      \field{number}{4}
+      \field{title}{Mnemosyne: Lightweight Persistent Memory}
+      \field{volume}{47}
+      \field{year}{2012}
+      \field{pages}{91\bibrangedash 103}
+      \range{pages}{13}
+      \keyw{nocite}
+    \endentry
+    \entry{whatIsPMEM}{online}{}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labeltitlesource}{title}
+      \field{title}{What is Persistent Memory?}
+      \field{urlday}{13}
+      \field{urlmonth}{11}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.snia.org/education/what-is-persistent-memory
+      \endverb
+      \verb{url}
+      \verb https://www.snia.org/education/what-is-persistent-memory
+      \endverb
+    \endentry
+    \entry{whatIsPMEM2}{online}{}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labeltitlesource}{title}
+      \field{title}{What is Persistent Memory?}
+      \field{urlday}{13}
+      \field{urlmonth}{11}
+      \field{urlyear}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://pmem.io/
+      \endverb
+      \verb{url}
+      \verb https://pmem.io/
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

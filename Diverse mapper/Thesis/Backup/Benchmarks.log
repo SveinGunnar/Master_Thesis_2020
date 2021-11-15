@@ -1,0 +1,1291 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.4)  24 OCT 2021 19:20
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Benchmarks.tex
+(./Benchmarks.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-04-06>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2020/03/22 3.42 The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2020/03/22 3.42 Babel switching mechanism
+)
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/USenglish.ldf
+Language: USenglish 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2020/03/22 3.42 Babel common definitions
+\babel@savecnt=\count175
+\U@D=\dimen135
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count176
+)
+Package babel Info: \l@canadian = using hyphenrules for english
+(babel)             (\language0) on input line 102.
+Package babel Info: \l@australian = using hyphenrules for ukenglish
+(babel)             (\language27) on input line 105.
+Package babel Info: \l@newzealand = using hyphenrules for ukenglish
+(babel)             (\language27) on input line 108.
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count177
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+\csq@reset=\count178
+\csq@gtype=\count179
+\csq@glevel=\count180
+\csq@qlevel=\count181
+\csq@maxlvl=\count182
+\csq@tshold=\count183
+\csq@ltx@everypar=\toks18
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2019-12-06 v5.2j csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/newcent.sty
+Package: newcent 2020/03/25 PSNFSS-v9.3 (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2019/12/01 v3.14 programmable bibliographies (PK/MW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count184
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count185
+\c@listtotal=\count186
+\c@listcount=\count187
+\c@liststart=\count188
+\c@liststop=\count189
+\c@citecount=\count190
+\c@citetotal=\count191
+\c@multicitecount=\count192
+\c@multicitetotal=\count193
+\c@instcount=\count194
+\c@maxnames=\count195
+\c@minnames=\count196
+\c@maxitems=\count197
+\c@minitems=\count198
+\c@citecounter=\count199
+\c@maxcitecounter=\count266
+\c@savedcitecounter=\count267
+\c@uniquelist=\count268
+\c@uniquename=\count269
+\c@refsection=\count270
+\c@refsegment=\count271
+\c@maxextratitle=\count272
+\c@maxextratitleyear=\count273
+\c@maxextraname=\count274
+\c@maxextradate=\count275
+\c@maxextraalpha=\count276
+\c@abbrvpenalty=\count277
+\c@highnamepenalty=\count278
+\c@lownamepenalty=\count279
+\c@maxparens=\count280
+\c@parenlevel=\count281
+\blx@tempcnta=\count282
+\blx@tempcntb=\count283
+\blx@tempcntc=\count284
+\blx@maxsection=\count285
+\blx@maxsegment@0=\count286
+\blx@notetype=\count287
+\blx@parenlevel@text=\count288
+\blx@parenlevel@foot=\count289
+\blx@sectionciteorder@0=\count290
+\blx@entrysetcounter=\count291
+\labelnumberwidth=\skip49
+\labelalphawidth=\skip50
+\biblabelsep=\skip51
+\bibitemsep=\skip52
+\bibnamesep=\skip53
+\bibinitsep=\skip54
+\bibparsep=\skip55
+\bibhang=\skip56
+\blx@bcfin=\read3
+\blx@bcfout=\write3
+\blx@langwohyphens=\language84
+\c@mincomprange=\count292
+\c@maxcomprange=\count293
+\c@mincompwidth=\count294
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2019/12/01 v3.14 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count295
+\c@savedafterword=\count296
+\c@annotator=\count297
+\c@savedannotator=\count298
+\c@author=\count299
+\c@savedauthor=\count300
+\c@bookauthor=\count301
+\c@savedbookauthor=\count302
+\c@commentator=\count303
+\c@savedcommentator=\count304
+\c@editor=\count305
+\c@savededitor=\count306
+\c@editora=\count307
+\c@savededitora=\count308
+\c@editorb=\count309
+\c@savededitorb=\count310
+\c@editorc=\count311
+\c@savededitorc=\count312
+\c@foreword=\count313
+\c@savedforeword=\count314
+\c@holder=\count315
+\c@savedholder=\count316
+\c@introduction=\count317
+\c@savedintroduction=\count318
+\c@namea=\count319
+\c@savednamea=\count320
+\c@nameb=\count321
+\c@savednameb=\count322
+\c@namec=\count323
+\c@savednamec=\count324
+\c@translator=\count325
+\c@savedtranslator=\count326
+\c@shortauthor=\count327
+\c@savedshortauthor=\count328
+\c@shorteditor=\count329
+\c@savedshorteditor=\count330
+\c@labelname=\count331
+\c@savedlabelname=\count332
+\c@institution=\count333
+\c@savedinstitution=\count334
+\c@lista=\count335
+\c@savedlista=\count336
+\c@listb=\count337
+\c@savedlistb=\count338
+\c@listc=\count339
+\c@savedlistc=\count340
+\c@listd=\count341
+\c@savedlistd=\count342
+\c@liste=\count343
+\c@savedliste=\count344
+\c@listf=\count345
+\c@savedlistf=\count346
+\c@location=\count347
+\c@savedlocation=\count348
+\c@organization=\count349
+\c@savedorganization=\count350
+\c@origlocation=\count351
+\c@savedoriglocation=\count352
+\c@origpublisher=\count353
+\c@savedorigpublisher=\count354
+\c@publisher=\count355
+\c@savedpublisher=\count356
+\c@language=\count357
+\c@savedlanguage=\count358
+\c@origlanguage=\count359
+\c@savedoriglanguage=\count360
+\c@pageref=\count361
+\c@savedpageref=\count362
+\shorthandwidth=\skip57
+\shortjournalwidth=\skip58
+\shortserieswidth=\skip59
+\shorttitlewidth=\skip60
+\shortauthorwidth=\skip61
+\shorteditorwidth=\skip62
+\locallabelnumberwidth=\skip63
+\locallabelalphawidth=\skip64
+\localshorthandwidth=\skip65
+\localshortjournalwidth=\skip66
+\localshortserieswidth=\skip67
+\localshorttitlewidth=\skip68
+\localshortauthorwidth=\skip69
+\localshorteditorwidth=\skip70
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2019/12/01 v3.14 biblatex compatibility (PK/MW)
+\c@textcitecount=\count363
+\c@textcitetotal=\count364
+\c@textcitemaxnames=\count365
+\c@biburlbigbreakpenalty=\count366
+\c@biburlbreakpenalty=\count367
+\c@biburlnumpenalty=\count368
+\c@biburlucpenalty=\count369
+\c@biburllcpenalty=\count370
+\biburlbigskip=\muskip17
+\biburlnumskip=\muskip18
+\biburlucskip=\muskip19
+\biburllcskip=\muskip20
+\c@smartand=\count371
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2019/12/01 v3.14 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count372
+\c@bbx:relatedtotal=\count373
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2019/12/01 v3.14 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen136
+\Gin@req@width=\dimen137
+)
+(/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write4
+
+Excluding comment 'comment')
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count374
+\lst@gtempboxa=\box45
+\lst@token=\toks19
+\lst@length=\count375
+\lst@currlwidth=\dimen138
+\lst@column=\count376
+\lst@pos=\count377
+\lst@lostspace=\dimen139
+\lst@width=\dimen140
+\lst@newlines=\count378
+\lst@lineno=\count379
+\lst@maxwidth=\dimen141
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count380
+\lst@skipnumbers=\count381
+\lst@framebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'USenglish'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count382
+\l__pdf_internal_box=\box47
+)
+(./Benchmarks.aux)
+\openout1 = `Benchmarks.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Trying to load font information for T1+pnc on input line 43
+.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pnc.fd
+File: t1pnc.fd 2001/06/04 font definitions for T1/pnc.
+)
+Package biblatex Info: Trying to load language 'USenglish'...
+Package biblatex Info: ... file 'USenglish.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/USenglish.lbx
+File: USenglish.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/american.lbx
+File: american.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+))
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/american.lbx
+File: american.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2019/12/01 v3.14 biblatex localization (PK/MW)
+)))
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout3 = `Benchmarks.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'Benchmarks.bbl' not found.
+
+No file Benchmarks.bbl.
+Package biblatex Info: Reference section=0 on input line 43.
+Package biblatex Info: Reference segment=0 on input line 43.
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count383
+\scratchdimen=\dimen142
+\scratchbox=\box48
+\nofMPsegments=\count384
+\nofMParguments=\count385
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count386
+\MPscratchDim=\dimen143
+\MPnumerator=\count387
+\makeMPintoPDFobject=\count388
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count389
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--60
+
+ []
+
+
+LaTeX Warning: Citation 'STREAM-c' on page 1 undefined on input line 64.
+
+Excluding 'comment' comment.
+Overfull \hbox (3.28448pt too wide) in paragraph at lines 64--76
+\T1/pnc/m/n/12 The STREAM[[]] bench-mark is a syn-thetic and sim-ple bench-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--76
+
+ []
+
+[1
+
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: File `DRAM_stream2.png' not found on input line 78.
+
+
+! Package pdftex.def Error: File `DRAM_stream2.png' not found: using draft sett
+ing.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78 \includegraphics[scale=0.7]{DRAM_stream2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 78
+.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [2]
+
+LaTeX Warning: File `NVDIMM_stream2.png' not found on input line 120.
+
+
+! Package pdftex.def Error: File `NVDIMM_stream2.png' not found: using draft se
+tting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.120 ...degraphics[scale=0.7]{NVDIMM_stream2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (8.98431pt too wide) in paragraph at lines 125--128
+\T1/pnc/m/n/12 Graphs and ta-bles be-low show the speed of a cer-tain amount of
+ NVDIMM
+ []
+
+[3] [4] [5]
+Overfull \hbox (5.16795pt too wide) in paragraph at lines 196--197
+\T1/pnc/m/n/12 threads trans-fer from DRAM-DRAM and an-other group from NVDIMM-
+
+ []
+
+
+Overfull \hbox (9.63235pt too wide) in paragraph at lines 196--197
+\T1/pnc/m/n/12 bined speed of all the threads that are copy-ing from NVDIMM-NVD
+IMM. 
+ []
+
+
+! LaTeX Error: File `NVM-NVM_table_p1_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.206 ...ics[scale=0.7]{NVM-NVM_table_p1_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `NVM-NVM_table_p2_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.211 ...ics[scale=0.7]{NVM-NVM_table_p2_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `NVM-NVM_Graph_1-20_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.216 ...raphics[scale=0.7]{NVM-NVM_Graph_1-20_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[6]
+
+! LaTeX Error: File `NVM-DRAM_table_p1_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.224 ...cs[scale=0.7]{NVM-DRAM_table_p1_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `NVM-DRAM_table_p2_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.229 ...cs[scale=0.7]{NVM-DRAM_table_p2_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `NVM-DRAM_Graph_1-20_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.234 ...aphics[scale=0.7]{NVM-DRAM_Graph_1-20_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[7
+
+]
+
+! LaTeX Error: File `DRAM-NVM_table_p1_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.242 ...cs[scale=0.7]{DRAM-NVM_table_p1_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `DRAM-NVM_table_p2_1-100_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.247 ...cs[scale=0.7]{DRAM-NVM_table_p2_1-100_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `DRAM-NVM_Graph_1-20_v3' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.252 ...aphics[scale=0.7]{DRAM-NVM_Graph_1-20_v3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[8
+
+]
+
+LaTeX Warning: File `DRAM_only_16M.png' not found on input line 264.
+
+
+! Package pdftex.def Error: File `DRAM_only_16M.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.264 ...udegraphics[scale=0.7]{DRAM_only_16M.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[9
+
+]
+Overfull \hbox (9.2245pt too wide) in paragraph at lines 322--324
+\T1/pnc/m/n/12 The ar-rays x and xk_1 are dou-ble ar-rays that have the length 
+of 4'000'000
+ []
+
+
+Overfull \hbox (31.25519pt too wide) in paragraph at lines 322--324
+\T1/pnc/m/n/12 once. The for-mula for cal-cu-lat-ing mem-ory traf-fic is 3*4'00
+0'000+2*31'976'004
+ []
+
+[10]
+
+LaTeX Warning: File `DRAM_only_DataGeneration_16M.png' not found on input line 
+343.
+
+
+! Package pdftex.def Error: File `DRAM_only_DataGeneration_16M.png' not found: 
+using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.343 ...le=0.7]{DRAM_only_DataGeneration_16M.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[11]
+
+LaTeX Warning: File `DRAM_only_Analyze_16M.png' not found on input line 375.
+
+
+! Package pdftex.def Error: File `DRAM_only_Analyze_16M.png' not found: using d
+raft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.375 ...ics[scale=0.7]{DRAM_only_Analyze_16M.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[12
+
+]
+
+LaTeX Warning: File `Stream_benchmark.png' not found on input line 385.
+
+
+! Package pdftex.def Error: File `Stream_benchmark.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.385 ...graphics[scale=0.7]{Stream_benchmark.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Stream_NVM_sum.png' not found on input line 390.
+
+
+! Package pdftex.def Error: File `Stream_NVM_sum.png' not found: using draft se
+tting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.390 ...degraphics[scale=0.7]{Stream_NVM_sum.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[13
+
+]
+
+LaTeX Warning: File `Benchmark_only_prediction.png' not found on input line 397
+.
+
+
+! Package pdftex.def Error: File `Benchmark_only_prediction.png' not found: usi
+ng draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.397 ...scale=0.7]{Benchmark_only_prediction.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[14
+
+]
+
+! LaTeX Error: File `NVDIMM_analyze_only' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.404 ...egraphics[scale=0.7]{NVDIMM_analyze_only}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[15
+
+]
+
+LaTeX Warning: File `lock_overview.png' not found on input line 419.
+
+
+! Package pdftex.def Error: File `lock_overview.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.419 \includegraphics[scale=1]{lock_overview.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[16
+
+] [17]
+
+LaTeX Warning: File `Simulation_NVM_2.png' not found on input line 480.
+
+
+! Package pdftex.def Error: File `Simulation_NVM_2.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.480 ...graphics[scale=0.7]{Simulation_NVM_2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Predicted_calculation.png' not found on input line 487.
+
+
+! Package pdftex.def Error: File `Predicted_calculation.png' not found: using d
+raft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.487 ...ics[scale=0.7]{Predicted_calculation.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Predicted_calculation_3.png' not found on input line 492.
+
+
+! Package pdftex.def Error: File `Predicted_calculation_3.png' not found: using
+ draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.492 ...s[scale=0.7]{Predicted_calculation_3.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Array-counting.png' not found on input line 497.
+
+
+! Package pdftex.def Error: File `Array-counting.png' not found: using draft se
+tting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.497 ...degraphics[scale=0.7]{Array-counting.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Predicted_calculation_2.png' not found on input line 502.
+
+
+! Package pdftex.def Error: File `Predicted_calculation_2.png' not found: using
+ draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.502 ...s[scale=0.7]{Predicted_calculation_2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Datagen_prediction_NVM.png' not found on input line 507.
+
+
+! Package pdftex.def Error: File `Datagen_prediction_NVM.png' not found: using 
+draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.507 ...cs[scale=0.7]{Datagen_prediction_NVM.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Analyze_prediction_NVM.png' not found on input line 512.
+
+
+! Package pdftex.def Error: File `Analyze_prediction_NVM.png' not found: using 
+draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.512 ...cs[scale=0.7]{Analyze_prediction_NVM.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[18] [19]
+Overfull \hbox (102.7494pt too wide) in paragraph at lines 519--520
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][]  
+ []
+
+
+LaTeX Warning: File `2D_array_test.png' not found on input line 522.
+
+
+! Package pdftex.def Error: File `2D_array_test.png' not found: using draft set
+ting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.522 ...udegraphics[scale=0.7]{2D_array_test.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[20
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 528--533
+
+ []
+
+[21
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 535.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 535.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 535.
+
+
+LaTeX Warning: File `Formula_calculation.png' not found on input line 544.
+
+
+! Package pdftex.def Error: File `Formula_calculation.png' not found: using dra
+ft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.544 ...phics[scale=0.7]{Formula_calculation.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 540--547
+
+ []
+
+
+LaTeX Warning: File `Formula_First_version.png' not found on input line 549.
+
+
+! Package pdftex.def Error: File `Formula_First_version.png' not found: using d
+raft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.549 ...ics[scale=0.7]{Formula_First_version.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Formula_Second_version.png' not found on input line 554.
+
+
+! Package pdftex.def Error: File `Formula_Second_version.png' not found: using 
+draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.554 ...cs[scale=0.7]{Formula_Second_version.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[22
+
+] [23]
+Overfull \hbox (55.40668pt too wide) in paragraph at lines 607--608
+[][][][][][][][][][][][][][][][][][][]  
+ []
+
+[24]
+Overfull \hbox (7.48431pt too wide) in paragraph at lines 644--645
+[][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[25]
+Overfull \hbox (7.48431pt too wide) in paragraph at lines 696--697
+[][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+
+LaTeX Warning: File `First_version_DRAM_only_17_9_21.png' not found on input li
+ne 707.
+
+
+! Package pdftex.def Error: File `First_version_DRAM_only_17_9_21.png' not foun
+d: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.707 ...0.6]{First_version_DRAM_only_17_9_21.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `first_version_more_detailed_1.png' not found on input line
+ 712.
+
+
+! Package pdftex.def Error: File `first_version_more_detailed_1.png' not found:
+ using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.712 ...e=0.6]{first_version_more_detailed_1.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `first_version_more_detailed_2.png' not found on input line
+ 717.
+
+
+! Package pdftex.def Error: File `first_version_more_detailed_2.png' not found:
+ using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.717 ...e=0.6]{first_version_more_detailed_2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_first_version_v5.png' not found on input 
+line 722.
+
+
+! Package pdftex.def Error: File `Large_array_test_first_version_v5.png' not fo
+und: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.722 ...7]{Large_array_test_first_version_v5.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_second_version_v3.png' not found on input
+ line 727.
+
+
+! Package pdftex.def Error: File `Large_array_test_second_version_v3.png' not f
+ound: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.727 ...]{Large_array_test_second_version_v3.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_first_version_v2.png' not found on input 
+line 732.
+
+
+! Package pdftex.def Error: File `Large_array_test_first_version_v2.png' not fo
+und: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.732 ...7]{Large_array_test_first_version_v2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_first_version_v3.png' not found on input 
+line 737.
+
+
+! Package pdftex.def Error: File `Large_array_test_first_version_v3.png' not fo
+und: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.737 ...7]{Large_array_test_first_version_v3.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_second_version_v2.png' not found on input
+ line 742.
+
+
+! Package pdftex.def Error: File `Large_array_test_second_version_v2.png' not f
+ound: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.742 ...]{Large_array_test_second_version_v2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `Large_array_test_second_version_NVDIMM_only_v2.png' not fo
+und on input line 747.
+
+
+! Package pdftex.def Error: File `Large_array_test_second_version_NVDIMM_only_v
+2.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.747 ...y_test_second_version_NVDIMM_only_v2.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `DRAM_only_on_n50.png' not found on input line 752.
+
+
+! Package pdftex.def Error: File `DRAM_only_on_n50.png' not found: using draft 
+setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.752 ...graphics[scale=0.7]{DRAM_only_on_n50.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[26] [27] [28]
+
+LaTeX Warning: Empty bibliography on input line 761.
+
+(./Benchmarks.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                Benchmarks
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'Benchmarks.run.xml'.
+\openout1 = `Benchmarks.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 12568 strings out of 480623
+ 223635 string characters out of 5906693
+ 880537 words of memory out of 5000000
+ 28292 multiletter control sequences out of 15000+600000
+ 551536 words of font info for 51 fonts, out of 8000000 for 9000
+ 1137 hyphenation exceptions out of 8191
+ 35i,7n,40p,868b,1653s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncn
+trsbk/uncb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a
+.pfb>
+Output written on Benchmarks.pdf (28 pages, 109769 bytes).
+PDF statistics:
+ 119 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

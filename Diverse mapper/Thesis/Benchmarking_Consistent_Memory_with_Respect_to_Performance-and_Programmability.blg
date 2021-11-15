@@ -1,0 +1,33 @@
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'Benchmarking_Consistent_Memory_with_Respect_to_Performance-and_Programmability.blg'
+[66] biber:322> INFO - === Sat Nov 13, 2021, 17:32:59
+[80] Biber.pm:415> INFO - Reading 'Benchmarking_Consistent_Memory_with_Respect_to_Performance-and_Programmability.bcf'
+[140] Biber.pm:943> INFO - Found 16 citekeys in bib section 0
+[153] Biber.pm:4256> INFO - Processing section 0
+[153] Utils.pm:75> INFO - Globbing data source 'mini.bib'
+[153] Utils.pm:91> INFO - Globbed data source 'mini.bib' to mini.bib
+[163] Biber.pm:4455> INFO - Looking for bibtex format file 'mini.bib' for section 0
+[164] bibtex.pm:1653> INFO - LaTeX decoding ...
+[190] bibtex.pm:1471> INFO - Found BibTeX data source 'mini.bib'
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 2, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 16, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 27, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 39, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 52, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 66, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 80, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 94, warning: 1 characters of junk seen at toplevel
+[280] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 108, warning: 1 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 122, warning: 2 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 136, warning: 2 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 143, warning: 2 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 150, warning: 2 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 157, warning: 15 characters of junk seen at toplevel
+[281] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_MZIo/mini.bib_79503.utf8, line 226, warning: 6 characters of junk seen at toplevel
+[299] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[299] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[299] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[299] Biber.pm:4090> INFO - No sort tailoring available for locale 'en-US'
+[314] bbl.pm:652> INFO - Writing 'Benchmarking_Consistent_Memory_with_Respect_to_Performance-and_Programmability.bbl' with encoding 'UTF-8'
+[320] bbl.pm:755> INFO - Output to Benchmarking_Consistent_Memory_with_Respect_to_Performance-and_Programmability.bbl
+[320] Biber.pm:128> INFO - WARNINGS: 15

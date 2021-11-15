@@ -1,0 +1,7 @@
+papi-devel.i686 : Header files for the compiling programs with PAPI
+papi-devel.x86_64 : Header files for the compiling programs with PAPI
+papi-libs.x86_64 : Libraries for PAPI clients
+papi-libs.i686 : Libraries for PAPI clients
+papi-static.i686 : Static libraries for the compiling programs with PAPI
+papi-static.x86_64 : Static libraries for the compiling programs with PAPI
+papi-testsuite.x86_64 : Set of tests for checking PAPI functionality

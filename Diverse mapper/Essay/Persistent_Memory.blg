@@ -1,0 +1,31 @@
+[0] Config.pm:304> INFO - This is Biber 2.12
+[0] Config.pm:307> INFO - Logfile is 'Persistent_Memory.blg'
+[31] biber-MSWIN64:315> INFO - === 
+[61] Biber.pm:371> INFO - Reading 'Persistent_Memory.bcf'
+[149] Biber.pm:886> INFO - Using all citekeys in bib section 0
+[162] Biber.pm:4093> INFO - Processing section 0
+[177] Biber.pm:4254> INFO - Looking for bibtex format file 'mini.bib' for section 0
+[181] bibtex.pm:1523> INFO - LaTeX decoding ...
+[216] bibtex.pm:1340> INFO - Found BibTeX data source 'mini.bib'
+[320] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 2, warning: 1 characters of junk seen at toplevel
+[320] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 16, warning: 1 characters of junk seen at toplevel
+[320] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 27, warning: 1 characters of junk seen at toplevel
+[320] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 39, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 52, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 66, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 80, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 94, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 108, warning: 1 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 122, warning: 2 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 136, warning: 2 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 143, warning: 2 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 150, warning: 2 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 157, warning: 15 characters of junk seen at toplevel
+[321] Utils.pm:193> WARN - BibTeX subsystem: C:\Users\SVEIN_~1\AppData\Local\Temp\ei1n7WP4oI\mini.bib_14572.utf8, line 207, warning: 6 characters of junk seen at toplevel
+[350] UCollate.pm:68> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[350] UCollate.pm:68> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[350] Biber.pm:3921> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-UK'
+[350] Biber.pm:3927> INFO - No sort tailoring available for locale 'en-UK'
+[375] bbl.pm:636> INFO - Writing 'Persistent_Memory.bbl' with encoding 'UTF-8'
+[382] bbl.pm:739> INFO - Output to Persistent_Memory.bbl
+[386] Biber.pm:110> INFO - WARNINGS: 15

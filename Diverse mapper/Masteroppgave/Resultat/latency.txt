@@ -1,0 +1,27 @@
+From DRAM to DRAM
+Time: 6.500000e-08
+MB/S: 246.15
+From DRAM to NVM
+Time: 6.900000e-08
+MB/S: 231.88
+From NVM to DRAM
+Time: 7.100000e-08
+MB/S: 225.35
+From NVM to NVM
+Time: 7.400000e-08
+MB/S: 216.22
+
+From DRAM to DRAM
+Time: 3.200000e-08
+MB/S: 500.00
+From DRAM to NVM
+Time: 3.500000e-08
+MB/S: 457.14
+From NVM to DRAM
+Time: 3.600000e-08
+MB/S: 444.44
+From NVM to NVM
+Time: 3.600000e-08
+MB/S: 444.44
+
+

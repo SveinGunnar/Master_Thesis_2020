@@ -1,0 +1,30 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {USenglish}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Abstract}{1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Acknowledgements}{1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Introduction}{2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}What is persistent memory}{2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Challenges}{3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.1}Security}{3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.2}Durability}{4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.3}Persistent memory leaks}{4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Advantages}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.1}Cost}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.2}Capacity, Larger physical memory}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.3}Byte addressable, low latency}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}The rest of thesis}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Research questions}{6}%

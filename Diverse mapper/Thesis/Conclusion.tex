@@ -1,0 +1,102 @@
+%!TeX spellcheck = en_US
+\documentclass[12pt,a4paper,USenglish]{article}      % Specifies the document class
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc,url}
+\usepackage{babel,csquotes,newcent,textcomp}
+\usepackage[backend=biber,sortcites]{biblatex}
+\usepackage{graphicx}
+%\usepackage{graphics}
+%\usepackage{listings}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{comment}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\graphicspath{ {./images/} }
+
+%\addbibresource{References.bib}
+
+\title{Methodology}  % Declares the document's title.
+
+%\newcommand{\ip}[2]{(#1, #2)}
+
+\begin{document}             % End of preamble and beginning of text.
+%\maketitle                   % Produces the title.
+
+\section{Conclusion}
+\subsection{Introduction}
+The conclusion will start with a summary of what has happened in the previous sections. Then it will move on to answer the research questions that was introduced in the beginning of the thesis. After the research questions have been answered there will be a section with reflections of what could have been done better or different. The thesis will end with a section that consider what further work could be. 
+
+\subsection{Summary}
+This thesis started in chapter 1 with explaining what persistent memory is, what are the advantages and disadvantages. Four research questions where introduced in the end of the section that will be answered later in this section. 
+
+The thesis continued with explaining the basic when programming with NVDIMM in chapter 2. 
+
+In chapter 3 I created a modified version of the Stream benchmark that could be used to measure the speed of the NVDIMM. I also created three other benchmark benchmark that is similar to each other where the threads are competing with each other for bandwidth. I used the benchmarks to measure the performance of NVDIMM on the server and made observation based on those performance measurements. 
+
+Chapter are about DRAM and NVIDMM working together because the amount of data exceeds the total capacity of the DRAM.
+I created a formula that calculated how much should be allocated from DRAM to NVDIMM. I also created two version of a new test that could test if the formula is correct. The purpose of the two version was to which programming decision is the fastest.
+
+The last chapter are about NVDIMM and DRAM doing two different types of jobs. I created a new test where DRAM are working on generating data while the NVDIMM are transferring the last set of generated data to from DRAM to NVDIMM and analyzing the data afterward.
+
+\subsection{Research questions}
+\subsubsection{Question 1}
+What is the data transfer speed of NVDIMM compared to DRAM?
+
+The expectation before starting this thesis was that NVDIMM would be slower than DRAM. What interesting is how fast the speed of the NVDIMM is compared to DRAM. This question is possible to answer by comparing the results Stream  benchmark int section \ref{section:STREAMDRAM} and the result from modified Stream benchmark in section \ref{section:STREAM_NVDIMM}. By comparing the speed from these two benchmarks there is which has been done in \ref{tab:Q1} in section \ref{section:Observations} it possible to see how much faster the DRAM is.
+
+\subsubsection{Question 2}
+In an competitive environment, in what way will NVDIMM and DRAM affect each other?
+
+When both DRAM and NVDIMM are competing for bandwidth the speed will be slower than what they would be if were alone with the bandwidth. When using all cores in a socket the sum of the DRAM speed and NVDIMM speed will be lower then the speed of sixteen DRAM threads running alone, this can be determined by comparing table \ref{tab:DRAM_STREAM_100M_Table} and \ref{tab:NVM_NVM}.
+
+\subsubsection{Question 3}
+When the size of the data is higher than the capacity of the DRAM. How much data should be transferred to NVDIMM? How many threads should be allocated to work on the data on NVDIMM?
+
+In chapter four I created a formula that can be used to find out how much data should be placed on NVDIMM based on what the speed of DRAM and NVDIMM is. By deciding first on how many threads should be allocated the formula will tell how much data should be placed on NVDIMM.
+
+\subsubsection{Question 4}
+While DRAM is working on a task, is it possible for NVDIMM to be working on a different type of task?
+In chapter four I created a program where a group of DRAM threads working on one task while a group of NVDIMM threads transfer the the result of that work to NVDIMM and do another type of task on that data. The program is slower then the DRAM version of the program, but it is possible to have DRAM and NVDIMM do different kinds of tasks simultaneously.
+
+
+\subsection{Reflections}
+The benchmark section \ref{section:NVM-NVM}, \ref{section:DRAM-NVM}, \ref{section:NVM-DRAM} had unstable NVDIMM theads that dropped their speed for some reason. More time could have been spent trying to find out why this is occurring.
+
+While working on this thesis I could have saved a lot of time by having a greater attention to details. By looking at the results more critically I could have noticed mistakes more easier and it would not be necessary for other to point it out. 
+
+\subsection{Further work}
+Further work would be to find out what causes the NVDIMM threads to drop their speeds sometimes that was shown in competing benchmark section in chapter three.
+If its possible to explain what causes this it might be possible to make programming choices that avoid the sudden drop from happening. The result is that with no drop in speed it might be possible to get more performance out of NVDIMM.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+Chapter 3 are about the benchmarks that have created for this thesis and a Stream benchmark that has been created by someone else. The Stream benchmark tested the speed of DRAM when only DRAM was working. There was also created a modified version of the Stream benchmark that measured the speed of NVDIMM when only NVDIMM was working. The section moved on to test DRAM and NVDIMM when they were competing for resources. There are three benchmarks. While a group of threads transferred from DRAM-DRAM another group of thread are transferring data from either NVDIMM-NVDIMM, DRAM-NVDIMM or NVDIMM-DRAM. All possible combinations of threads were tested and there was only one thread per core.
+
+How much data should be allocated to NVDIMM and how many threads should be working on the data. There are two version of this program and the difference between versions are about how NVDIMM and DRAM access data that belong in the other group. 
+\end{comment}
+\end{document}

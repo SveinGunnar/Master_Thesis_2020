@@ -1,0 +1,136 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {USenglish}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Abstract}{1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Acknowledgements}{2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Introduction}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}What is persistent memory}{5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Challenges}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.1}Security}{6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.2}Durability}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.2.3}Persistent memory leaks}{7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Advantages}{8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.1}Cost}{8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.2}Capacity, larger physical memory}{8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.3}Byte addressable, low latency}{8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}The rest of thesis}{8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Research questions}{9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Basic programming with NVDIMM}{10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1}Introduction}{10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2}Different types of libraries}{10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.1}Libpmemobj}{10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.2.2}libpmemblk and libpmemlog}{10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3}Creating pmempool}{11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.4}NVDIMM Functions used in thesis}{11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.4.1}Open memory pool}{11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.4.2}Declaring an array}{12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.4.3}Allocating array}{12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.4.4}Read/Write to array}{12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.5}Coding example}{13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Benchmarks}{16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Introduction}{16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.1.1}Hardware}{16}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}STREAM DRAM}{17}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3}STREAM NVDIMM}{19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4}Competition benchmarks}{23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.4.1}NVM-NVM}{23}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.4.2}NVM-DRAM}{28}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.4.3}DRAM-NVM}{33}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.4.4}Observations}{38}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}DRAM and NVDIMM Cooperation}{40}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Introduction}{40}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Calculation of NVDIMM part}{40}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.1}Explanation of formula}{40}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.2}Distribution}{42}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.2.3}Prediction}{43}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3}First program version}{43}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.4}Second program version}{51}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {6.4.1}Comparisons of versions}{55}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}DRAM and NVDIMM working independently}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1}Introduction}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2}Test with only DRAM}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.1}Description of code}{56}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.2}Data generation}{58}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.3}Analyzing the data}{60}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.2.4}Result}{60}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3}NVM simulation}{61}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.3.1}Locks}{61}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.3.2}Calculation}{62}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.3.3}Analysis}{64}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.3.4}Prediction}{67}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {7.3.5}Result}{68}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Conclusion}{70}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.1}Summary}{70}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.2}Research questions}{71}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {8.2.1}Question 1}{71}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {8.2.2}Question 2}{71}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {8.2.3}Question 3}{71}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {8.2.4}Question 4}{71}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.3}Reflections}{72}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.4}Further work}{72}%

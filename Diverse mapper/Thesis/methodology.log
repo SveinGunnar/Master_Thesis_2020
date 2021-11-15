@@ -1,0 +1,498 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.16)  17 SEP 2020 13:01
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**methodology.tex
+(./methodology.tex
+LaTeX2e <2018-12-01>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count88
+\lst@gtempboxa=\box27
+\lst@token=\toks15
+\lst@length=\count89
+\lst@currlwidth=\dimen105
+\lst@column=\count90
+\lst@pos=\count91
+\lst@lostspace=\dimen106
+\lst@width=\dimen107
+\lst@newlines=\count92
+\lst@lineno=\count93
+\lst@maxwidth=\dimen108
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
+\c@lstnumber=\count94
+\lst@skipnumbers=\count95
+\lst@framebox=\box28
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/02/27 1.8b listings configuration
+))
+Package: listings 2019/02/27 1.8b (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2018/11/02 v3.12 programmable bibliographies (PK/MW)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count96
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count97
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count98
+\c@listtotal=\count99
+\c@listcount=\count100
+\c@liststart=\count101
+\c@liststop=\count102
+\c@citecount=\count103
+\c@citetotal=\count104
+\c@multicitecount=\count105
+\c@multicitetotal=\count106
+\c@instcount=\count107
+\c@maxnames=\count108
+\c@minnames=\count109
+\c@maxitems=\count110
+\c@minitems=\count111
+\c@citecounter=\count112
+\c@maxcitecounter=\count113
+\c@savedcitecounter=\count114
+\c@uniquelist=\count115
+\c@uniquename=\count116
+\c@refsection=\count117
+\c@refsegment=\count118
+\c@maxextratitle=\count119
+\c@maxextratitleyear=\count120
+\c@maxextraname=\count121
+\c@maxextradate=\count122
+\c@maxextraalpha=\count123
+\c@abbrvpenalty=\count124
+\c@highnamepenalty=\count125
+\c@lownamepenalty=\count126
+\c@maxparens=\count127
+\c@parenlevel=\count128
+\blx@tempcnta=\count129
+\blx@tempcntb=\count130
+\blx@tempcntc=\count131
+\blx@maxsection=\count132
+\blx@maxsegment@0=\count133
+\blx@notetype=\count134
+\blx@parenlevel@text=\count135
+\blx@parenlevel@foot=\count136
+\blx@sectionciteorder@0=\count137
+\blx@entrysetcounter=\count138
+\labelnumberwidth=\skip43
+\labelalphawidth=\skip44
+\biblabelsep=\skip45
+\bibitemsep=\skip46
+\bibnamesep=\skip47
+\bibinitsep=\skip48
+\bibparsep=\skip49
+\bibhang=\skip50
+\blx@bcfin=\read1
+\blx@bcfout=\write3
+\c@mincomprange=\count139
+\c@maxcomprange=\count140
+\c@mincompwidth=\count141
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2018/11/02 v3.12 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count142
+\c@savedafterword=\count143
+\c@annotator=\count144
+\c@savedannotator=\count145
+\c@author=\count146
+\c@savedauthor=\count147
+\c@bookauthor=\count148
+\c@savedbookauthor=\count149
+\c@commentator=\count150
+\c@savedcommentator=\count151
+\c@editor=\count152
+\c@savededitor=\count153
+\c@editora=\count154
+\c@savededitora=\count155
+\c@editorb=\count156
+\c@savededitorb=\count157
+\c@editorc=\count158
+\c@savededitorc=\count159
+\c@foreword=\count160
+\c@savedforeword=\count161
+\c@holder=\count162
+\c@savedholder=\count163
+\c@introduction=\count164
+\c@savedintroduction=\count165
+\c@namea=\count166
+\c@savednamea=\count167
+\c@nameb=\count168
+\c@savednameb=\count169
+\c@namec=\count170
+\c@savednamec=\count171
+\c@translator=\count172
+\c@savedtranslator=\count173
+\c@shortauthor=\count174
+\c@savedshortauthor=\count175
+\c@shorteditor=\count176
+\c@savedshorteditor=\count177
+\c@labelname=\count178
+\c@savedlabelname=\count179
+\c@institution=\count180
+\c@savedinstitution=\count181
+\c@lista=\count182
+\c@savedlista=\count183
+\c@listb=\count184
+\c@savedlistb=\count185
+\c@listc=\count186
+\c@savedlistc=\count187
+\c@listd=\count188
+\c@savedlistd=\count189
+\c@liste=\count190
+\c@savedliste=\count191
+\c@listf=\count192
+\c@savedlistf=\count193
+\c@location=\count194
+\c@savedlocation=\count195
+\c@organization=\count196
+\c@savedorganization=\count197
+\c@origlocation=\count198
+\c@savedoriglocation=\count199
+\c@origpublisher=\count266
+\c@savedorigpublisher=\count267
+\c@publisher=\count268
+\c@savedpublisher=\count269
+\c@language=\count270
+\c@savedlanguage=\count271
+\c@origlanguage=\count272
+\c@savedoriglanguage=\count273
+\c@pageref=\count274
+\c@savedpageref=\count275
+\shorthandwidth=\skip51
+\shortjournalwidth=\skip52
+\shortserieswidth=\skip53
+\shorttitlewidth=\skip54
+\shortauthorwidth=\skip55
+\shorteditorwidth=\skip56
+\locallabelnumberwidth=\skip57
+\locallabelalphawidth=\skip58
+\localshorthandwidth=\skip59
+\localshortjournalwidth=\skip60
+\localshortserieswidth=\skip61
+\localshorttitlewidth=\skip62
+\localshortauthorwidth=\skip63
+\localshorteditorwidth=\skip64
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2018/11/02 v3.12 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2018/11/02 v3.12 biblatex compatibility (PK/MW)
+\c@textcitecount=\count276
+\c@textcitetotal=\count277
+\c@textcitemaxnames=\count278
+\c@biburlnumpenalty=\count279
+\c@biburlucpenalty=\count280
+\c@biburllcpenalty=\count281
+\c@smartand=\count282
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2018/11/02 v3.12 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2018/11/02 v3.12 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count283
+\c@bbx:relatedtotal=\count284
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2018/11/02 v3.12 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
+)
+\@quotelevel=\count285
+\@quotereset=\count286
+
+(./methodology.aux)
+\openout1 = `methodology.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count287
+\scratchdimen=\dimen109
+\scratchbox=\box29
+\nofMPsegments=\count288
+\nofMParguments=\count289
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count290
+\MPscratchDim=\dimen110
+\MPnumerator=\count291
+\makeMPintoPDFobject=\count292
+\everyMPtoPDFconversion=\toks17
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+))
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count293
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout3 = `methodology.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'methodology.bbl' not found.
+
+No file methodology.bbl.
+Package biblatex Info: Reference section=0 on input line 18.
+Package biblatex Info: Reference segment=0 on input line 18.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/02/27 1.8b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
+)
+Underfull \hbox (badness 10000) in paragraph at lines 24--29
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 30.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 30.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 30.
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--36
+
+ []
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 37.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
+
+Overfull \hbox (54.14923pt too wide) in paragraph at lines 40--41
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (68.2492pt too wide) in paragraph at lines 41--42
+[][][][][][][][][][][][][][][][][] 
+ []
+
+
+LaTeX Warning: Citation 'testing' on page 1 undefined on input line 56.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--57
+
+ []
+
+[1
+
+{/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (103.49915pt too wide) in paragraph at lines 76--77
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+LaTeX Warning: Empty bibliography on input line 87.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--88
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--88
+
+ []
+
+[2] [3] (./methodology.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                methodology
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'methodology.run.xml'.
+\openout1 = `methodology.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 9862 strings out of 494553
+ 168566 string characters out of 6177318
+ 597289 words of memory out of 5000000
+ 13466 multiletter control sequences out of 15000+600000
+ 7289 words of font info for 26 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 35i,4n,51p,825b,1222s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on methodology.pdf (3 pages, 53373 bytes).
+PDF statistics:
+ 30 PDF objects out of 1000 (max. 8388607)
+ 20 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

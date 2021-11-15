@@ -1,0 +1,93 @@
+\begin{table}[!hbtp]
+%\centering
+\includegraphics[scale=0.7]{NVM-NVM_table_p1}
+\caption{NVM-NVM part 1}
+\end{table}
+
+\begin{table}[!hbtp]
+\includegraphics[scale=0.7]{NVM-NVM_table_p2}
+\caption{NVM-NVM part 2}
+\end{table}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-NVM_Graph}
+\caption{NVM-NVM graph}
+\end{figure}
+%\FloatBarrier
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-NVM_table_p1_1-100}
+\caption{NVM-NVM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-NVM_table_p2_1-100}
+\caption{NVM-NVM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-NVM_Graph_1-20}
+\caption{NVM-NVM graph 1-20}
+\end{figure}
+
+
+\begin{table}[!hbtp]
+\includegraphics[scale=0.7]{NVM-DRAM_table_p1}
+\caption{NVM-DRAM part 1}
+\end{table}
+
+\begin{table}[!hbtp]
+\includegraphics[scale=0.7]{NVM_DRAM_table_p2}
+\caption{NVM-DRAM part 2}
+\end{table}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-DRAM_Graph}
+\caption{NVM-DRAM graph}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-DRAM_table_p1_1-100}
+\caption{NVM-DRAM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-DRAM_table_p2_1-100}
+\caption{NVM-DRAM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{NVM-DRAM_Graph_1-20}
+\caption{NVM-DRAM graph 1-20}
+\end{figure}
+
+
+\begin{table}[!hbtp]
+\includegraphics[scale=0.7]{DRAM-NVM_table_p1}
+\caption{DRAM-NVM part 1}
+\end{table}
+
+\begin{table}[!hbtp]
+\includegraphics[scale=0.7]{DRAM_NVM_table_p2}
+\caption{DRAM-NVM part 2}
+\end{table}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{DRAM-NVM_Graph}
+\caption{DRAM-NVM graph}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{DRAM-NVM_table_p1_1-100}
+\caption{DRAM-NVM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{DRAM-NVM_table_p2_1-100}
+\caption{DRAM-NVM 1-100 iteration}
+\end{figure}
+
+\begin{figure}[!hbtp]
+\includegraphics[scale=0.7]{DRAM-NVM_Graph_1-20}
+\caption{DRAM-NVM graph 1-20}
+\end{figure}

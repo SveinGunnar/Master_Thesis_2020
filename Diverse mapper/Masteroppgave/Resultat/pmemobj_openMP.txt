@@ -1,0 +1,25 @@
+OpenMP to tråder samtidig.
+Best DRAM
+From DRAM to DRAM
+Time: 0.150418
+MB/S: 10637.02
+From NVM to NVM
+Time: 0.290635
+MB/S: 5505.19
+
+Best NVM
+From DRAM to DRAM
+Time: 0.152972
+MB/S: 10459.43
+From NVM to NVM
+Time: 0.283083
+MB/S: 5652.05
+
+Average
+100 000 000 elements
+DRAM
+Time: 0.119658
+MB/S: 13371.44
+NVM
+Time: 0.142168
+MB/S: 11254.31

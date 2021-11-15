@@ -1,0 +1,19 @@
+% -*- coding: utf-8 -*-
+\documentclass[12pt,a4paper,UKenglish]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc,url}
+\usepackage{babel,csquotes,newcent,textcomp}
+\usepackage[backend=biber,sortcites]{biblatex}
+\title{Line breaking in \TeX}
+\author{Dag Langmyhr\\ Department of Informatics\\
+University of Oslo\\ E-mail: \url{dag@ifi.uio.no}}
+\addbibresource{mini.bib}
+\begin{document}
+\maketitle
+\section{Introduction}
+The \TeX{}\cite{TeX-book} program uses an advanced
+algorithm for breaking the lines in a paragraph.
+This algorithm is based on work done by Michael
+Plass\cite{Breaklines} and Donald Knuth in 1981.
+\printbibliography
+\end{document}

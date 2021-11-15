@@ -1,0 +1,80 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{TeX-book}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={Donald\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{fullhash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{bibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authorbibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authornamehash}{ec08e6f01da5f3814f28a70c89c64656}
+      \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-201-03801-3}
+      \field{title}{The {\TeX}book}
+      \field{year}{1984}
+    \endentry
+    \entry{Breaklines}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
+           family={Knuth},
+           familyi={K\bibinitperiod},
+           given={Donald\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=34cdb56656c8e505404385625e2ce398}{%
+           family={Plass},
+           familyi={P\bibinitperiod},
+           given={Michael\bibnamedelima F.},
+           giveni={M\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \strng{fullhash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \strng{bibnamehash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \strng{authorbibnamehash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \strng{authornamehash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \strng{authorfullhash}{7da72d4dd337ac64f7c90a167a73be2c}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Software---Practice and Experience}
+      \field{title}{Breaking Paragraphs into Lines}
+      \field{volume}{11}
+      \field{year}{1981}
+      \field{pages}{1119\bibrangedash 1184}
+      \range{pages}{66}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
